@@ -57,9 +57,6 @@ public class ChallongeExtension extends Challonge {
 	 */
 	public boolean doesExist(String tournament) throws DataAccessException {
 		// TODO: make the check better and safer for api updates, no ideas yet.
-		// Also potential optimization: something like a
-		// getTournamentOrNull(String tournament)
-		// method to save an api call.
 		try {
 			getTournament(tournament);
 			return true;
