@@ -30,7 +30,7 @@ public class ChallongeListenerDemonstration {
 			manager.addListener(event -> {
 				// Removes all time based events, as they are fired constantly
 				// for some reason.
-				if(!event.getClass().getName().contains("At")) {
+				if(!event.getClass().getName().contains("AtChangedEvent")) {
 					System.out.println(event);
 					if(event instanceof GenericTournamentEvent) {
 						Tournament tournament = ((GenericTournamentEvent) event).getTournament();
