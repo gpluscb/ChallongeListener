@@ -42,12 +42,34 @@ import com.gpluscb.challonge_listener.events.tournament.participant.*;
  * TournamentCreatedEvent} would be fired rather than a
  * {@link com.gpluscb.challonge_listener.events.tournament.TournamentIdChangedEvent
  * TournamentIdChangedEvent}.
+ * <h3>The manager can be in various states, the states progress as
+ * follows:</h3>
+ * <ul>
+ * <li>INITIALIZING</li>
+ * <li>RUNNING</li>
+ * <li>SHUTTING_DOWN</li>
+ * <li>SHUT_DOWN</li>
+ * </ul>
  */
 // TODO: Maybe make a void update() method public (would need Tournament
 // previousState field for that) for manual update handling after shutdown or
 // maybe even include a constructor that allows the listenerThread to not start.
 // Can't think of a good use case right now.
 public class ListenerManager {
+	public static enum ManagerState {
+		INITIALIZING(0), RUNNING(1), SHUTTING_DOWN(2), SHUT_DOWN(3);
+		
+		private int stateLayer;
+		
+		private ManagerState(int stateLayer) {
+			this.stateLayer = stateLayer;
+		}
+		
+		public int getStateLayer() {
+			return stateLayer;
+		}
+	}
+	
 	private static Logger LOG = LogManager.getLogger(ListenerManager.class);
 	
 	// TODO: potentially find better solution. Also get a clue about
@@ -56,10 +78,11 @@ public class ListenerManager {
 	private Object sync = new Object();
 	private Thread listenerThread;
 	
+	private ManagerState state;
+	
 	private ChallongeExtension challonge;
 	
 	private long interval;
-	private boolean running;
 	
 	private List<EventListener> managedListeners;
 	
@@ -96,6 +119,8 @@ public class ListenerManager {
 	 *             Exchange with the rest api or validation failed
 	 */
 	public ListenerManager(ChallongeExtension challonge, long interval) throws DataAccessException {
+		state = ManagerState.INITIALIZING;
+		
 		// Check if the ChallongeExtension works in principle. Reducing failures
 		// inside of ChallongeListener thread
 		challonge.getTournaments();
@@ -104,13 +129,12 @@ public class ListenerManager {
 		this.interval = interval;
 		managedListeners = new ArrayList<>();
 		
-		running = true;
-		
 		listenerThread = new Thread(() -> {
 			try {
 				List<Tournament> previousTournaments = null;
 				// TODO: Maybe that should be handled somewhere else in the
-				// project. Like this it is quite ugly, but should somewhat works.
+				// project. Like this it is quite ugly, but should somewhat
+				// work.
 				// Try to get tournament four times
 				final int NUM_TRIES = 4;
 				for(int i = 1; i <= NUM_TRIES; i++) {
@@ -124,8 +148,10 @@ public class ListenerManager {
 					}
 				}
 				
+				state = ManagerState.RUNNING;
+				
 				long waitTime = interval;
-				while(running) {
+				while(state.equals(ManagerState.RUNNING)) {
 					synchronized(sync) {
 						if(waitTime > 0) sync.wait(waitTime);
 					}
@@ -147,6 +173,8 @@ public class ListenerManager {
 				LOG.catching(e);
 				shutdown();
 			}
+			
+			state = ManagerState.SHUT_DOWN;
 		}, "ChallongeListener");
 		
 		listenerThread.start();
@@ -552,6 +580,53 @@ public class ListenerManager {
 	}
 	
 	/**
+	 * Blocks the current thread until the main cycle is started.
+	 * 
+	 * @throws InterruptedException
+	 *             if the thread is interrupted
+	 * @throws IllegalStateException
+	 *             if the manager is shutting down or shut down
+	 */
+	public void awaitRunning() throws InterruptedException, IllegalStateException {
+		awaitState(ManagerState.RUNNING);
+	}
+	
+	/**
+	 * Blocks the current thread until the given state is reached
+	 * 
+	 * @param state
+	 *            The state to be reached
+	 * @throws InterruptedException
+	 *             if the thread is interrupted
+	 * @throws IllegalStateException
+	 *             if the given state is unreachable
+	 */
+	public void awaitState(ManagerState state) throws InterruptedException, IllegalStateException {
+		if(state.getStateLayer() < this.state.getStateLayer())
+			throw new IllegalStateException("The given state is unreachable.");
+		
+		while(!state.equals(this.state))
+			Thread.sleep(10);
+	}
+	
+	/**
+	 * Shuts down the update cycle and removes all listeners from its managed
+	 * listeners list. After the shutdown is complete this instance is
+	 * completely useless.
+	 */
+	public void shutdown() {
+		if(state.getStateLayer() <= ManagerState.RUNNING.getStateLayer()) {
+			state = ManagerState.SHUTTING_DOWN;
+			
+			synchronized(sync) {
+				sync.notify();
+			}
+			
+			managedListeners.clear();
+		}
+	}
+	
+	/**
 	 * Adjusts the interval the tournaments are updated at.
 	 * 
 	 * @param interval
@@ -569,27 +644,6 @@ public class ListenerManager {
 	 */
 	public long getInterval() {
 		return interval;
-	}
-	
-	/**
-	 * Shuts down the update cycle and removes all listeners from its managed
-	 * listeners list. Blocks the thread until the shutdown is complete. After
-	 * the shutdown is complete this instance is completely useless.
-	 */
-	public void shutdown() {
-		if(running && !Thread.currentThread().equals(listenerThread)) {
-			running = false;
-			synchronized(sync) {
-				sync.notify();
-			}
-			try {
-				listenerThread.join();
-			} catch(InterruptedException e) {
-				LOG.catching(e);
-			}
-		}
-		
-		managedListeners.clear();
 	}
 	
 	/**
@@ -626,13 +680,23 @@ public class ListenerManager {
 	}
 	
 	/**
+	 * The current state of the manager.
+	 * 
+	 * @return The state of the manager
+	 */
+	public ManagerState getState() {
+		return state;
+	}
+	
+	/**
 	 * Whether the update cycle is running.
 	 * 
-	 * @return true if the instance has not been
-	 *         {@link ListenerManager#shutdown() shut down} yet
+	 * @return true if the instance has not been shut down yet
+	 * 
+	 * @deprecated Use {@link com.gpluscb.challonge_listener.listener.ListenerManager#getState() getState()} instead
 	 */
 	public boolean isRunning() {
-		return running;
+		return state.equals(ManagerState.RUNNING);
 	}
 	
 	@Override

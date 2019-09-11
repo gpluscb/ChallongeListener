@@ -5,6 +5,7 @@ import java.util.Scanner;
 import com.google.gson.GsonBuilder;
 import com.gpluscb.challonge_listener.events.tournament.GenericTournamentEvent;
 import com.gpluscb.challonge_listener.listener.ListenerManager;
+import com.gpluscb.challonge_listener.listener.ListenerManager.ManagerState;
 
 import at.stefangeyer.challonge.model.Credentials;
 import at.stefangeyer.challonge.model.Tournament;
@@ -40,6 +41,8 @@ public class ChallongeListenerDemonstration {
 			});
 			
 			Scanner s = new Scanner(System.in);
+
+			manager.awaitRunning();
 			
 			System.out.println("Everything running. Press enter to close.");
 			s.nextLine();
@@ -48,6 +51,10 @@ public class ChallongeListenerDemonstration {
 			manager.shutdown();
 			client.close();
 			s.close();
+			
+			manager.awaitState(ManagerState.SHUT_DOWN);
+			
+			System.out.println("Stopped.");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
