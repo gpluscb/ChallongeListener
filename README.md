@@ -22,7 +22,7 @@ A project using the [stefangeyer/challonge-java](https://github.com/stefangeyer/
 	* Potentially attracting errors, difficult to test
 	* Unnecessary work
 
-- [ ] [Public void ListenerManager#update() method for manual updates](/src/main/java/com/gpluscb/challonge_listener/listener/ListenerManager.java#L46)
+- [ ] [Public void ListenerManager#update() method for manual updates](/src/main/java/com/gpluscb/challonge_listener/listener/ListenerManager.java#L54)
 
 	Pro:
 	* Neat feature for anyone who would need it (and testing)
@@ -30,9 +30,9 @@ A project using the [stefangeyer/challonge-java](https://github.com/stefangeyer/
 	Con:
 	* Cannot think of anyone who would need it (except tests)
 	
-- [ ] [Find better solution than a private object for wait/notify calls. Also learn about synchronizing and race conditions](/src/main/java/com/gpluscb/challonge_listener/listener/ListenerManager.java#L53)
+- [ ] [Find better solution than a private object for wait/notify calls. Also learn about synchronizing and race conditions](/src/main/java/com/gpluscb/challonge_listener/listener/ListenerManager.java#L75)
 
-- [ ] [Replace ugly multiple try system for the case that a tournament changes in the middle of getting it from the api](/src/main/java/com/gpluscb/challonge_listener/listener/ListenerManager.java#L112)
+- [ ] [Replace ugly multiple try system for the case that a tournament changes in the middle of getting it from the api](/src/main/java/com/gpluscb/challonge_listener/listener/ListenerManager.java#L135)
 
 - [ ] [Make ChallongeExtension#doesExist(String tournament) check more elegant and safer](/src/main/java/com/gpluscb/challonge_listener/ChallongeExtension.java#L59)
 
