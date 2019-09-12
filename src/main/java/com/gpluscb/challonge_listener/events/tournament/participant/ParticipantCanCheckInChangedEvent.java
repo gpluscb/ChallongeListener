@@ -7,8 +7,8 @@ public class ParticipantCanCheckInChangedEvent extends GenericParticipantChanged
 	private Boolean canCheckIn;
 	private Boolean previousCanCheckIn;
 	
-	public ParticipantCanCheckInChangedEvent(Tournament tournament, Tournament previousTournament, Participant participant,
-			Participant previousParticipant, Boolean canCheckIn, Boolean previousCanCheckIn) {
+	public ParticipantCanCheckInChangedEvent(Tournament tournament, Tournament previousTournament,
+			Participant participant, Participant previousParticipant, Boolean canCheckIn, Boolean previousCanCheckIn) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.canCheckIn = canCheckIn;
 		this.previousCanCheckIn = previousCanCheckIn;

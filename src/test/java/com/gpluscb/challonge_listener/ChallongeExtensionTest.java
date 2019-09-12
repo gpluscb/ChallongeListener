@@ -43,10 +43,9 @@ public class ChallongeExtensionTest {
 		Credentials credentials = new Credentials(System.getenv("ChallongeUsername"), System.getenv("ChallongeToken"));
 		challonge = new ChallongeExtension(credentials, serializer, client);
 		
-		randomUrl = generateRandomUrl(10);		
+		randomUrl = generateRandomUrl(10);
 		TournamentQuery tournamentQuery = TournamentQuery.builder().name("TestTournament")
-				.description("A test tournament").gameName("Chess").url(randomUrl).acceptAttachments(true)
-				.build();
+				.description("A test tournament").gameName("Chess").url(randomUrl).acceptAttachments(true).build();
 		owned = challonge.createTournament(tournamentQuery);
 		
 		List<ParticipantQuery> participantQueries = new ArrayList<>();

@@ -6,7 +6,8 @@ public class TournamentAcceptingPredictionsChangedEvent extends GenericTournamen
 	private Boolean acceptingPredictions;
 	private Boolean previousAcceptingPredictions;
 	
-	public TournamentAcceptingPredictionsChangedEvent(Tournament tournament, Tournament previousTournament, Boolean acceptingPredictions, Boolean previousAcceptingPredictions) {
+	public TournamentAcceptingPredictionsChangedEvent(Tournament tournament, Tournament previousTournament,
+			Boolean acceptingPredictions, Boolean previousAcceptingPredictions) {
 		super(tournament, previousTournament);
 		this.acceptingPredictions = acceptingPredictions;
 		this.previousAcceptingPredictions = previousAcceptingPredictions;

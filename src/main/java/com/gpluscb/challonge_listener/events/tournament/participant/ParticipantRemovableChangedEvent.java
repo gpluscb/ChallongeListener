@@ -7,8 +7,8 @@ public class ParticipantRemovableChangedEvent extends GenericParticipantChangedE
 	private Boolean removable;
 	private Boolean previousRemovable;
 	
-	public ParticipantRemovableChangedEvent(Tournament tournament, Tournament previousTournament, Participant participant,
-			Participant previousParticipant, Boolean removable, Boolean previousRemovable) {
+	public ParticipantRemovableChangedEvent(Tournament tournament, Tournament previousTournament,
+			Participant participant, Participant previousParticipant, Boolean removable, Boolean previousRemovable) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.removable = removable;
 		this.previousRemovable = previousRemovable;

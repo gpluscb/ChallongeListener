@@ -6,7 +6,8 @@ public class TournamentParticipantsLockedChangedEvent extends GenericTournamentC
 	private Boolean participantsLocked;
 	private Boolean previousParticipantsLocked;
 	
-	public TournamentParticipantsLockedChangedEvent(Tournament tournament, Tournament previousTournament, Boolean participantsLocked, Boolean previousParticipantsLocked) {
+	public TournamentParticipantsLockedChangedEvent(Tournament tournament, Tournament previousTournament,
+			Boolean participantsLocked, Boolean previousParticipantsLocked) {
 		super(tournament, previousTournament);
 		this.participantsLocked = participantsLocked;
 		this.previousParticipantsLocked = previousParticipantsLocked;

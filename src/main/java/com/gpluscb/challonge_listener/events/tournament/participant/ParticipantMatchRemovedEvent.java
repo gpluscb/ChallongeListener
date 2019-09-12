@@ -6,7 +6,7 @@ import at.stefangeyer.challonge.model.Tournament;
 
 public class ParticipantMatchRemovedEvent extends GenericParticipantChangedEvent {
 	private Match previousMatch;
-
+	
 	public ParticipantMatchRemovedEvent(Tournament tournament, Tournament previousTournament, Participant participant,
 			Participant previousParticipant, Match previousMatch) {
 		super(tournament, previousTournament, participant, previousParticipant);

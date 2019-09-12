@@ -9,7 +9,8 @@ public class AttachmentAssetFileNameChangedEvent extends GenericAttachmentChange
 	private String previousAssetFileName;
 	
 	public AttachmentAssetFileNameChangedEvent(Tournament tournament, Tournament previousTournament, Match match,
-			Match previousMatch, Attachment attachment, Attachment previousAttachment, String assetFileName, String previousAssetFileName) {
+			Match previousMatch, Attachment attachment, Attachment previousAttachment, String assetFileName,
+			String previousAssetFileName) {
 		super(tournament, previousTournament, match, previousMatch, attachment, previousAttachment);
 		this.assetFileName = assetFileName;
 		this.previousAssetFileName = previousAssetFileName;

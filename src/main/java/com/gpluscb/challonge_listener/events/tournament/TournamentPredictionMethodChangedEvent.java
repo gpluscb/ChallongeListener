@@ -6,7 +6,8 @@ public class TournamentPredictionMethodChangedEvent extends GenericTournamentCha
 	private Integer predictionMethod;
 	private Integer previousPredictionMethod;
 	
-	public TournamentPredictionMethodChangedEvent(Tournament tournament, Tournament previousTournament, Integer predictionMethod, Integer previousPredictionMethod) {
+	public TournamentPredictionMethodChangedEvent(Tournament tournament, Tournament previousTournament,
+			Integer predictionMethod, Integer previousPredictionMethod) {
 		super(tournament, previousTournament);
 		this.predictionMethod = predictionMethod;
 		this.previousPredictionMethod = previousPredictionMethod;

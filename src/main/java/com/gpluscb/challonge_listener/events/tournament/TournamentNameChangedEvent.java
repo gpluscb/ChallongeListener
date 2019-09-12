@@ -6,7 +6,8 @@ public class TournamentNameChangedEvent extends GenericTournamentChangedEvent {
 	private String name;
 	private String previousName;
 	
-	public TournamentNameChangedEvent(Tournament tournament, Tournament previousTournament, String name, String previousName) {
+	public TournamentNameChangedEvent(Tournament tournament, Tournament previousTournament, String name,
+			String previousName) {
 		super(tournament, previousTournament);
 		this.name = name;
 		this.previousName = previousName;

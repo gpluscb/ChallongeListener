@@ -6,7 +6,8 @@ public class TournamentTeamsChangedEvent extends GenericTournamentChangedEvent {
 	private Boolean teams;
 	private Boolean previousTeams;
 	
-	public TournamentTeamsChangedEvent(Tournament tournament, Tournament previousTournament, Boolean teams, Boolean previousTeams) {
+	public TournamentTeamsChangedEvent(Tournament tournament, Tournament previousTournament, Boolean teams,
+			Boolean previousTeams) {
 		super(tournament, previousTournament);
 		this.teams = teams;
 		this.previousTeams = previousTeams;

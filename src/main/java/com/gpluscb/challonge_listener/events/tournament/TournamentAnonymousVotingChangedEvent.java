@@ -6,7 +6,8 @@ public class TournamentAnonymousVotingChangedEvent extends GenericTournamentChan
 	private Boolean anonymousVoting;
 	private Boolean previousAnonymousVoting;
 	
-	public TournamentAnonymousVotingChangedEvent(Tournament tournament, Tournament previousTournament, Boolean anonymousVoting, Boolean previousAnonymousVoting) {
+	public TournamentAnonymousVotingChangedEvent(Tournament tournament, Tournament previousTournament,
+			Boolean anonymousVoting, Boolean previousAnonymousVoting) {
 		super(tournament, previousTournament);
 		this.anonymousVoting = anonymousVoting;
 		this.previousAnonymousVoting = previousAnonymousVoting;

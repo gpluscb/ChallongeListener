@@ -6,7 +6,8 @@ public class TournamentPublicPredictionsBeforeStartTimeChangedEvent extends Gene
 	private Boolean publicPredictionsBeforeStartTime;
 	private Boolean previousPublicPredictionsBeforeStartTime;
 	
-	public TournamentPublicPredictionsBeforeStartTimeChangedEvent(Tournament tournament, Tournament previousTournament, Boolean publicPredictionsBeforeStartTime, Boolean previousPublicPredictionsBeforeStartTime) {
+	public TournamentPublicPredictionsBeforeStartTimeChangedEvent(Tournament tournament, Tournament previousTournament,
+			Boolean publicPredictionsBeforeStartTime, Boolean previousPublicPredictionsBeforeStartTime) {
 		super(tournament, previousTournament);
 		this.publicPredictionsBeforeStartTime = publicPredictionsBeforeStartTime;
 		this.previousPublicPredictionsBeforeStartTime = previousPublicPredictionsBeforeStartTime;

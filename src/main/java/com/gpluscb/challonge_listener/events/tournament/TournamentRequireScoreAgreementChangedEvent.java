@@ -6,7 +6,8 @@ public class TournamentRequireScoreAgreementChangedEvent extends GenericTourname
 	private Boolean requireScoreAgreement;
 	private Boolean previousRequireScoreAgreement;
 	
-	public TournamentRequireScoreAgreementChangedEvent(Tournament tournament, Tournament previousTournament, Boolean requireScoreAgreement, Boolean previousRequireScoreAgreement) {
+	public TournamentRequireScoreAgreementChangedEvent(Tournament tournament, Tournament previousTournament,
+			Boolean requireScoreAgreement, Boolean previousRequireScoreAgreement) {
 		super(tournament, previousTournament);
 		this.requireScoreAgreement = requireScoreAgreement;
 		this.previousRequireScoreAgreement = previousRequireScoreAgreement;

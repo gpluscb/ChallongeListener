@@ -6,7 +6,8 @@ public class TournamentEventIdChangedEvent extends GenericTournamentChangedEvent
 	private Long eventEventId;
 	private Long previousEventId;
 	
-	public TournamentEventIdChangedEvent(Tournament tournament, Tournament previousTournament, Long eventEventId, Long previousEventId) {
+	public TournamentEventIdChangedEvent(Tournament tournament, Tournament previousTournament, Long eventEventId,
+			Long previousEventId) {
 		super(tournament, previousTournament);
 		this.eventEventId = eventEventId;
 		this.previousEventId = previousEventId;

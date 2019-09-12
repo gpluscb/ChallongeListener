@@ -6,7 +6,8 @@ public class TournamentPrivateOnlyChangedEvent extends GenericTournamentChangedE
 	private Boolean privateOnly;
 	private Boolean previousPrivateOnly;
 	
-	public TournamentPrivateOnlyChangedEvent(Tournament tournament, Tournament previousTournament, Boolean privateOnly, Boolean previousPrivateOnly) {
+	public TournamentPrivateOnlyChangedEvent(Tournament tournament, Tournament previousTournament, Boolean privateOnly,
+			Boolean previousPrivateOnly) {
 		super(tournament, previousTournament);
 		this.privateOnly = privateOnly;
 		this.previousPrivateOnly = previousPrivateOnly;

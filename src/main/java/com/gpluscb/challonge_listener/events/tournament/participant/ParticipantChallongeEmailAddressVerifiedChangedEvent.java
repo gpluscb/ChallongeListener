@@ -7,8 +7,9 @@ public class ParticipantChallongeEmailAddressVerifiedChangedEvent extends Generi
 	private String challongeEmailAddressVerified;
 	private String previousChallongeEmailAddressVerified;
 	
-	public ParticipantChallongeEmailAddressVerifiedChangedEvent(Tournament tournament, Tournament previousTournament, Participant participant,
-			Participant previousParticipant, String challongeEmailAddressVerified, String previousChallongeEmailAddressVerified) {
+	public ParticipantChallongeEmailAddressVerifiedChangedEvent(Tournament tournament, Tournament previousTournament,
+			Participant participant, Participant previousParticipant, String challongeEmailAddressVerified,
+			String previousChallongeEmailAddressVerified) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.challongeEmailAddressVerified = challongeEmailAddressVerified;
 		this.previousChallongeEmailAddressVerified = previousChallongeEmailAddressVerified;

@@ -6,7 +6,8 @@ public class TournamentReviewBeforeFinalizingChangedEvent extends GenericTournam
 	private Boolean reviewBeforeFinalizing;
 	private Boolean previousReviewBeforeFinalizing;
 	
-	public TournamentReviewBeforeFinalizingChangedEvent(Tournament tournament, Tournament previousTournament, Boolean reviewBeforeFinalizing, Boolean previousReviewBeforeFinalizing) {
+	public TournamentReviewBeforeFinalizingChangedEvent(Tournament tournament, Tournament previousTournament,
+			Boolean reviewBeforeFinalizing, Boolean previousReviewBeforeFinalizing) {
 		super(tournament, previousTournament);
 		this.reviewBeforeFinalizing = reviewBeforeFinalizing;
 		this.previousReviewBeforeFinalizing = previousReviewBeforeFinalizing;

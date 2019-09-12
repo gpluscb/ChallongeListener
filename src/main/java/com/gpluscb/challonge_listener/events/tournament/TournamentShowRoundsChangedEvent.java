@@ -6,7 +6,8 @@ public class TournamentShowRoundsChangedEvent extends GenericTournamentChangedEv
 	private Boolean showRounds;
 	private Boolean previousShowRounds;
 	
-	public TournamentShowRoundsChangedEvent(Tournament tournament, Tournament previousTournament, Boolean showRounds, Boolean previousShowRounds) {
+	public TournamentShowRoundsChangedEvent(Tournament tournament, Tournament previousTournament, Boolean showRounds,
+			Boolean previousShowRounds) {
 		super(tournament, previousTournament);
 		this.showRounds = showRounds;
 		this.previousShowRounds = previousShowRounds;

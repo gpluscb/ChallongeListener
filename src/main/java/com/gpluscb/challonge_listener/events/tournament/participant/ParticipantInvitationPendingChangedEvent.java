@@ -7,8 +7,9 @@ public class ParticipantInvitationPendingChangedEvent extends GenericParticipant
 	private Boolean invitationPending;
 	private Boolean previousInvitationPending;
 	
-	public ParticipantInvitationPendingChangedEvent(Tournament tournament, Tournament previousTournament, Participant participant,
-			Participant previousParticipant, Boolean invitationPending, Boolean previousInvitationPending) {
+	public ParticipantInvitationPendingChangedEvent(Tournament tournament, Tournament previousTournament,
+			Participant participant, Participant previousParticipant, Boolean invitationPending,
+			Boolean previousInvitationPending) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.invitationPending = invitationPending;
 		this.previousInvitationPending = previousInvitationPending;

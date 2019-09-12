@@ -7,8 +7,9 @@ public class ParticipantInvitationIdChangedEvent extends GenericParticipantChang
 	private Long invitationInvitationId;
 	private Long previousInvitationId;
 	
-	public ParticipantInvitationIdChangedEvent(Tournament tournament, Tournament previousTournament, Participant participant,
-			Participant previousParticipant, Long invitationInvitationId, Long previousInvitationId) {
+	public ParticipantInvitationIdChangedEvent(Tournament tournament, Tournament previousTournament,
+			Participant participant, Participant previousParticipant, Long invitationInvitationId,
+			Long previousInvitationId) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.invitationInvitationId = invitationInvitationId;
 		this.previousInvitationId = previousInvitationId;

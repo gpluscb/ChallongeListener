@@ -6,7 +6,8 @@ public class TournamentMaxPredictionsPerUserChangedEvent extends GenericTourname
 	private Integer maxPredictionsPerUser;
 	private Integer previousMaxPredictionsPerUser;
 	
-	public TournamentMaxPredictionsPerUserChangedEvent(Tournament tournament, Tournament previousTournament, Integer maxPredictionsPerUser, Integer previousMaxPredictionsPerUser) {
+	public TournamentMaxPredictionsPerUserChangedEvent(Tournament tournament, Tournament previousTournament,
+			Integer maxPredictionsPerUser, Integer previousMaxPredictionsPerUser) {
 		super(tournament, previousTournament);
 		this.maxPredictionsPerUser = maxPredictionsPerUser;
 		this.previousMaxPredictionsPerUser = previousMaxPredictionsPerUser;

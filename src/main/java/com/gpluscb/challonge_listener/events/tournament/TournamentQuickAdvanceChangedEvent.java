@@ -6,7 +6,8 @@ public class TournamentQuickAdvanceChangedEvent extends GenericTournamentChanged
 	private Boolean quickAdvance;
 	private Boolean previousQuickAdvance;
 	
-	public TournamentQuickAdvanceChangedEvent(Tournament tournament, Tournament previousTournament, Boolean quickAdvance, Boolean previousQuickAdvance) {
+	public TournamentQuickAdvanceChangedEvent(Tournament tournament, Tournament previousTournament,
+			Boolean quickAdvance, Boolean previousQuickAdvance) {
 		super(tournament, previousTournament);
 		this.quickAdvance = quickAdvance;
 		this.previousQuickAdvance = previousQuickAdvance;

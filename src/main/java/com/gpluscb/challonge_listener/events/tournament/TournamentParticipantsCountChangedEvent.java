@@ -6,7 +6,8 @@ public class TournamentParticipantsCountChangedEvent extends GenericTournamentCh
 	private Integer participantsCount;
 	private Integer previousParticipantsCount;
 	
-	public TournamentParticipantsCountChangedEvent(Tournament tournament, Tournament previousTournament, Integer participantsCount, Integer previousParticipantsCount) {
+	public TournamentParticipantsCountChangedEvent(Tournament tournament, Tournament previousTournament,
+			Integer participantsCount, Integer previousParticipantsCount) {
 		super(tournament, previousTournament);
 		this.participantsCount = participantsCount;
 		this.previousParticipantsCount = previousParticipantsCount;

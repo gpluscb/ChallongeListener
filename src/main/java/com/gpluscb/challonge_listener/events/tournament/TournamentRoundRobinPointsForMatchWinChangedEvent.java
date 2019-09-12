@@ -6,7 +6,8 @@ public class TournamentRoundRobinPointsForMatchWinChangedEvent extends GenericTo
 	private Float roundRobinPointsForMatchWin;
 	private Float previousRoundRobinPointsForMatchWin;
 	
-	public TournamentRoundRobinPointsForMatchWinChangedEvent(Tournament tournament, Tournament previousTournament, Float roundRobinPointsForMatchWin, Float previousRoundRobinPointsForMatchWin) {
+	public TournamentRoundRobinPointsForMatchWinChangedEvent(Tournament tournament, Tournament previousTournament,
+			Float roundRobinPointsForMatchWin, Float previousRoundRobinPointsForMatchWin) {
 		super(tournament, previousTournament);
 		this.roundRobinPointsForMatchWin = roundRobinPointsForMatchWin;
 		this.previousRoundRobinPointsForMatchWin = previousRoundRobinPointsForMatchWin;

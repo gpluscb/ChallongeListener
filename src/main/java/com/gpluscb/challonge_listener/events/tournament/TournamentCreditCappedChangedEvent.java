@@ -6,7 +6,8 @@ public class TournamentCreditCappedChangedEvent extends GenericTournamentChanged
 	private Boolean creditCapped;
 	private Boolean previousCreditCapped;
 	
-	public TournamentCreditCappedChangedEvent(Tournament tournament, Tournament previousTournament, Boolean creditCapped, Boolean previousCreditCapped) {
+	public TournamentCreditCappedChangedEvent(Tournament tournament, Tournament previousTournament,
+			Boolean creditCapped, Boolean previousCreditCapped) {
 		super(tournament, previousTournament);
 		this.creditCapped = creditCapped;
 		this.previousCreditCapped = previousCreditCapped;

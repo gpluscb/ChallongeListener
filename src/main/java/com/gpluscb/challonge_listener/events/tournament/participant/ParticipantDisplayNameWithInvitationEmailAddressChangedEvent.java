@@ -7,8 +7,9 @@ public class ParticipantDisplayNameWithInvitationEmailAddressChangedEvent extend
 	private String displayNameWithInvitationEmailAddress;
 	private String previousDisplayNameWithInvitationEmailAddress;
 	
-	public ParticipantDisplayNameWithInvitationEmailAddressChangedEvent(Tournament tournament, Tournament previousTournament, Participant participant,
-			Participant previousParticipant, String displayNameWithInvitationEmailAddress, String previousDisplayNameWithInvitationEmailAddress) {
+	public ParticipantDisplayNameWithInvitationEmailAddressChangedEvent(Tournament tournament,
+			Tournament previousTournament, Participant participant, Participant previousParticipant,
+			String displayNameWithInvitationEmailAddress, String previousDisplayNameWithInvitationEmailAddress) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.displayNameWithInvitationEmailAddress = displayNameWithInvitationEmailAddress;
 		this.previousDisplayNameWithInvitationEmailAddress = previousDisplayNameWithInvitationEmailAddress;

@@ -8,7 +8,8 @@ public class TournamentLockedAtChangedEvent extends GenericTournamentChangedEven
 	private OffsetDateTime lockedAt;
 	private OffsetDateTime previousLockedAt;
 	
-	public TournamentLockedAtChangedEvent(Tournament tournament, Tournament previousTournament, OffsetDateTime lockedAt, OffsetDateTime previousLockedAt) {
+	public TournamentLockedAtChangedEvent(Tournament tournament, Tournament previousTournament, OffsetDateTime lockedAt,
+			OffsetDateTime previousLockedAt) {
 		super(tournament, previousTournament);
 		this.lockedAt = lockedAt;
 		this.previousLockedAt = previousLockedAt;

@@ -6,7 +6,8 @@ public class TournamentSubdomainChangedEvent extends GenericTournamentChangedEve
 	private String subdomain;
 	private String previousSubdomain;
 	
-	public TournamentSubdomainChangedEvent(Tournament tournament, Tournament previousTournament, String subdomain, String previousSubdomain) {
+	public TournamentSubdomainChangedEvent(Tournament tournament, Tournament previousTournament, String subdomain,
+			String previousSubdomain) {
 		super(tournament, previousTournament);
 		this.subdomain = subdomain;
 		this.previousSubdomain = previousSubdomain;

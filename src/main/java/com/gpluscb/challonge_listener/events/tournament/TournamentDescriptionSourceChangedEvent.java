@@ -6,7 +6,8 @@ public class TournamentDescriptionSourceChangedEvent extends GenericTournamentCh
 	private String descriptionSource;
 	private String previousDescriptionSource;
 	
-	public TournamentDescriptionSourceChangedEvent(Tournament tournament, Tournament previousTournament, String descriptionSource, String previousDescriptionSource) {
+	public TournamentDescriptionSourceChangedEvent(Tournament tournament, Tournament previousTournament,
+			String descriptionSource, String previousDescriptionSource) {
 		super(tournament, previousTournament);
 		this.descriptionSource = descriptionSource;
 		this.previousDescriptionSource = previousDescriptionSource;

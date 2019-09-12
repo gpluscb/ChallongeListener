@@ -6,7 +6,8 @@ public class TournamentNotifyUsersWhenMatchesOpenChangedEvent extends GenericTou
 	private Boolean notifyUsersWhenMatchesOpen;
 	private Boolean previousNotifyUsersWhenMatchesOpen;
 	
-	public TournamentNotifyUsersWhenMatchesOpenChangedEvent(Tournament tournament, Tournament previousTournament, Boolean notifyUsersWhenMatchesOpen, Boolean previousNotifyUsersWhenMatchesOpen) {
+	public TournamentNotifyUsersWhenMatchesOpenChangedEvent(Tournament tournament, Tournament previousTournament,
+			Boolean notifyUsersWhenMatchesOpen, Boolean previousNotifyUsersWhenMatchesOpen) {
 		super(tournament, previousTournament);
 		this.notifyUsersWhenMatchesOpen = notifyUsersWhenMatchesOpen;
 		this.previousNotifyUsersWhenMatchesOpen = previousNotifyUsersWhenMatchesOpen;

@@ -6,7 +6,8 @@ public class TournamentOpenSignupChangedEvent extends GenericTournamentChangedEv
 	private Boolean openSignup;
 	private Boolean previousOpenSignup;
 	
-	public TournamentOpenSignupChangedEvent(Tournament tournament, Tournament previousTournament, Boolean openSignup, Boolean previousOpenSignup) {
+	public TournamentOpenSignupChangedEvent(Tournament tournament, Tournament previousTournament, Boolean openSignup,
+			Boolean previousOpenSignup) {
 		super(tournament, previousTournament);
 		this.openSignup = openSignup;
 		this.previousOpenSignup = previousOpenSignup;

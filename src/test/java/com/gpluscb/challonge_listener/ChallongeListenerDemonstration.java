@@ -41,7 +41,7 @@ public class ChallongeListenerDemonstration {
 			});
 			
 			Scanner s = new Scanner(System.in);
-
+			
 			manager.awaitRunning();
 			
 			System.out.println("Everything running. Press enter to close.");

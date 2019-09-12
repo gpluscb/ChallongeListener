@@ -6,7 +6,8 @@ public class TournamentParticipantsSwappableChangedEvent extends GenericTourname
 	private Boolean participantsSwappable;
 	private Boolean previousParticipantsSwappable;
 	
-	public TournamentParticipantsSwappableChangedEvent(Tournament tournament, Tournament previousTournament, Boolean participantsSwappable, Boolean previousParticipantsSwappable) {
+	public TournamentParticipantsSwappableChangedEvent(Tournament tournament, Tournament previousTournament,
+			Boolean participantsSwappable, Boolean previousParticipantsSwappable) {
 		super(tournament, previousTournament);
 		this.participantsSwappable = participantsSwappable;
 		this.previousParticipantsSwappable = previousParticipantsSwappable;

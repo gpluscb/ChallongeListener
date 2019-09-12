@@ -6,7 +6,8 @@ public class TournamentCategoryChangedEvent extends GenericTournamentChangedEven
 	private String category;
 	private String previousCategory;
 	
-	public TournamentCategoryChangedEvent(Tournament tournament, Tournament previousTournament, String category, String previousCategory) {
+	public TournamentCategoryChangedEvent(Tournament tournament, Tournament previousTournament, String category,
+			String previousCategory) {
 		super(tournament, previousTournament);
 		this.category = category;
 		this.previousCategory = previousCategory;

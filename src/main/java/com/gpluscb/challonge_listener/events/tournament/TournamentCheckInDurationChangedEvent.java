@@ -6,7 +6,8 @@ public class TournamentCheckInDurationChangedEvent extends GenericTournamentChan
 	private Long checkInDuration;
 	private Long previousCheckInDuration;
 	
-	public TournamentCheckInDurationChangedEvent(Tournament tournament, Tournament previousTournament, Long checkInDuration, Long previousCheckInDuration) {
+	public TournamentCheckInDurationChangedEvent(Tournament tournament, Tournament previousTournament,
+			Long checkInDuration, Long previousCheckInDuration) {
 		super(tournament, previousTournament);
 		this.checkInDuration = checkInDuration;
 		this.previousCheckInDuration = previousCheckInDuration;

@@ -6,7 +6,8 @@ public class TournamentProgressMeterChangedEvent extends GenericTournamentChange
 	private Integer progressMeter;
 	private Integer previousProgressMeter;
 	
-	public TournamentProgressMeterChangedEvent(Tournament tournament, Tournament previousTournament, Integer progressMeter, Integer previousProgressMeter) {
+	public TournamentProgressMeterChangedEvent(Tournament tournament, Tournament previousTournament,
+			Integer progressMeter, Integer previousProgressMeter) {
 		super(tournament, previousTournament);
 		this.progressMeter = progressMeter;
 		this.previousProgressMeter = previousProgressMeter;

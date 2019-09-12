@@ -6,7 +6,8 @@ public class TournamentSwissRoundsChangedEvent extends GenericTournamentChangedE
 	private Integer swissRounds;
 	private Integer previousSwissRounds;
 	
-	public TournamentSwissRoundsChangedEvent(Tournament tournament, Tournament previousTournament, Integer swissRounds, Integer previousSwissRounds) {
+	public TournamentSwissRoundsChangedEvent(Tournament tournament, Tournament previousTournament, Integer swissRounds,
+			Integer previousSwissRounds) {
 		super(tournament, previousTournament);
 		this.swissRounds = swissRounds;
 		this.previousSwissRounds = previousSwissRounds;

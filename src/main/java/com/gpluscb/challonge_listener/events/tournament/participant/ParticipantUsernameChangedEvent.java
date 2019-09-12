@@ -7,8 +7,8 @@ public class ParticipantUsernameChangedEvent extends GenericParticipantChangedEv
 	private String username;
 	private String previousUsername;
 	
-	public ParticipantUsernameChangedEvent(Tournament tournament, Tournament previousTournament, Participant participant,
-			Participant previousParticipant, String username, String previousUsername) {
+	public ParticipantUsernameChangedEvent(Tournament tournament, Tournament previousTournament,
+			Participant participant, Participant previousParticipant, String username, String previousUsername) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.username = username;
 		this.previousUsername = previousUsername;

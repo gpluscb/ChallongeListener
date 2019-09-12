@@ -11,7 +11,8 @@ public class AttachmentUpdatedAtChangedEvent extends GenericAttachmentChangedEve
 	private OffsetDateTime previousUpdatedAt;
 	
 	public AttachmentUpdatedAtChangedEvent(Tournament tournament, Tournament previousTournament, Match match,
-			Match previousMatch, Attachment attachment, Attachment previousAttachment, OffsetDateTime updatedAt, OffsetDateTime previousUpdatedAt) {
+			Match previousMatch, Attachment attachment, Attachment previousAttachment, OffsetDateTime updatedAt,
+			OffsetDateTime previousUpdatedAt) {
 		super(tournament, previousTournament, match, previousMatch, attachment, previousAttachment);
 		this.updatedAt = updatedAt;
 		this.previousUpdatedAt = previousUpdatedAt;

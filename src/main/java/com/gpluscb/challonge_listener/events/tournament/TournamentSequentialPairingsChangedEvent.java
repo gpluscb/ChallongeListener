@@ -6,7 +6,8 @@ public class TournamentSequentialPairingsChangedEvent extends GenericTournamentC
 	private Boolean sequentialPairings;
 	private Boolean previousSequentialPairings;
 	
-	public TournamentSequentialPairingsChangedEvent(Tournament tournament, Tournament previousTournament, Boolean sequentialPairings, Boolean previousSequentialPairings) {
+	public TournamentSequentialPairingsChangedEvent(Tournament tournament, Tournament previousTournament,
+			Boolean sequentialPairings, Boolean previousSequentialPairings) {
 		super(tournament, previousTournament);
 		this.sequentialPairings = sequentialPairings;
 		this.previousSequentialPairings = previousSequentialPairings;

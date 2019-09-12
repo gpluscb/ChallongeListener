@@ -7,8 +7,9 @@ public class ParticipantAttachedParticipatablePortraitUrlChangedEvent extends Ge
 	private String attachedParticipatablePortraitUrl;
 	private String previousAttachedParticipatablePortraitUrl;
 	
-	public ParticipantAttachedParticipatablePortraitUrlChangedEvent(Tournament tournament, Tournament previousTournament, Participant participant,
-			Participant previousParticipant, String attachedParticipatablePortraitUrl, String previousAttachedParticipatablePortraitUrl) {
+	public ParticipantAttachedParticipatablePortraitUrlChangedEvent(Tournament tournament,
+			Tournament previousTournament, Participant participant, Participant previousParticipant,
+			String attachedParticipatablePortraitUrl, String previousAttachedParticipatablePortraitUrl) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.attachedParticipatablePortraitUrl = attachedParticipatablePortraitUrl;
 		this.previousAttachedParticipatablePortraitUrl = previousAttachedParticipatablePortraitUrl;

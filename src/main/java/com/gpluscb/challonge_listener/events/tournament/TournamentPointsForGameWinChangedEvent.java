@@ -6,7 +6,8 @@ public class TournamentPointsForGameWinChangedEvent extends GenericTournamentCha
 	private Float pointsForGameWin;
 	private Float previousPointsForGameWin;
 	
-	public TournamentPointsForGameWinChangedEvent(Tournament tournament, Tournament previousTournament, Float pointsForGameWin, Float previousPointsForGameWin) {
+	public TournamentPointsForGameWinChangedEvent(Tournament tournament, Tournament previousTournament,
+			Float pointsForGameWin, Float previousPointsForGameWin) {
 		super(tournament, previousTournament);
 		this.pointsForGameWin = pointsForGameWin;
 		this.previousPointsForGameWin = previousPointsForGameWin;

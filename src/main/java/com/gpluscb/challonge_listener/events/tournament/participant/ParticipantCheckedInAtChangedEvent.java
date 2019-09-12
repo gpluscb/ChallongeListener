@@ -9,8 +9,9 @@ public class ParticipantCheckedInAtChangedEvent extends GenericParticipantChange
 	private OffsetDateTime checkedInAt;
 	private OffsetDateTime previousCheckedInAt;
 	
-	public ParticipantCheckedInAtChangedEvent(Tournament tournament, Tournament previousTournament, Participant participant,
-			Participant previousParticipant, OffsetDateTime checkedInAt, OffsetDateTime previousCheckedInAt) {
+	public ParticipantCheckedInAtChangedEvent(Tournament tournament, Tournament previousTournament,
+			Participant participant, Participant previousParticipant, OffsetDateTime checkedInAt,
+			OffsetDateTime previousCheckedInAt) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.checkedInAt = checkedInAt;
 		this.previousCheckedInAt = previousCheckedInAt;

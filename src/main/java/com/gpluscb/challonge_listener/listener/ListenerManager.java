@@ -693,7 +693,9 @@ public class ListenerManager {
 	 * 
 	 * @return true if the instance has not been shut down yet
 	 * 
-	 * @deprecated Use {@link com.gpluscb.challonge_listener.listener.ListenerManager#getState() getState()} instead
+	 * @deprecated Use
+	 *             {@link com.gpluscb.challonge_listener.listener.ListenerManager#getState()
+	 *             getState()} instead
 	 */
 	public boolean isRunning() {
 		return state.equals(ManagerState.RUNNING);

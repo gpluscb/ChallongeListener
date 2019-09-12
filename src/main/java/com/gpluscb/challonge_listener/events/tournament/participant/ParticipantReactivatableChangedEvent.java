@@ -7,8 +7,9 @@ public class ParticipantReactivatableChangedEvent extends GenericParticipantChan
 	private Boolean reactivatable;
 	private Boolean previousReactivatable;
 	
-	public ParticipantReactivatableChangedEvent(Tournament tournament, Tournament previousTournament, Participant participant,
-			Participant previousParticipant, Boolean reactivatable, Boolean previousReactivatable) {
+	public ParticipantReactivatableChangedEvent(Tournament tournament, Tournament previousTournament,
+			Participant participant, Participant previousParticipant, Boolean reactivatable,
+			Boolean previousReactivatable) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.reactivatable = reactivatable;
 		this.previousReactivatable = previousReactivatable;

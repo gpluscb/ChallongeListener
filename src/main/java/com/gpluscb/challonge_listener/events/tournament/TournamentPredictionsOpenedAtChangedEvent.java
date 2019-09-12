@@ -8,7 +8,8 @@ public class TournamentPredictionsOpenedAtChangedEvent extends GenericTournament
 	private OffsetDateTime predictionsOpenedAt;
 	private OffsetDateTime previousPredictionsOpenedAt;
 	
-	public TournamentPredictionsOpenedAtChangedEvent(Tournament tournament, Tournament previousTournament, OffsetDateTime predictionsOpenedAt, OffsetDateTime previousPredictionsOpenedAt) {
+	public TournamentPredictionsOpenedAtChangedEvent(Tournament tournament, Tournament previousTournament,
+			OffsetDateTime predictionsOpenedAt, OffsetDateTime previousPredictionsOpenedAt) {
 		super(tournament, previousTournament);
 		this.predictionsOpenedAt = predictionsOpenedAt;
 		this.previousPredictionsOpenedAt = previousPredictionsOpenedAt;

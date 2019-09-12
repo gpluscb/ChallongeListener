@@ -6,7 +6,8 @@ public class TournamentHideForumChangedEvent extends GenericTournamentChangedEve
 	private Boolean hideForum;
 	private Boolean previousHideForum;
 	
-	public TournamentHideForumChangedEvent(Tournament tournament, Tournament previousTournament, Boolean hideForum, Boolean previousHideForum) {
+	public TournamentHideForumChangedEvent(Tournament tournament, Tournament previousTournament, Boolean hideForum,
+			Boolean previousHideForum) {
 		super(tournament, previousTournament);
 		this.hideForum = hideForum;
 		this.previousHideForum = previousHideForum;

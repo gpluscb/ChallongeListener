@@ -6,7 +6,8 @@ public class TournamentHideSeedsChangedEvent extends GenericTournamentChangedEve
 	private Boolean hideSeeds;
 	private Boolean previousHideSeeds;
 	
-	public TournamentHideSeedsChangedEvent(Tournament tournament, Tournament previousTournament, Boolean hideSeeds, Boolean previousHideSeeds) {
+	public TournamentHideSeedsChangedEvent(Tournament tournament, Tournament previousTournament, Boolean hideSeeds,
+			Boolean previousHideSeeds) {
 		super(tournament, previousTournament);
 		this.hideSeeds = hideSeeds;
 		this.previousHideSeeds = previousHideSeeds;

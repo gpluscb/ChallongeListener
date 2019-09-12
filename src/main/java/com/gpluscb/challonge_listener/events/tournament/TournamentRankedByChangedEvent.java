@@ -7,7 +7,8 @@ public class TournamentRankedByChangedEvent extends GenericTournamentChangedEven
 	private RankedBy rankedBy;
 	private RankedBy previousRankedBy;
 	
-	public TournamentRankedByChangedEvent(Tournament tournament, Tournament previousTournament, RankedBy rankedBy, RankedBy previousRankedBy) {
+	public TournamentRankedByChangedEvent(Tournament tournament, Tournament previousTournament, RankedBy rankedBy,
+			RankedBy previousRankedBy) {
 		super(tournament, previousTournament);
 		this.rankedBy = rankedBy;
 		this.previousRankedBy = previousRankedBy;

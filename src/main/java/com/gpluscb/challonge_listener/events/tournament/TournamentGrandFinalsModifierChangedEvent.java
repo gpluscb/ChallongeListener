@@ -7,7 +7,8 @@ public class TournamentGrandFinalsModifierChangedEvent extends GenericTournament
 	private GrandFinalsModifier grandFinalsModifier;
 	private GrandFinalsModifier previousGrandFinalsModifier;
 	
-	public TournamentGrandFinalsModifierChangedEvent(Tournament tournament, Tournament previousTournament, GrandFinalsModifier grandFinalsModifier, GrandFinalsModifier previousGrandFinalsModifier) {
+	public TournamentGrandFinalsModifierChangedEvent(Tournament tournament, Tournament previousTournament,
+			GrandFinalsModifier grandFinalsModifier, GrandFinalsModifier previousGrandFinalsModifier) {
 		super(tournament, previousTournament);
 		this.grandFinalsModifier = grandFinalsModifier;
 		this.previousGrandFinalsModifier = previousGrandFinalsModifier;

@@ -8,7 +8,8 @@ public class TournamentTieBreaksChangedEvent extends GenericTournamentChangedEve
 	private List<String> tieBreaks;
 	private List<String> previousTieBreaks;
 	
-	public TournamentTieBreaksChangedEvent(Tournament tournament, Tournament previousTournament, List<String> tieBreaks, List<String> previousTieBreaks) {
+	public TournamentTieBreaksChangedEvent(Tournament tournament, Tournament previousTournament, List<String> tieBreaks,
+			List<String> previousTieBreaks) {
 		super(tournament, previousTournament);
 		this.tieBreaks = tieBreaks;
 		this.previousTieBreaks = previousTieBreaks;

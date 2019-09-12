@@ -6,7 +6,8 @@ public class TournamentAcceptAttachmentsChangedEvent extends GenericTournamentCh
 	private Boolean acceptAttachments;
 	private Boolean previousAcceptAttachments;
 	
-	public TournamentAcceptAttachmentsChangedEvent(Tournament tournament, Tournament previousTournament, Boolean acceptAttachments, Boolean previousAcceptAttachments) {
+	public TournamentAcceptAttachmentsChangedEvent(Tournament tournament, Tournament previousTournament,
+			Boolean acceptAttachments, Boolean previousAcceptAttachments) {
 		super(tournament, previousTournament);
 		this.acceptAttachments = acceptAttachments;
 		this.previousAcceptAttachments = previousAcceptAttachments;

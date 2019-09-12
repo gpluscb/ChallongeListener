@@ -9,8 +9,9 @@ public class ParticipantUpdatedAtChangedEvent extends GenericParticipantChangedE
 	private OffsetDateTime updatedAt;
 	private OffsetDateTime previousUpdatedAt;
 	
-	public ParticipantUpdatedAtChangedEvent(Tournament tournament, Tournament previousTournament, Participant participant,
-			Participant previousParticipant, OffsetDateTime updatedAt, OffsetDateTime previousUpdatedAt) {
+	public ParticipantUpdatedAtChangedEvent(Tournament tournament, Tournament previousTournament,
+			Participant participant, Participant previousParticipant, OffsetDateTime updatedAt,
+			OffsetDateTime previousUpdatedAt) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.updatedAt = updatedAt;
 		this.previousUpdatedAt = previousUpdatedAt;

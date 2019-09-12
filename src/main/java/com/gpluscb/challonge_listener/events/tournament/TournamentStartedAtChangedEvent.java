@@ -8,7 +8,8 @@ public class TournamentStartedAtChangedEvent extends GenericTournamentChangedEve
 	private OffsetDateTime startedAt;
 	private OffsetDateTime previousStartedAt;
 	
-	public TournamentStartedAtChangedEvent(Tournament tournament, Tournament previousTournament, OffsetDateTime startedAt, OffsetDateTime previousStartedAt) {
+	public TournamentStartedAtChangedEvent(Tournament tournament, Tournament previousTournament,
+			OffsetDateTime startedAt, OffsetDateTime previousStartedAt) {
 		super(tournament, previousTournament);
 		this.startedAt = startedAt;
 		this.previousStartedAt = previousStartedAt;

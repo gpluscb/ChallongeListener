@@ -7,8 +7,8 @@ public class ParticipantInviteEmailChangedEvent extends GenericParticipantChange
 	private String inviteEmail;
 	private String previousInviteEmail;
 	
-	public ParticipantInviteEmailChangedEvent(Tournament tournament, Tournament previousTournament, Participant participant,
-			Participant previousParticipant, String inviteEmail, String previousInviteEmail) {
+	public ParticipantInviteEmailChangedEvent(Tournament tournament, Tournament previousTournament,
+			Participant participant, Participant previousParticipant, String inviteEmail, String previousInviteEmail) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.inviteEmail = inviteEmail;
 		this.previousInviteEmail = previousInviteEmail;

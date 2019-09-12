@@ -6,7 +6,8 @@ public class TournamentSignupCapChangedEvent extends GenericTournamentChangedEve
 	private Integer signupCap;
 	private Integer previousSignupCap;
 	
-	public TournamentSignupCapChangedEvent(Tournament tournament, Tournament previousTournament, Integer signupCap, Integer previousSignupCap) {
+	public TournamentSignupCapChangedEvent(Tournament tournament, Tournament previousTournament, Integer signupCap,
+			Integer previousSignupCap) {
 		super(tournament, previousTournament);
 		this.signupCap = signupCap;
 		this.previousSignupCap = previousSignupCap;

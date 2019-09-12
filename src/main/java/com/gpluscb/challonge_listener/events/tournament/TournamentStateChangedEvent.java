@@ -7,7 +7,8 @@ public class TournamentStateChangedEvent extends GenericTournamentChangedEvent {
 	private TournamentState state;
 	private TournamentState previousState;
 	
-	public TournamentStateChangedEvent(Tournament tournament, Tournament previousTournament, TournamentState state, TournamentState previousState) {
+	public TournamentStateChangedEvent(Tournament tournament, Tournament previousTournament, TournamentState state,
+			TournamentState previousState) {
 		super(tournament, previousTournament);
 		this.state = state;
 		this.previousState = previousState;

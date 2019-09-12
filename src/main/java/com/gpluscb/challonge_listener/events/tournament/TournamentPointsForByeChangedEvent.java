@@ -6,7 +6,8 @@ public class TournamentPointsForByeChangedEvent extends GenericTournamentChanged
 	private Float pointsForBye;
 	private Float previousPointsForBye;
 	
-	public TournamentPointsForByeChangedEvent(Tournament tournament, Tournament previousTournament, Float pointsForBye, Float previousPointsForBye) {
+	public TournamentPointsForByeChangedEvent(Tournament tournament, Tournament previousTournament, Float pointsForBye,
+			Float previousPointsForBye) {
 		super(tournament, previousTournament);
 		this.pointsForBye = pointsForBye;
 		this.previousPointsForBye = previousPointsForBye;

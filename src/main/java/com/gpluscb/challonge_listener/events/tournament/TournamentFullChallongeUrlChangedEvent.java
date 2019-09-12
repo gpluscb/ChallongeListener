@@ -6,7 +6,8 @@ public class TournamentFullChallongeUrlChangedEvent extends GenericTournamentCha
 	private String fullChallongeUrl;
 	private String previousFullChallongeUrl;
 	
-	public TournamentFullChallongeUrlChangedEvent(Tournament tournament, Tournament previousTournament, String fullChallongeUrl, String previousFullChallongeUrl) {
+	public TournamentFullChallongeUrlChangedEvent(Tournament tournament, Tournament previousTournament,
+			String fullChallongeUrl, String previousFullChallongeUrl) {
 		super(tournament, previousTournament);
 		this.fullChallongeUrl = fullChallongeUrl;
 		this.previousFullChallongeUrl = previousFullChallongeUrl;

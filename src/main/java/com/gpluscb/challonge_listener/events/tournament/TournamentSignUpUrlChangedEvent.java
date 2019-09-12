@@ -6,7 +6,8 @@ public class TournamentSignUpUrlChangedEvent extends GenericTournamentChangedEve
 	private String signUpUrl;
 	private String previousSignUpUrl;
 	
-	public TournamentSignUpUrlChangedEvent(Tournament tournament, Tournament previousTournament, String signUpUrl, String previousSignUpUrl) {
+	public TournamentSignUpUrlChangedEvent(Tournament tournament, Tournament previousTournament, String signUpUrl,
+			String previousSignUpUrl) {
 		super(tournament, previousTournament);
 		this.signUpUrl = signUpUrl;
 		this.previousSignUpUrl = previousSignUpUrl;

@@ -9,7 +9,8 @@ public class AttachmentUserIdChangedEvent extends GenericAttachmentChangedEvent 
 	private Long previousUserId;
 	
 	public AttachmentUserIdChangedEvent(Tournament tournament, Tournament previousTournament, Match match,
-			Match previousMatch, Attachment attachment, Attachment previousAttachment, Long userUserId, Long previousUserId) {
+			Match previousMatch, Attachment attachment, Attachment previousAttachment, Long userUserId,
+			Long previousUserId) {
 		super(tournament, previousTournament, match, previousMatch, attachment, previousAttachment);
 		this.userUserId = userUserId;
 		this.previousUserId = previousUserId;

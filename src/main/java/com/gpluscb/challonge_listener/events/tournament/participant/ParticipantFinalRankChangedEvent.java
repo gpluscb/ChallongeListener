@@ -7,8 +7,8 @@ public class ParticipantFinalRankChangedEvent extends GenericParticipantChangedE
 	private Integer finalRank;
 	private Integer previousFinalRank;
 	
-	public ParticipantFinalRankChangedEvent(Tournament tournament, Tournament previousTournament, Participant participant,
-			Participant previousParticipant, Integer finalRank, Integer previousFinalRank) {
+	public ParticipantFinalRankChangedEvent(Tournament tournament, Tournament previousTournament,
+			Participant participant, Participant previousParticipant, Integer finalRank, Integer previousFinalRank) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.finalRank = finalRank;
 		this.previousFinalRank = previousFinalRank;

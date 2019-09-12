@@ -9,7 +9,8 @@ public class AttachmentAssetUrlChangedEvent extends GenericAttachmentChangedEven
 	private String previousAssetUrl;
 	
 	public AttachmentAssetUrlChangedEvent(Tournament tournament, Tournament previousTournament, Match match,
-			Match previousMatch, Attachment attachment, Attachment previousAttachment, String assetUrl, String previousAssetUrl) {
+			Match previousMatch, Attachment attachment, Attachment previousAttachment, String assetUrl,
+			String previousAssetUrl) {
 		super(tournament, previousTournament, match, previousMatch, attachment, previousAttachment);
 		this.assetUrl = assetUrl;
 		this.previousAssetUrl = previousAssetUrl;

@@ -6,7 +6,8 @@ public class TournamentCreatedByApiChangedEvent extends GenericTournamentChanged
 	private Boolean createdByApi;
 	private Boolean previousCreatedByApi;
 	
-	public TournamentCreatedByApiChangedEvent(Tournament tournament, Tournament previousTournament, Boolean createdByApi, Boolean previousCreatedByApi) {
+	public TournamentCreatedByApiChangedEvent(Tournament tournament, Tournament previousTournament,
+			Boolean createdByApi, Boolean previousCreatedByApi) {
 		super(tournament, previousTournament);
 		this.createdByApi = createdByApi;
 		this.previousCreatedByApi = previousCreatedByApi;

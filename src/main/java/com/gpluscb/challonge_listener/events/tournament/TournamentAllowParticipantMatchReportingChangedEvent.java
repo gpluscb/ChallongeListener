@@ -6,7 +6,8 @@ public class TournamentAllowParticipantMatchReportingChangedEvent extends Generi
 	private Boolean allowParticipantMatchReporting;
 	private Boolean previousAllowParticipantMatchReporting;
 	
-	public TournamentAllowParticipantMatchReportingChangedEvent(Tournament tournament, Tournament previousTournament, Boolean allowParticipantMatchReporting, Boolean previousAllowParticipantMatchReporting) {
+	public TournamentAllowParticipantMatchReportingChangedEvent(Tournament tournament, Tournament previousTournament,
+			Boolean allowParticipantMatchReporting, Boolean previousAllowParticipantMatchReporting) {
 		super(tournament, previousTournament);
 		this.allowParticipantMatchReporting = allowParticipantMatchReporting;
 		this.previousAllowParticipantMatchReporting = previousAllowParticipantMatchReporting;

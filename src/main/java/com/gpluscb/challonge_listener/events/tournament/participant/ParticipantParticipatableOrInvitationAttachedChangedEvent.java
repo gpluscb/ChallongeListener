@@ -7,8 +7,9 @@ public class ParticipantParticipatableOrInvitationAttachedChangedEvent extends G
 	private Boolean participatableOrInvitationAttached;
 	private Boolean previousParticipatableOrInvitationAttached;
 	
-	public ParticipantParticipatableOrInvitationAttachedChangedEvent(Tournament tournament, Tournament previousTournament, Participant participant,
-			Participant previousParticipant, Boolean participatableOrInvitationAttached, Boolean previousParticipatableOrInvitationAttached) {
+	public ParticipantParticipatableOrInvitationAttachedChangedEvent(Tournament tournament,
+			Tournament previousTournament, Participant participant, Participant previousParticipant,
+			Boolean participatableOrInvitationAttached, Boolean previousParticipatableOrInvitationAttached) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.participatableOrInvitationAttached = participatableOrInvitationAttached;
 		this.previousParticipatableOrInvitationAttached = previousParticipatableOrInvitationAttached;

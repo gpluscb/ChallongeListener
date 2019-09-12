@@ -9,7 +9,8 @@ public class TournamentMatchesChangedEvent extends GenericTournamentChangedEvent
 	private List<Match> matches;
 	private List<Match> previousMatches;
 	
-	public TournamentMatchesChangedEvent(Tournament tournament, Tournament previousTournament, List<Match> matches, List<Match> previousMatches) {
+	public TournamentMatchesChangedEvent(Tournament tournament, Tournament previousTournament, List<Match> matches,
+			List<Match> previousMatches) {
 		super(tournament, previousTournament);
 		this.matches = matches;
 		this.previousMatches = previousMatches;

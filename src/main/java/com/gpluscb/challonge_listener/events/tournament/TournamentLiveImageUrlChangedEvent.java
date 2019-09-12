@@ -6,7 +6,8 @@ public class TournamentLiveImageUrlChangedEvent extends GenericTournamentChanged
 	private String liveImageUrl;
 	private String previousLiveImageUrl;
 	
-	public TournamentLiveImageUrlChangedEvent(Tournament tournament, Tournament previousTournament, String liveImageUrl, String previousLiveImageUrl) {
+	public TournamentLiveImageUrlChangedEvent(Tournament tournament, Tournament previousTournament, String liveImageUrl,
+			String previousLiveImageUrl) {
 		super(tournament, previousTournament);
 		this.liveImageUrl = liveImageUrl;
 		this.previousLiveImageUrl = previousLiveImageUrl;

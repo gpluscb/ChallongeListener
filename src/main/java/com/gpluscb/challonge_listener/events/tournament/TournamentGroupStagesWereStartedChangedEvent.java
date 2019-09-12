@@ -6,7 +6,8 @@ public class TournamentGroupStagesWereStartedChangedEvent extends GenericTournam
 	private Boolean groupStagesWereStarted;
 	private Boolean previousGroupStagesWereStarted;
 	
-	public TournamentGroupStagesWereStartedChangedEvent(Tournament tournament, Tournament previousTournament, Boolean groupStagesWereStarted, Boolean previousGroupStagesWereStarted) {
+	public TournamentGroupStagesWereStartedChangedEvent(Tournament tournament, Tournament previousTournament,
+			Boolean groupStagesWereStarted, Boolean previousGroupStagesWereStarted) {
 		super(tournament, previousTournament);
 		this.groupStagesWereStarted = groupStagesWereStarted;
 		this.previousGroupStagesWereStarted = previousGroupStagesWereStarted;

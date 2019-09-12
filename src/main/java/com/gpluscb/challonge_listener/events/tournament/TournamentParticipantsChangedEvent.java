@@ -9,7 +9,8 @@ public class TournamentParticipantsChangedEvent extends GenericTournamentChanged
 	private List<Participant> participants;
 	private List<Participant> previousParticipants;
 	
-	public TournamentParticipantsChangedEvent(Tournament tournament, Tournament previousTournament, List<Participant> participants, List<Participant> previousParticipants) {
+	public TournamentParticipantsChangedEvent(Tournament tournament, Tournament previousTournament,
+			List<Participant> participants, List<Participant> previousParticipants) {
 		super(tournament, previousTournament);
 		this.participants = participants;
 		this.previousParticipants = previousParticipants;

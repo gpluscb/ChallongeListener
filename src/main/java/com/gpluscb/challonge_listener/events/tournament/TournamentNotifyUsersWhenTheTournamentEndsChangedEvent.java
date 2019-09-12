@@ -6,7 +6,8 @@ public class TournamentNotifyUsersWhenTheTournamentEndsChangedEvent extends Gene
 	private Boolean notifyUsersWhenTheTournamentEnds;
 	private Boolean previousNotifyUsersWhenTheTournamentEnds;
 	
-	public TournamentNotifyUsersWhenTheTournamentEndsChangedEvent(Tournament tournament, Tournament previousTournament, Boolean notifyUsersWhenTheTournamentEnds, Boolean previousNotifyUsersWhenTheTournamentEnds) {
+	public TournamentNotifyUsersWhenTheTournamentEndsChangedEvent(Tournament tournament, Tournament previousTournament,
+			Boolean notifyUsersWhenTheTournamentEnds, Boolean previousNotifyUsersWhenTheTournamentEnds) {
 		super(tournament, previousTournament);
 		this.notifyUsersWhenTheTournamentEnds = notifyUsersWhenTheTournamentEnds;
 		this.previousNotifyUsersWhenTheTournamentEnds = previousNotifyUsersWhenTheTournamentEnds;

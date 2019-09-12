@@ -6,7 +6,8 @@ public class TournamentTeamConvertableChangedEvent extends GenericTournamentChan
 	private Boolean teamConvertable;
 	private Boolean previousTeamConvertable;
 	
-	public TournamentTeamConvertableChangedEvent(Tournament tournament, Tournament previousTournament, Boolean teamConvertable, Boolean previousTeamConvertable) {
+	public TournamentTeamConvertableChangedEvent(Tournament tournament, Tournament previousTournament,
+			Boolean teamConvertable, Boolean previousTeamConvertable) {
 		super(tournament, previousTournament);
 		this.teamConvertable = teamConvertable;
 		this.previousTeamConvertable = previousTeamConvertable;
