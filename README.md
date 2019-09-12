@@ -32,7 +32,7 @@ A project using the [stefangeyer/challonge-java](https://github.com/stefangeyer/
 	
 - [ ] [Find better solution than a private object for wait/notify calls. Also learn about synchronizing and race conditions](/src/main/java/com/gpluscb/challonge_listener/listener/ListenerManager.java#L75)
 
-- [ ] [Replace ugly multiple try system for the case that a tournament changes in the middle of getting it from the api](/src/main/java/com/gpluscb/challonge_listener/listener/ListenerManager.java#L135)
+- [ ] [Replace ugly multiple try system for the case that a tournament changes in the middle of getting it from the api](/src/main/java/com/gpluscb/challonge_listener/listener/ListenerManager.java#L162)
 
 - [ ] [Make ChallongeExtension#doesExist(String tournament) check more elegant and safer](/src/main/java/com/gpluscb/challonge_listener/ChallongeExtension.java#L59)
 

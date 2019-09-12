@@ -93,12 +93,12 @@ public class ListenerManager {
 	 * 
 	 * @param challonge
 	 *            The ChallongeExtension instance used to get all the tournament
-	 *            data.
+	 *            data
 	 * @throws DataAccessException
 	 *             Exchange with the rest api or validation failed
 	 */
 	public ListenerManager(ChallongeExtension challonge) throws DataAccessException {
-		this(challonge, 5000);
+		this(challonge, 5000, null);
 	}
 	
 	/**
@@ -110,7 +110,7 @@ public class ListenerManager {
 	 * 
 	 * @param challonge
 	 *            The ChallongeExtension instance used to get all the tournament
-	 *            data.
+	 *            data
 	 * @param interval
 	 *            The interval to try to update at in milliseconds. If the
 	 *            interval is 0, the manager tries to update as quickly as
@@ -119,6 +119,31 @@ public class ListenerManager {
 	 *             Exchange with the rest api or validation failed
 	 */
 	public ListenerManager(ChallongeExtension challonge, long interval) throws DataAccessException {
+		this(challonge, interval, null);
+	}
+	
+	/**
+	 * Creates a running instance that tries to update at the specified
+	 * interval. Note that if something is changed but then changed back
+	 * in-between updates the changes may not fire events.<br>
+	 * The instance will run until the {@link ListenerManager#shutdown()
+	 * shutdown()} method is called or the garbage collector destroys it.
+	 * 
+	 * @param challonge
+	 *            The ChallongeExtension instance used to get all the tournament
+	 *            data
+	 * @param interval
+	 *            The interval to try to update at in milliseconds. If the
+	 *            interval is 0, the manager tries to update as quickly as
+	 *            possible
+	 * @param tournaments
+	 *            The state of tournaments to be the initial state. At first,
+	 *            the current state will be compared to this state
+	 * @throws DataAccessException
+	 *             Exchange with the rest api or validation failed
+	 */
+	public ListenerManager(ChallongeExtension challonge, long interval, List<Tournament> tournaments)
+			throws DataAccessException {
 		state = ManagerState.INITIALIZING;
 		
 		// Check if the ChallongeExtension works in principle. Reducing failures
@@ -131,31 +156,29 @@ public class ListenerManager {
 		
 		listenerThread = new Thread(() -> {
 			try {
-				List<Tournament> previousTournaments = null;
-				// TODO: Maybe that should be handled somewhere else in the
-				// project. Like this it is quite ugly, but should somewhat
-				// work.
-				// Try to get tournament four times
-				final int NUM_TRIES = 4;
-				for(int i = 1; i <= NUM_TRIES; i++) {
-					try {
-						previousTournaments = challonge.getTournamentsWithFullData();
-						break;
-					} catch(DataAccessException e) {
-						if(i >= NUM_TRIES) throw e;
-						LOG.warn("DataAccessException caught while initializing, trying again.");
-						LOG.catching(Level.WARN, e);
+				List<Tournament> previousTournaments = tournaments;
+				
+				if(previousTournaments == null) {
+					// TODO: Maybe that should be handled somewhere else in the
+					// project. Like this it is quite ugly, but should somewhat
+					// work.
+					// Try to get tournament four times
+					final int NUM_TRIES = 4;
+					for(int i = 1; i <= NUM_TRIES; i++) {
+						try {
+							previousTournaments = challonge.getTournamentsWithFullData();
+							break;
+						} catch(DataAccessException e) {
+							if(i >= NUM_TRIES) throw e;
+							LOG.warn("DataAccessException caught while initializing, trying again.");
+							LOG.catching(Level.WARN, e);
+						}
 					}
 				}
 				
 				state = ManagerState.RUNNING;
 				
-				long waitTime = interval;
 				while(state.equals(ManagerState.RUNNING)) {
-					synchronized(sync) {
-						if(waitTime > 0) sync.wait(waitTime);
-					}
-					
 					long cycleStartTime = System.currentTimeMillis();
 					
 					try {
@@ -166,7 +189,10 @@ public class ListenerManager {
 					}
 					
 					long cycleTime = System.currentTimeMillis() - cycleStartTime;
-					waitTime = interval - cycleTime;
+					long waitTime = interval - cycleTime;
+					synchronized(sync) {
+						if(waitTime > 0) sync.wait(waitTime);
+					}
 				}
 			} catch(InterruptedException | DataAccessException e) {
 				LOG.error("Exception caught in ChallongeListener thread, shutting down.");
