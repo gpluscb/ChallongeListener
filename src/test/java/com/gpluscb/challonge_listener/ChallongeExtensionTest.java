@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -29,6 +30,7 @@ public class ChallongeExtensionTest {
 	private static RetrofitRestClient client;
 	private static ChallongeExtension challonge;
 	private static Serializer serializer;
+	private static String randomUrl;
 	private static Tournament owned;
 	private static Tournament notOwned;
 	
@@ -41,10 +43,9 @@ public class ChallongeExtensionTest {
 		Credentials credentials = new Credentials(System.getenv("ChallongeUsername"), System.getenv("ChallongeToken"));
 		challonge = new ChallongeExtension(credentials, serializer, client);
 		
-		// Please don't sabotage this test
-		// TODO: Random url
+		randomUrl = generateRandomUrl(10);		
 		TournamentQuery tournamentQuery = TournamentQuery.builder().name("TestTournament")
-				.description("A test tournament").gameName("Chess").url("134665474523547").acceptAttachments(true)
+				.description("A test tournament").gameName("Chess").url(randomUrl).acceptAttachments(true)
 				.build();
 		owned = challonge.createTournament(tournamentQuery);
 		
@@ -63,15 +64,31 @@ public class ChallongeExtensionTest {
 		}
 	}
 	
+	private static String generateRandomUrl(int length) {
+		// Only gets lower-case [a-z]{length} type strings
+		int a = 97;
+		int z = 122;
+		Random rng = new Random();
+		StringBuilder builder = new StringBuilder(length);
+		for(int i = 0; i < length; i++) {
+			int random = rng.nextInt(z + 1 - a) + a;
+			
+			builder.append((char) random);
+		}
+		
+		return builder.toString();
+	}
+	
 	@AfterClass
 	public static void afterClass() throws DataAccessException {
+		owned = challonge.getTournament(randomUrl);
 		challonge.deleteTournament(owned);
 		client.close();
 	}
 	
 	@Before
 	public void beforeTest() throws DataAccessException {
-		owned = challonge.getTournament("134665474523547");
+		owned = challonge.getTournament(randomUrl);
 		
 		List<Participant> ownedParticipants = challonge.getParticipants(owned);
 		for(Participant participant : ownedParticipants) {

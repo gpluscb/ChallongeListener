@@ -46,6 +46,4 @@ A project using the [stefangeyer/challonge-java](https://github.com/stefangeyer/
 	Con:
 	* Cannot think of anyone who would need it when methods to get stuff with full data already exist.
 	
-- [ ] [Noticed weird behaviour of match/has_attachment (always false) and match/attachment_count (null until attachment is added (not 0, null)). Should annoy Challonge support about that](/src/test/java/com/gpluscb/challonge_listener/ChallongeExtensionTest.java#L27)
-
-- [ ] [Implement random url for testing in case the current one gets taken](/src/test/java/com/gpluscb/challonge_listener/ChallongeExtensionTest.java#L45)
+- [ ] [Noticed weird behaviour of match/has_attachment (always false) and match/attachment_count (null until attachment is added (not 0, null)). Should annoy Challonge support about that](/src/test/java/com/gpluscb/challonge_listener/ChallongeExtensionTest.java#L28)
