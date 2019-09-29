@@ -4,21 +4,21 @@ import at.stefangeyer.challonge.model.Tournament;
 import at.stefangeyer.challonge.model.enumeration.RankedBy;
 
 public class TournamentRankedByChangedEvent extends GenericTournamentChangedEvent {
-	private RankedBy rankedBy;
-	private RankedBy previousRankedBy;
+	private final RankedBy rankedBy;
+	private final RankedBy previousRankedBy;
 	
-	public TournamentRankedByChangedEvent(Tournament tournament, Tournament previousTournament, RankedBy rankedBy,
-			RankedBy previousRankedBy) {
+	public TournamentRankedByChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final RankedBy rankedBy, final RankedBy previousRankedBy) {
 		super(tournament, previousTournament);
 		this.rankedBy = rankedBy;
 		this.previousRankedBy = previousRankedBy;
 	}
 	
 	public RankedBy getRankedBy() {
-		return rankedBy;
+		return this.rankedBy;
 	}
 	
 	public RankedBy getPreviousRankedBy() {
-		return previousRankedBy;
+		return this.previousRankedBy;
 	}
 }

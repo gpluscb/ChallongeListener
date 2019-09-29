@@ -4,21 +4,22 @@ import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class MatchAttachmentCountChangedEvent extends GenericMatchChangedEvent {
-	private Integer attachmentCount;
-	private Integer previousAttachmentCount;
+	private final Integer attachmentCount;
+	private final Integer previousAttachmentCount;
 	
-	public MatchAttachmentCountChangedEvent(Tournament tournament, Tournament previousTournament, Match match,
-			Match previousMatch, Integer attachmentCount, Integer previousAttachmentCount) {
+	public MatchAttachmentCountChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Match match, final Match previousMatch, final Integer attachmentCount,
+			final Integer previousAttachmentCount) {
 		super(tournament, previousTournament, match, previousMatch);
 		this.attachmentCount = attachmentCount;
 		this.previousAttachmentCount = previousAttachmentCount;
 	}
 	
 	public Integer getAttachmentCount() {
-		return attachmentCount;
+		return this.attachmentCount;
 	}
 	
 	public Integer getPreviousAttachmentCount() {
-		return previousAttachmentCount;
+		return this.previousAttachmentCount;
 	}
 }

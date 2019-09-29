@@ -3,21 +3,21 @@ package com.gpluscb.challonge_listener.events.tournament;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class TournamentOpenSignupChangedEvent extends GenericTournamentChangedEvent {
-	private Boolean openSignup;
-	private Boolean previousOpenSignup;
+	private final Boolean openSignup;
+	private final Boolean previousOpenSignup;
 	
-	public TournamentOpenSignupChangedEvent(Tournament tournament, Tournament previousTournament, Boolean openSignup,
-			Boolean previousOpenSignup) {
+	public TournamentOpenSignupChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Boolean openSignup, final Boolean previousOpenSignup) {
 		super(tournament, previousTournament);
 		this.openSignup = openSignup;
 		this.previousOpenSignup = previousOpenSignup;
 	}
 	
 	public Boolean getOpenSignup() {
-		return openSignup;
+		return this.openSignup;
 	}
 	
 	public Boolean getPreviousOpenSignup() {
-		return previousOpenSignup;
+		return this.previousOpenSignup;
 	}
 }

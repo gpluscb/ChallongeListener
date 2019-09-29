@@ -3,21 +3,21 @@ package com.gpluscb.challonge_listener.events.tournament;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class TournamentAcceptingPredictionsChangedEvent extends GenericTournamentChangedEvent {
-	private Boolean acceptingPredictions;
-	private Boolean previousAcceptingPredictions;
+	private final Boolean acceptingPredictions;
+	private final Boolean previousAcceptingPredictions;
 	
-	public TournamentAcceptingPredictionsChangedEvent(Tournament tournament, Tournament previousTournament,
-			Boolean acceptingPredictions, Boolean previousAcceptingPredictions) {
+	public TournamentAcceptingPredictionsChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Boolean acceptingPredictions, final Boolean previousAcceptingPredictions) {
 		super(tournament, previousTournament);
 		this.acceptingPredictions = acceptingPredictions;
 		this.previousAcceptingPredictions = previousAcceptingPredictions;
 	}
 	
 	public Boolean getAcceptingPredictions() {
-		return acceptingPredictions;
+		return this.acceptingPredictions;
 	}
 	
 	public Boolean getPreviousAcceptingPredictions() {
-		return previousAcceptingPredictions;
+		return this.previousAcceptingPredictions;
 	}
 }

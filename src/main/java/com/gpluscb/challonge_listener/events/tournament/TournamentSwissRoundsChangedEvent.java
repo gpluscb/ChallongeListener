@@ -3,21 +3,21 @@ package com.gpluscb.challonge_listener.events.tournament;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class TournamentSwissRoundsChangedEvent extends GenericTournamentChangedEvent {
-	private Integer swissRounds;
-	private Integer previousSwissRounds;
+	private final Integer swissRounds;
+	private final Integer previousSwissRounds;
 	
-	public TournamentSwissRoundsChangedEvent(Tournament tournament, Tournament previousTournament, Integer swissRounds,
-			Integer previousSwissRounds) {
+	public TournamentSwissRoundsChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Integer swissRounds, final Integer previousSwissRounds) {
 		super(tournament, previousTournament);
 		this.swissRounds = swissRounds;
 		this.previousSwissRounds = previousSwissRounds;
 	}
 	
 	public Integer getSwissRounds() {
-		return swissRounds;
+		return this.swissRounds;
 	}
 	
 	public Integer getPreviousSwissRounds() {
-		return previousSwissRounds;
+		return this.previousSwissRounds;
 	}
 }

@@ -4,22 +4,22 @@ import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class MatchPlayer2IsPrerequisiteMatchLoserChangedEvent extends GenericMatchChangedEvent {
-	private Boolean player2IsPrerequisiteMatchLoser;
-	private Boolean previousPlayer2IsPrerequisiteMatchLoser;
+	private final Boolean player2IsPrerequisiteMatchLoser;
+	private final Boolean previousPlayer2IsPrerequisiteMatchLoser;
 	
-	public MatchPlayer2IsPrerequisiteMatchLoserChangedEvent(Tournament tournament, Tournament previousTournament,
-			Match match, Match previousMatch, Boolean player2IsPrerequisiteMatchLoser,
-			Boolean previousPlayer2IsPrerequisiteMatchLoser) {
+	public MatchPlayer2IsPrerequisiteMatchLoserChangedEvent(final Tournament tournament,
+			final Tournament previousTournament, final Match match, final Match previousMatch,
+			final Boolean player2IsPrerequisiteMatchLoser, final Boolean previousPlayer2IsPrerequisiteMatchLoser) {
 		super(tournament, previousTournament, match, previousMatch);
 		this.player2IsPrerequisiteMatchLoser = player2IsPrerequisiteMatchLoser;
 		this.previousPlayer2IsPrerequisiteMatchLoser = previousPlayer2IsPrerequisiteMatchLoser;
 	}
 	
 	public Boolean getPlayer2IsPrerequisiteMatchLoser() {
-		return player2IsPrerequisiteMatchLoser;
+		return this.player2IsPrerequisiteMatchLoser;
 	}
 	
 	public Boolean getPreviousPlayer2IsPrerequisiteMatchLoser() {
-		return previousPlayer2IsPrerequisiteMatchLoser;
+		return this.previousPlayer2IsPrerequisiteMatchLoser;
 	}
 }

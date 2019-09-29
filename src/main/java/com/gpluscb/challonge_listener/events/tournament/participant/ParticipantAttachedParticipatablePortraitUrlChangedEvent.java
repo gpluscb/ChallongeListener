@@ -4,22 +4,22 @@ import at.stefangeyer.challonge.model.Participant;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class ParticipantAttachedParticipatablePortraitUrlChangedEvent extends GenericParticipantChangedEvent {
-	private String attachedParticipatablePortraitUrl;
-	private String previousAttachedParticipatablePortraitUrl;
+	private final String attachedParticipatablePortraitUrl;
+	private final String previousAttachedParticipatablePortraitUrl;
 	
-	public ParticipantAttachedParticipatablePortraitUrlChangedEvent(Tournament tournament,
-			Tournament previousTournament, Participant participant, Participant previousParticipant,
-			String attachedParticipatablePortraitUrl, String previousAttachedParticipatablePortraitUrl) {
+	public ParticipantAttachedParticipatablePortraitUrlChangedEvent(final Tournament tournament,
+			final Tournament previousTournament, final Participant participant, final Participant previousParticipant,
+			final String attachedParticipatablePortraitUrl, final String previousAttachedParticipatablePortraitUrl) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.attachedParticipatablePortraitUrl = attachedParticipatablePortraitUrl;
 		this.previousAttachedParticipatablePortraitUrl = previousAttachedParticipatablePortraitUrl;
 	}
 	
 	public String getAttachedParticipatablePortraitUrl() {
-		return attachedParticipatablePortraitUrl;
+		return this.attachedParticipatablePortraitUrl;
 	}
 	
 	public String getPreviousAttachedParticipatablePortraitUrl() {
-		return previousAttachedParticipatablePortraitUrl;
+		return this.previousAttachedParticipatablePortraitUrl;
 	}
 }

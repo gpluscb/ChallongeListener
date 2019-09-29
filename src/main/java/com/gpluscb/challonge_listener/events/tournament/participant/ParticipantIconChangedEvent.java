@@ -4,21 +4,22 @@ import at.stefangeyer.challonge.model.Participant;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class ParticipantIconChangedEvent extends GenericParticipantChangedEvent {
-	private String icon;
-	private String previousIcon;
+	private final String icon;
+	private final String previousIcon;
 	
-	public ParticipantIconChangedEvent(Tournament tournament, Tournament previousTournament, Participant participant,
-			Participant previousParticipant, String icon, String previousIcon) {
+	public ParticipantIconChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Participant participant, final Participant previousParticipant, final String icon,
+			final String previousIcon) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.icon = icon;
 		this.previousIcon = previousIcon;
 	}
 	
 	public String getIcon() {
-		return icon;
+		return this.icon;
 	}
 	
 	public String getPreviousIcon() {
-		return previousIcon;
+		return this.previousIcon;
 	}
 }

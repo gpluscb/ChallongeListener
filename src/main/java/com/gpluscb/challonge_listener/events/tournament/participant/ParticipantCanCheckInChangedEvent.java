@@ -4,21 +4,22 @@ import at.stefangeyer.challonge.model.Participant;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class ParticipantCanCheckInChangedEvent extends GenericParticipantChangedEvent {
-	private Boolean canCheckIn;
-	private Boolean previousCanCheckIn;
+	private final Boolean canCheckIn;
+	private final Boolean previousCanCheckIn;
 	
-	public ParticipantCanCheckInChangedEvent(Tournament tournament, Tournament previousTournament,
-			Participant participant, Participant previousParticipant, Boolean canCheckIn, Boolean previousCanCheckIn) {
+	public ParticipantCanCheckInChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Participant participant, final Participant previousParticipant, final Boolean canCheckIn,
+			final Boolean previousCanCheckIn) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.canCheckIn = canCheckIn;
 		this.previousCanCheckIn = previousCanCheckIn;
 	}
 	
 	public Boolean getCanCheckIn() {
-		return canCheckIn;
+		return this.canCheckIn;
 	}
 	
 	public Boolean getPreviousCanCheckIn() {
-		return previousCanCheckIn;
+		return this.previousCanCheckIn;
 	}
 }

@@ -1,5 +1,7 @@
 package com.gpluscb.challonge_listener.listener;
 
+import java.util.List;
+
 import com.gpluscb.challonge_listener.events.GenericEvent;
 
 /**
@@ -10,9 +12,20 @@ import com.gpluscb.challonge_listener.events.GenericEvent;
 public interface EventListener {
 	/**
 	 * Handles a fired event.
-	 * 
+	 *
 	 * @param event
 	 *            The event to be handled
 	 */
-	public void onEvent(GenericEvent event);
+	void onEvent(GenericEvent event);
+	
+	/**
+	 * The ids of the tournaments this EventListener is subscribed to. Used by
+	 * ListenerManager. Unfortunately, no url support is possible here because
+	 * there are possible id/url collisions which could give the user events for
+	 * an entirely different tournament. Workarounds would require a good amount
+	 * of checks, so no implementation of that yet.
+	 *
+	 * @return All the ids of tournaments the EventListener is subscribed to
+	 */
+	List<Long> getSubscribedTournamentIds();
 }

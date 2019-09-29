@@ -4,21 +4,21 @@ import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class MatchScoresCsvChangedEvent extends GenericMatchChangedEvent {
-	private String scoresCsv;
-	private String previousScoresCsv;
+	private final String scoresCsv;
+	private final String previousScoresCsv;
 	
-	public MatchScoresCsvChangedEvent(Tournament tournament, Tournament previousTournament, Match match,
-			Match previousMatch, String scoresCsv, String previousScoresCsv) {
+	public MatchScoresCsvChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Match match, final Match previousMatch, final String scoresCsv, final String previousScoresCsv) {
 		super(tournament, previousTournament, match, previousMatch);
 		this.scoresCsv = scoresCsv;
 		this.previousScoresCsv = previousScoresCsv;
 	}
 	
 	public String getScoresCsv() {
-		return scoresCsv;
+		return this.scoresCsv;
 	}
 	
 	public String getPreviousScoresCsv() {
-		return previousScoresCsv;
+		return this.previousScoresCsv;
 	}
 }

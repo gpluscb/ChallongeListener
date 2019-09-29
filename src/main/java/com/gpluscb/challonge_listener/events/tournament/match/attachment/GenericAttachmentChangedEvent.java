@@ -5,15 +5,21 @@ import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Tournament;
 
 public abstract class GenericAttachmentChangedEvent extends GenericAttachmentEvent {
-	private Attachment previousAttachment;
+	private final Attachment previousAttachment;
 	
-	public GenericAttachmentChangedEvent(Tournament tournament, Tournament previousTournament, Match match,
-			Match previousMatch, Attachment attachment, Attachment previousAttachment) {
+	public GenericAttachmentChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Match match, final Match previousMatch, final Attachment attachment,
+			final Attachment previousAttachment) {
 		super(tournament, previousTournament, match, previousMatch, attachment);
 		this.previousAttachment = previousAttachment;
 	}
 	
+	/**
+	 * The attachment before it changed.
+	 * 
+	 * @return the previous attachment
+	 */
 	public Attachment getPreviousAttachment() {
-		return previousAttachment;
+		return this.previousAttachment;
 	}
 }

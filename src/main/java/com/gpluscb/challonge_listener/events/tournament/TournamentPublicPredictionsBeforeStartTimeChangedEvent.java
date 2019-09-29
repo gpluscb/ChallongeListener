@@ -3,21 +3,22 @@ package com.gpluscb.challonge_listener.events.tournament;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class TournamentPublicPredictionsBeforeStartTimeChangedEvent extends GenericTournamentChangedEvent {
-	private Boolean publicPredictionsBeforeStartTime;
-	private Boolean previousPublicPredictionsBeforeStartTime;
+	private final Boolean publicPredictionsBeforeStartTime;
+	private final Boolean previousPublicPredictionsBeforeStartTime;
 	
-	public TournamentPublicPredictionsBeforeStartTimeChangedEvent(Tournament tournament, Tournament previousTournament,
-			Boolean publicPredictionsBeforeStartTime, Boolean previousPublicPredictionsBeforeStartTime) {
+	public TournamentPublicPredictionsBeforeStartTimeChangedEvent(final Tournament tournament,
+			final Tournament previousTournament, final Boolean publicPredictionsBeforeStartTime,
+			final Boolean previousPublicPredictionsBeforeStartTime) {
 		super(tournament, previousTournament);
 		this.publicPredictionsBeforeStartTime = publicPredictionsBeforeStartTime;
 		this.previousPublicPredictionsBeforeStartTime = previousPublicPredictionsBeforeStartTime;
 	}
 	
 	public Boolean getPublicPredictionsBeforeStartTime() {
-		return publicPredictionsBeforeStartTime;
+		return this.publicPredictionsBeforeStartTime;
 	}
 	
 	public Boolean getPreviousPublicPredictionsBeforeStartTime() {
-		return previousPublicPredictionsBeforeStartTime;
+		return this.previousPublicPredictionsBeforeStartTime;
 	}
 }

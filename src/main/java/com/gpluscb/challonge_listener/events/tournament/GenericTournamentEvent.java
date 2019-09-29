@@ -1,16 +1,22 @@
 package com.gpluscb.challonge_listener.events.tournament;
 
-import at.stefangeyer.challonge.model.Tournament;
 import com.gpluscb.challonge_listener.events.GenericEvent;
 
+import at.stefangeyer.challonge.model.Tournament;
+
 public abstract class GenericTournamentEvent implements GenericEvent {
-	private Tournament tournament;
+	private final Tournament tournament;
 	
-	public GenericTournamentEvent(Tournament tournament) {
+	public GenericTournamentEvent(final Tournament tournament) {
 		this.tournament = tournament;
 	}
 	
+	/**
+	 * The tournament primarily associated with this event.
+	 * 
+	 * @return The primary tournament of this event
+	 */
 	public Tournament getTournament() {
-		return tournament;
+		return this.tournament;
 	}
 }

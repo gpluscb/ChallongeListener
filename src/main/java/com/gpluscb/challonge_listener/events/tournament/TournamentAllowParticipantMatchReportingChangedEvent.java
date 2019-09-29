@@ -3,21 +3,22 @@ package com.gpluscb.challonge_listener.events.tournament;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class TournamentAllowParticipantMatchReportingChangedEvent extends GenericTournamentChangedEvent {
-	private Boolean allowParticipantMatchReporting;
-	private Boolean previousAllowParticipantMatchReporting;
+	private final Boolean allowParticipantMatchReporting;
+	private final Boolean previousAllowParticipantMatchReporting;
 	
-	public TournamentAllowParticipantMatchReportingChangedEvent(Tournament tournament, Tournament previousTournament,
-			Boolean allowParticipantMatchReporting, Boolean previousAllowParticipantMatchReporting) {
+	public TournamentAllowParticipantMatchReportingChangedEvent(final Tournament tournament,
+			final Tournament previousTournament, final Boolean allowParticipantMatchReporting,
+			final Boolean previousAllowParticipantMatchReporting) {
 		super(tournament, previousTournament);
 		this.allowParticipantMatchReporting = allowParticipantMatchReporting;
 		this.previousAllowParticipantMatchReporting = previousAllowParticipantMatchReporting;
 	}
 	
 	public Boolean getAllowParticipantMatchReporting() {
-		return allowParticipantMatchReporting;
+		return this.allowParticipantMatchReporting;
 	}
 	
 	public Boolean getPreviousAllowParticipantMatchReporting() {
-		return previousAllowParticipantMatchReporting;
+		return this.previousAllowParticipantMatchReporting;
 	}
 }

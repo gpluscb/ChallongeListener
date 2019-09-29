@@ -1,18 +1,25 @@
 package com.gpluscb.challonge_listener.events.tournament.participant;
 
-import at.stefangeyer.challonge.model.Participant;
-import at.stefangeyer.challonge.model.Tournament;
 import com.gpluscb.challonge_listener.events.tournament.GenericTournamentChangedEvent;
 
+import at.stefangeyer.challonge.model.Participant;
+import at.stefangeyer.challonge.model.Tournament;
+
 public abstract class GenericParticipantEvent extends GenericTournamentChangedEvent {
-	private Participant participant;
+	private final Participant participant;
 	
-	public GenericParticipantEvent(Tournament tournament, Tournament previousTournament, Participant participant) {
+	public GenericParticipantEvent(final Tournament tournament, final Tournament previousTournament,
+			final Participant participant) {
 		super(tournament, previousTournament);
 		this.participant = participant;
 	}
 	
+	/**
+	 * The participant primarily associated with this event.
+	 * 
+	 * @return The primary participant of this event
+	 */
 	public Participant getParticipant() {
-		return participant;
+		return this.participant;
 	}
 }

@@ -5,22 +5,22 @@ import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class AttachmentAssetUrlChangedEvent extends GenericAttachmentChangedEvent {
-	private String assetUrl;
-	private String previousAssetUrl;
+	private final String assetUrl;
+	private final String previousAssetUrl;
 	
-	public AttachmentAssetUrlChangedEvent(Tournament tournament, Tournament previousTournament, Match match,
-			Match previousMatch, Attachment attachment, Attachment previousAttachment, String assetUrl,
-			String previousAssetUrl) {
+	public AttachmentAssetUrlChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Match match, final Match previousMatch, final Attachment attachment,
+			final Attachment previousAttachment, final String assetUrl, final String previousAssetUrl) {
 		super(tournament, previousTournament, match, previousMatch, attachment, previousAttachment);
 		this.assetUrl = assetUrl;
 		this.previousAssetUrl = previousAssetUrl;
 	}
 	
 	public String getAssetUrl() {
-		return assetUrl;
+		return this.assetUrl;
 	}
 	
 	public String getPreviousAssetUrl() {
-		return previousAssetUrl;
+		return this.previousAssetUrl;
 	}
 }

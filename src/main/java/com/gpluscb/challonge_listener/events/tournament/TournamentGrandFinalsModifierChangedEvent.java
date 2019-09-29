@@ -4,21 +4,21 @@ import at.stefangeyer.challonge.model.Tournament;
 import at.stefangeyer.challonge.model.query.enumeration.GrandFinalsModifier;
 
 public class TournamentGrandFinalsModifierChangedEvent extends GenericTournamentChangedEvent {
-	private GrandFinalsModifier grandFinalsModifier;
-	private GrandFinalsModifier previousGrandFinalsModifier;
+	private final GrandFinalsModifier grandFinalsModifier;
+	private final GrandFinalsModifier previousGrandFinalsModifier;
 	
-	public TournamentGrandFinalsModifierChangedEvent(Tournament tournament, Tournament previousTournament,
-			GrandFinalsModifier grandFinalsModifier, GrandFinalsModifier previousGrandFinalsModifier) {
+	public TournamentGrandFinalsModifierChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final GrandFinalsModifier grandFinalsModifier, final GrandFinalsModifier previousGrandFinalsModifier) {
 		super(tournament, previousTournament);
 		this.grandFinalsModifier = grandFinalsModifier;
 		this.previousGrandFinalsModifier = previousGrandFinalsModifier;
 	}
 	
 	public GrandFinalsModifier getGrandFinalsModifier() {
-		return grandFinalsModifier;
+		return this.grandFinalsModifier;
 	}
 	
 	public GrandFinalsModifier getPreviousGrandFinalsModifier() {
-		return previousGrandFinalsModifier;
+		return this.previousGrandFinalsModifier;
 	}
 }

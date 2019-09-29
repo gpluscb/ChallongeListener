@@ -4,22 +4,23 @@ import at.stefangeyer.challonge.model.Participant;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class ParticipantParticipatableOrInvitationAttachedChangedEvent extends GenericParticipantChangedEvent {
-	private Boolean participatableOrInvitationAttached;
-	private Boolean previousParticipatableOrInvitationAttached;
+	private final Boolean participatableOrInvitationAttached;
+	private final Boolean previousParticipatableOrInvitationAttached;
 	
-	public ParticipantParticipatableOrInvitationAttachedChangedEvent(Tournament tournament,
-			Tournament previousTournament, Participant participant, Participant previousParticipant,
-			Boolean participatableOrInvitationAttached, Boolean previousParticipatableOrInvitationAttached) {
+	public ParticipantParticipatableOrInvitationAttachedChangedEvent(final Tournament tournament,
+			final Tournament previousTournament, final Participant participant, final Participant previousParticipant,
+			final Boolean participatableOrInvitationAttached,
+			final Boolean previousParticipatableOrInvitationAttached) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.participatableOrInvitationAttached = participatableOrInvitationAttached;
 		this.previousParticipatableOrInvitationAttached = previousParticipatableOrInvitationAttached;
 	}
 	
 	public Boolean getParticipatableOrInvitationAttached() {
-		return participatableOrInvitationAttached;
+		return this.participatableOrInvitationAttached;
 	}
 	
 	public Boolean getPreviousParticipatableOrInvitationAttached() {
-		return previousParticipatableOrInvitationAttached;
+		return this.previousParticipatableOrInvitationAttached;
 	}
 }

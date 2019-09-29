@@ -4,21 +4,22 @@ import at.stefangeyer.challonge.model.Participant;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class ParticipantUsernameChangedEvent extends GenericParticipantChangedEvent {
-	private String username;
-	private String previousUsername;
+	private final String username;
+	private final String previousUsername;
 	
-	public ParticipantUsernameChangedEvent(Tournament tournament, Tournament previousTournament,
-			Participant participant, Participant previousParticipant, String username, String previousUsername) {
+	public ParticipantUsernameChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Participant participant, final Participant previousParticipant, final String username,
+			final String previousUsername) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.username = username;
 		this.previousUsername = previousUsername;
 	}
 	
 	public String getUsername() {
-		return username;
+		return this.username;
 	}
 	
 	public String getPreviousUsername() {
-		return previousUsername;
+		return this.previousUsername;
 	}
 }

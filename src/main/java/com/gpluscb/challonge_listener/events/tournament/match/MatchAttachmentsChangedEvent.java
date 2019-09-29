@@ -7,21 +7,22 @@ import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class MatchAttachmentsChangedEvent extends GenericMatchChangedEvent {
-	private List<Attachment> attachments;
-	private List<Attachment> previousAttachments;
+	private final List<Attachment> attachments;
+	private final List<Attachment> previousAttachments;
 	
-	public MatchAttachmentsChangedEvent(Tournament tournament, Tournament previousTournament, Match match,
-			Match previousMatch, List<Attachment> attachments, List<Attachment> previousAttachments) {
+	public MatchAttachmentsChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Match match, final Match previousMatch, final List<Attachment> attachments,
+			final List<Attachment> previousAttachments) {
 		super(tournament, previousTournament, match, previousMatch);
 		this.attachments = attachments;
 		this.previousAttachments = previousAttachments;
 	}
 	
 	public List<Attachment> getAttachments() {
-		return attachments;
+		return this.attachments;
 	}
 	
 	public List<Attachment> getPreviousAttachments() {
-		return previousAttachments;
+		return this.previousAttachments;
 	}
 }

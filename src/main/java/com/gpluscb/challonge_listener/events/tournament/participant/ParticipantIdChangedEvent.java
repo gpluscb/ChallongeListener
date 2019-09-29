@@ -4,21 +4,22 @@ import at.stefangeyer.challonge.model.Participant;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class ParticipantIdChangedEvent extends GenericParticipantChangedEvent {
-	private Long id;
-	private Long previousId;
+	private final Long id;
+	private final Long previousId;
 	
-	public ParticipantIdChangedEvent(Tournament tournament, Tournament previousTournament, Participant participant,
-			Participant previousParticipant, Long id, Long previousId) {
+	public ParticipantIdChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Participant participant, final Participant previousParticipant, final Long id,
+			final Long previousId) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.id = id;
 		this.previousId = previousId;
 	}
 	
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 	
 	public Long getPreviousId() {
-		return previousId;
+		return this.previousId;
 	}
 }

@@ -6,21 +6,21 @@ import at.stefangeyer.challonge.model.Participant;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class TournamentParticipantsChangedEvent extends GenericTournamentChangedEvent {
-	private List<Participant> participants;
-	private List<Participant> previousParticipants;
+	private final List<Participant> participants;
+	private final List<Participant> previousParticipants;
 	
-	public TournamentParticipantsChangedEvent(Tournament tournament, Tournament previousTournament,
-			List<Participant> participants, List<Participant> previousParticipants) {
+	public TournamentParticipantsChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final List<Participant> participants, final List<Participant> previousParticipants) {
 		super(tournament, previousTournament);
 		this.participants = participants;
 		this.previousParticipants = previousParticipants;
 	}
 	
 	public List<Participant> getParticipants() {
-		return participants;
+		return this.participants;
 	}
 	
 	public List<Participant> getPreviousParticipants() {
-		return previousParticipants;
+		return this.previousParticipants;
 	}
 }

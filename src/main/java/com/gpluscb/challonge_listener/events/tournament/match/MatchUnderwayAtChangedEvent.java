@@ -6,21 +6,22 @@ import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class MatchUnderwayAtChangedEvent extends GenericMatchChangedEvent {
-	private OffsetDateTime underwayAt;
-	private OffsetDateTime previousUnderwayAt;
+	private final OffsetDateTime underwayAt;
+	private final OffsetDateTime previousUnderwayAt;
 	
-	public MatchUnderwayAtChangedEvent(Tournament tournament, Tournament previousTournament, Match match,
-			Match previousMatch, OffsetDateTime underwayAt, OffsetDateTime previousUnderwayAt) {
+	public MatchUnderwayAtChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Match match, final Match previousMatch, final OffsetDateTime underwayAt,
+			final OffsetDateTime previousUnderwayAt) {
 		super(tournament, previousTournament, match, previousMatch);
 		this.underwayAt = underwayAt;
 		this.previousUnderwayAt = previousUnderwayAt;
 	}
 	
 	public OffsetDateTime getUnderwayAt() {
-		return underwayAt;
+		return this.underwayAt;
 	}
 	
 	public OffsetDateTime getPreviousUnderwayAt() {
-		return previousUnderwayAt;
+		return this.previousUnderwayAt;
 	}
 }

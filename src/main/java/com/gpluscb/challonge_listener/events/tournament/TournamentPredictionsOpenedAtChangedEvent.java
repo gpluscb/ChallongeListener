@@ -5,21 +5,21 @@ import java.time.OffsetDateTime;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class TournamentPredictionsOpenedAtChangedEvent extends GenericTournamentChangedEvent {
-	private OffsetDateTime predictionsOpenedAt;
-	private OffsetDateTime previousPredictionsOpenedAt;
+	private final OffsetDateTime predictionsOpenedAt;
+	private final OffsetDateTime previousPredictionsOpenedAt;
 	
-	public TournamentPredictionsOpenedAtChangedEvent(Tournament tournament, Tournament previousTournament,
-			OffsetDateTime predictionsOpenedAt, OffsetDateTime previousPredictionsOpenedAt) {
+	public TournamentPredictionsOpenedAtChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final OffsetDateTime predictionsOpenedAt, final OffsetDateTime previousPredictionsOpenedAt) {
 		super(tournament, previousTournament);
 		this.predictionsOpenedAt = predictionsOpenedAt;
 		this.previousPredictionsOpenedAt = previousPredictionsOpenedAt;
 	}
 	
 	public OffsetDateTime getPredictionsOpenedAt() {
-		return predictionsOpenedAt;
+		return this.predictionsOpenedAt;
 	}
 	
 	public OffsetDateTime getPreviousPredictionsOpenedAt() {
-		return previousPredictionsOpenedAt;
+		return this.previousPredictionsOpenedAt;
 	}
 }

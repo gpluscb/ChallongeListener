@@ -4,21 +4,22 @@ import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class MatchTournamentIdChangedEvent extends GenericMatchChangedEvent {
-	private Long tournamentTournamentId;
-	private Long previousTournamentId;
+	private final Long tournamentTournamentId;
+	private final Long previousTournamentId;
 	
-	public MatchTournamentIdChangedEvent(Tournament tournament, Tournament previousTournament, Match match,
-			Match previousMatch, Long tournamentTournamentId, Long previousTournamentId) {
+	public MatchTournamentIdChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Match match, final Match previousMatch, final Long tournamentTournamentId,
+			final Long previousTournamentId) {
 		super(tournament, previousTournament, match, previousMatch);
 		this.tournamentTournamentId = tournamentTournamentId;
 		this.previousTournamentId = previousTournamentId;
 	}
 	
 	public Long getTournamentId() {
-		return tournamentTournamentId;
+		return this.tournamentTournamentId;
 	}
 	
 	public Long getPreviousTournamentId() {
-		return previousTournamentId;
+		return this.previousTournamentId;
 	}
 }

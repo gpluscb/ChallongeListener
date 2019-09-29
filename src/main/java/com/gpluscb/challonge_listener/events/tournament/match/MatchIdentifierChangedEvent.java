@@ -4,21 +4,21 @@ import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class MatchIdentifierChangedEvent extends GenericMatchChangedEvent {
-	private String identifier;
-	private String previousIdentifier;
+	private final String identifier;
+	private final String previousIdentifier;
 	
-	public MatchIdentifierChangedEvent(Tournament tournament, Tournament previousTournament, Match match,
-			Match previousMatch, String identifier, String previousIdentifier) {
+	public MatchIdentifierChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Match match, final Match previousMatch, final String identifier, final String previousIdentifier) {
 		super(tournament, previousTournament, match, previousMatch);
 		this.identifier = identifier;
 		this.previousIdentifier = previousIdentifier;
 	}
 	
 	public String getIdentifier() {
-		return identifier;
+		return this.identifier;
 	}
 	
 	public String getPreviousIdentifier() {
-		return previousIdentifier;
+		return this.previousIdentifier;
 	}
 }

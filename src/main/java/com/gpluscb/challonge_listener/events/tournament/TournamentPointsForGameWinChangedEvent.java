@@ -3,21 +3,21 @@ package com.gpluscb.challonge_listener.events.tournament;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class TournamentPointsForGameWinChangedEvent extends GenericTournamentChangedEvent {
-	private Float pointsForGameWin;
-	private Float previousPointsForGameWin;
+	private final Float pointsForGameWin;
+	private final Float previousPointsForGameWin;
 	
-	public TournamentPointsForGameWinChangedEvent(Tournament tournament, Tournament previousTournament,
-			Float pointsForGameWin, Float previousPointsForGameWin) {
+	public TournamentPointsForGameWinChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Float pointsForGameWin, final Float previousPointsForGameWin) {
 		super(tournament, previousTournament);
 		this.pointsForGameWin = pointsForGameWin;
 		this.previousPointsForGameWin = previousPointsForGameWin;
 	}
 	
 	public Float getPointsForGameWin() {
-		return pointsForGameWin;
+		return this.pointsForGameWin;
 	}
 	
 	public Float getPreviousPointsForGameWin() {
-		return previousPointsForGameWin;
+		return this.previousPointsForGameWin;
 	}
 }

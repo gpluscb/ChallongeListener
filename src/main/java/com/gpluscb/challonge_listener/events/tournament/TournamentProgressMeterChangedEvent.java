@@ -3,21 +3,21 @@ package com.gpluscb.challonge_listener.events.tournament;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class TournamentProgressMeterChangedEvent extends GenericTournamentChangedEvent {
-	private Integer progressMeter;
-	private Integer previousProgressMeter;
+	private final Integer progressMeter;
+	private final Integer previousProgressMeter;
 	
-	public TournamentProgressMeterChangedEvent(Tournament tournament, Tournament previousTournament,
-			Integer progressMeter, Integer previousProgressMeter) {
+	public TournamentProgressMeterChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Integer progressMeter, final Integer previousProgressMeter) {
 		super(tournament, previousTournament);
 		this.progressMeter = progressMeter;
 		this.previousProgressMeter = previousProgressMeter;
 	}
 	
 	public Integer getProgressMeter() {
-		return progressMeter;
+		return this.progressMeter;
 	}
 	
 	public Integer getPreviousProgressMeter() {
-		return previousProgressMeter;
+		return this.previousProgressMeter;
 	}
 }

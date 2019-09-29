@@ -4,22 +4,22 @@ import at.stefangeyer.challonge.model.Participant;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class ParticipantReactivatableChangedEvent extends GenericParticipantChangedEvent {
-	private Boolean reactivatable;
-	private Boolean previousReactivatable;
+	private final Boolean reactivatable;
+	private final Boolean previousReactivatable;
 	
-	public ParticipantReactivatableChangedEvent(Tournament tournament, Tournament previousTournament,
-			Participant participant, Participant previousParticipant, Boolean reactivatable,
-			Boolean previousReactivatable) {
+	public ParticipantReactivatableChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Participant participant, final Participant previousParticipant, final Boolean reactivatable,
+			final Boolean previousReactivatable) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.reactivatable = reactivatable;
 		this.previousReactivatable = previousReactivatable;
 	}
 	
 	public Boolean getReactivatable() {
-		return reactivatable;
+		return this.reactivatable;
 	}
 	
 	public Boolean getPreviousReactivatable() {
-		return previousReactivatable;
+		return this.previousReactivatable;
 	}
 }

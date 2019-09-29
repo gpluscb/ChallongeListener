@@ -3,21 +3,21 @@ package com.gpluscb.challonge_listener.events.tournament;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class TournamentHoldThirdPlaceMatchChangedEvent extends GenericTournamentChangedEvent {
-	private Boolean holdThirdPlaceMatch;
-	private Boolean previousHoldThirdPlaceMatch;
+	private final Boolean holdThirdPlaceMatch;
+	private final Boolean previousHoldThirdPlaceMatch;
 	
-	public TournamentHoldThirdPlaceMatchChangedEvent(Tournament tournament, Tournament previousTournament,
-			Boolean holdThirdPlaceMatch, Boolean previousHoldThirdPlaceMatch) {
+	public TournamentHoldThirdPlaceMatchChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Boolean holdThirdPlaceMatch, final Boolean previousHoldThirdPlaceMatch) {
 		super(tournament, previousTournament);
 		this.holdThirdPlaceMatch = holdThirdPlaceMatch;
 		this.previousHoldThirdPlaceMatch = previousHoldThirdPlaceMatch;
 	}
 	
 	public Boolean getHoldThirdPlaceMatch() {
-		return holdThirdPlaceMatch;
+		return this.holdThirdPlaceMatch;
 	}
 	
 	public Boolean getPreviousHoldThirdPlaceMatch() {
-		return previousHoldThirdPlaceMatch;
+		return this.previousHoldThirdPlaceMatch;
 	}
 }

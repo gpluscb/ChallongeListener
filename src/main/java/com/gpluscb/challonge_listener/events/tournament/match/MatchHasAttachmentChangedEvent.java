@@ -4,21 +4,22 @@ import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class MatchHasAttachmentChangedEvent extends GenericMatchChangedEvent {
-	private Boolean hasAttachment;
-	private Boolean previousHasAttachment;
+	private final Boolean hasAttachment;
+	private final Boolean previousHasAttachment;
 	
-	public MatchHasAttachmentChangedEvent(Tournament tournament, Tournament previousTournament, Match match,
-			Match previousMatch, Boolean hasAttachment, Boolean previousHasAttachment) {
+	public MatchHasAttachmentChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Match match, final Match previousMatch, final Boolean hasAttachment,
+			final Boolean previousHasAttachment) {
 		super(tournament, previousTournament, match, previousMatch);
 		this.hasAttachment = hasAttachment;
 		this.previousHasAttachment = previousHasAttachment;
 	}
 	
 	public Boolean getHasAttachment() {
-		return hasAttachment;
+		return this.hasAttachment;
 	}
 	
 	public Boolean getPreviousHasAttachment() {
-		return previousHasAttachment;
+		return this.previousHasAttachment;
 	}
 }

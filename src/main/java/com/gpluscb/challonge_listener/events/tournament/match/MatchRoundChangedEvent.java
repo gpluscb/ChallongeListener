@@ -4,21 +4,21 @@ import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class MatchRoundChangedEvent extends GenericMatchChangedEvent {
-	private Integer round;
-	private Integer previousRound;
+	private final Integer round;
+	private final Integer previousRound;
 	
-	public MatchRoundChangedEvent(Tournament tournament, Tournament previousTournament, Match match,
-			Match previousMatch, Integer round, Integer previousRound) {
+	public MatchRoundChangedEvent(final Tournament tournament, final Tournament previousTournament, final Match match,
+			final Match previousMatch, final Integer round, final Integer previousRound) {
 		super(tournament, previousTournament, match, previousMatch);
 		this.round = round;
 		this.previousRound = previousRound;
 	}
 	
 	public Integer getRound() {
-		return round;
+		return this.round;
 	}
 	
 	public Integer getPreviousRound() {
-		return previousRound;
+		return this.previousRound;
 	}
 }

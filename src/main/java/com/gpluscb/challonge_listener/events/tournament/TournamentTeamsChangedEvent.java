@@ -3,21 +3,21 @@ package com.gpluscb.challonge_listener.events.tournament;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class TournamentTeamsChangedEvent extends GenericTournamentChangedEvent {
-	private Boolean teams;
-	private Boolean previousTeams;
+	private final Boolean teams;
+	private final Boolean previousTeams;
 	
-	public TournamentTeamsChangedEvent(Tournament tournament, Tournament previousTournament, Boolean teams,
-			Boolean previousTeams) {
+	public TournamentTeamsChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Boolean teams, final Boolean previousTeams) {
 		super(tournament, previousTournament);
 		this.teams = teams;
 		this.previousTeams = previousTeams;
 	}
 	
 	public Boolean getTeams() {
-		return teams;
+		return this.teams;
 	}
 	
 	public Boolean getPreviousTeams() {
-		return previousTeams;
+		return this.previousTeams;
 	}
 }

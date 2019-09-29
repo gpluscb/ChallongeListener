@@ -6,22 +6,22 @@ import at.stefangeyer.challonge.model.Participant;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class ParticipantUpdatedAtChangedEvent extends GenericParticipantChangedEvent {
-	private OffsetDateTime updatedAt;
-	private OffsetDateTime previousUpdatedAt;
+	private final OffsetDateTime updatedAt;
+	private final OffsetDateTime previousUpdatedAt;
 	
-	public ParticipantUpdatedAtChangedEvent(Tournament tournament, Tournament previousTournament,
-			Participant participant, Participant previousParticipant, OffsetDateTime updatedAt,
-			OffsetDateTime previousUpdatedAt) {
+	public ParticipantUpdatedAtChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Participant participant, final Participant previousParticipant, final OffsetDateTime updatedAt,
+			final OffsetDateTime previousUpdatedAt) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.updatedAt = updatedAt;
 		this.previousUpdatedAt = previousUpdatedAt;
 	}
 	
 	public OffsetDateTime getUpdatedAt() {
-		return updatedAt;
+		return this.updatedAt;
 	}
 	
 	public OffsetDateTime getPreviousUpdatedAt() {
-		return previousUpdatedAt;
+		return this.previousUpdatedAt;
 	}
 }

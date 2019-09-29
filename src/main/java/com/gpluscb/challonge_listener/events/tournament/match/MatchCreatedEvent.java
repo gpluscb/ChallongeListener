@@ -4,7 +4,7 @@ import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class MatchCreatedEvent extends GenericMatchEvent {
-	public MatchCreatedEvent(Tournament tournament, Tournament previousTournament, Match match) {
+	public MatchCreatedEvent(final Tournament tournament, final Tournament previousTournament, final Match match) {
 		super(tournament, previousTournament, match);
 	}
 }

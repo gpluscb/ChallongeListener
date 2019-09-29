@@ -4,21 +4,22 @@ import at.stefangeyer.challonge.model.Participant;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class ParticipantInviteEmailChangedEvent extends GenericParticipantChangedEvent {
-	private String inviteEmail;
-	private String previousInviteEmail;
+	private final String inviteEmail;
+	private final String previousInviteEmail;
 	
-	public ParticipantInviteEmailChangedEvent(Tournament tournament, Tournament previousTournament,
-			Participant participant, Participant previousParticipant, String inviteEmail, String previousInviteEmail) {
+	public ParticipantInviteEmailChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Participant participant, final Participant previousParticipant, final String inviteEmail,
+			final String previousInviteEmail) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.inviteEmail = inviteEmail;
 		this.previousInviteEmail = previousInviteEmail;
 	}
 	
 	public String getInviteEmail() {
-		return inviteEmail;
+		return this.inviteEmail;
 	}
 	
 	public String getPreviousInviteEmail() {
-		return previousInviteEmail;
+		return this.previousInviteEmail;
 	}
 }

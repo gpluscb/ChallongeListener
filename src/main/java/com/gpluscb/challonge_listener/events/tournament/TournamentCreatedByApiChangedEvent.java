@@ -3,21 +3,21 @@ package com.gpluscb.challonge_listener.events.tournament;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class TournamentCreatedByApiChangedEvent extends GenericTournamentChangedEvent {
-	private Boolean createdByApi;
-	private Boolean previousCreatedByApi;
+	private final Boolean createdByApi;
+	private final Boolean previousCreatedByApi;
 	
-	public TournamentCreatedByApiChangedEvent(Tournament tournament, Tournament previousTournament,
-			Boolean createdByApi, Boolean previousCreatedByApi) {
+	public TournamentCreatedByApiChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Boolean createdByApi, final Boolean previousCreatedByApi) {
 		super(tournament, previousTournament);
 		this.createdByApi = createdByApi;
 		this.previousCreatedByApi = previousCreatedByApi;
 	}
 	
 	public Boolean getCreatedByApi() {
-		return createdByApi;
+		return this.createdByApi;
 	}
 	
 	public Boolean getPreviousCreatedByApi() {
-		return previousCreatedByApi;
+		return this.previousCreatedByApi;
 	}
 }

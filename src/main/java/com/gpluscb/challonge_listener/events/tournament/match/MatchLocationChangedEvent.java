@@ -4,21 +4,21 @@ import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class MatchLocationChangedEvent extends GenericMatchChangedEvent {
-	private String location;
-	private String previousLocation;
+	private final String location;
+	private final String previousLocation;
 	
-	public MatchLocationChangedEvent(Tournament tournament, Tournament previousTournament, Match match,
-			Match previousMatch, String location, String previousLocation) {
+	public MatchLocationChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Match match, final Match previousMatch, final String location, final String previousLocation) {
 		super(tournament, previousTournament, match, previousMatch);
 		this.location = location;
 		this.previousLocation = previousLocation;
 	}
 	
 	public String getLocation() {
-		return location;
+		return this.location;
 	}
 	
 	public String getPreviousLocation() {
-		return previousLocation;
+		return this.previousLocation;
 	}
 }

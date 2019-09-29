@@ -5,22 +5,22 @@ import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class AttachmentDescriptionChangedEvent extends GenericAttachmentChangedEvent {
-	private String description;
-	private String previousDescription;
+	private final String description;
+	private final String previousDescription;
 	
-	public AttachmentDescriptionChangedEvent(Tournament tournament, Tournament previousTournament, Match match,
-			Match previousMatch, Attachment attachment, Attachment previousAttachment, String description,
-			String previousDescription) {
+	public AttachmentDescriptionChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Match match, final Match previousMatch, final Attachment attachment,
+			final Attachment previousAttachment, final String description, final String previousDescription) {
 		super(tournament, previousTournament, match, previousMatch, attachment, previousAttachment);
 		this.description = description;
 		this.previousDescription = previousDescription;
 	}
 	
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 	
 	public String getPreviousDescription() {
-		return previousDescription;
+		return this.previousDescription;
 	}
 }

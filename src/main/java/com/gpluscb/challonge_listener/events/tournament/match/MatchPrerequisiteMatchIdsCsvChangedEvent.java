@@ -4,22 +4,22 @@ import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class MatchPrerequisiteMatchIdsCsvChangedEvent extends GenericMatchChangedEvent {
-	private String prerequisiteMatchPrerequisiteMatchIdsCsvsCsv;
-	private String previousPrerequisiteMatchIdsCsv;
+	private final String prerequisiteMatchPrerequisiteMatchIdsCsvsCsv;
+	private final String previousPrerequisiteMatchIdsCsv;
 	
-	public MatchPrerequisiteMatchIdsCsvChangedEvent(Tournament tournament, Tournament previousTournament, Match match,
-			Match previousMatch, String prerequisiteMatchPrerequisiteMatchIdsCsvsCsv,
-			String previousPrerequisiteMatchIdsCsv) {
+	public MatchPrerequisiteMatchIdsCsvChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Match match, final Match previousMatch, final String prerequisiteMatchPrerequisiteMatchIdsCsvsCsv,
+			final String previousPrerequisiteMatchIdsCsv) {
 		super(tournament, previousTournament, match, previousMatch);
 		this.prerequisiteMatchPrerequisiteMatchIdsCsvsCsv = prerequisiteMatchPrerequisiteMatchIdsCsvsCsv;
 		this.previousPrerequisiteMatchIdsCsv = previousPrerequisiteMatchIdsCsv;
 	}
 	
 	public String getPrerequisiteMatchIdsCsv() {
-		return prerequisiteMatchPrerequisiteMatchIdsCsvsCsv;
+		return this.prerequisiteMatchPrerequisiteMatchIdsCsvsCsv;
 	}
 	
 	public String getPreviousPrerequisiteMatchIdsCsv() {
-		return previousPrerequisiteMatchIdsCsv;
+		return this.previousPrerequisiteMatchIdsCsv;
 	}
 }

@@ -3,21 +3,21 @@ package com.gpluscb.challonge_listener.events.tournament;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class TournamentHideSeedsChangedEvent extends GenericTournamentChangedEvent {
-	private Boolean hideSeeds;
-	private Boolean previousHideSeeds;
+	private final Boolean hideSeeds;
+	private final Boolean previousHideSeeds;
 	
-	public TournamentHideSeedsChangedEvent(Tournament tournament, Tournament previousTournament, Boolean hideSeeds,
-			Boolean previousHideSeeds) {
+	public TournamentHideSeedsChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Boolean hideSeeds, final Boolean previousHideSeeds) {
 		super(tournament, previousTournament);
 		this.hideSeeds = hideSeeds;
 		this.previousHideSeeds = previousHideSeeds;
 	}
 	
 	public Boolean getHideSeeds() {
-		return hideSeeds;
+		return this.hideSeeds;
 	}
 	
 	public Boolean getPreviousHideSeeds() {
-		return previousHideSeeds;
+		return this.previousHideSeeds;
 	}
 }

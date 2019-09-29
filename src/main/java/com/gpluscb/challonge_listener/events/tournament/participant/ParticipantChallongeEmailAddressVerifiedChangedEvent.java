@@ -4,22 +4,22 @@ import at.stefangeyer.challonge.model.Participant;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class ParticipantChallongeEmailAddressVerifiedChangedEvent extends GenericParticipantChangedEvent {
-	private String challongeEmailAddressVerified;
-	private String previousChallongeEmailAddressVerified;
+	private final String challongeEmailAddressVerified;
+	private final String previousChallongeEmailAddressVerified;
 	
-	public ParticipantChallongeEmailAddressVerifiedChangedEvent(Tournament tournament, Tournament previousTournament,
-			Participant participant, Participant previousParticipant, String challongeEmailAddressVerified,
-			String previousChallongeEmailAddressVerified) {
+	public ParticipantChallongeEmailAddressVerifiedChangedEvent(final Tournament tournament,
+			final Tournament previousTournament, final Participant participant, final Participant previousParticipant,
+			final String challongeEmailAddressVerified, final String previousChallongeEmailAddressVerified) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.challongeEmailAddressVerified = challongeEmailAddressVerified;
 		this.previousChallongeEmailAddressVerified = previousChallongeEmailAddressVerified;
 	}
 	
 	public String getChallongeEmailAddressVerified() {
-		return challongeEmailAddressVerified;
+		return this.challongeEmailAddressVerified;
 	}
 	
 	public String getPreviousChallongeEmailAddressVerified() {
-		return previousChallongeEmailAddressVerified;
+		return this.previousChallongeEmailAddressVerified;
 	}
 }

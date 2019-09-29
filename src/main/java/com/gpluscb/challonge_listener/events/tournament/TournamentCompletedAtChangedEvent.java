@@ -5,21 +5,21 @@ import java.time.OffsetDateTime;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class TournamentCompletedAtChangedEvent extends GenericTournamentChangedEvent {
-	private OffsetDateTime completedAt;
-	private OffsetDateTime previousCompletedAt;
+	private final OffsetDateTime completedAt;
+	private final OffsetDateTime previousCompletedAt;
 	
-	public TournamentCompletedAtChangedEvent(Tournament tournament, Tournament previousTournament,
-			OffsetDateTime completedAt, OffsetDateTime previousCompletedAt) {
+	public TournamentCompletedAtChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final OffsetDateTime completedAt, final OffsetDateTime previousCompletedAt) {
 		super(tournament, previousTournament);
 		this.completedAt = completedAt;
 		this.previousCompletedAt = previousCompletedAt;
 	}
 	
 	public OffsetDateTime getCompletedAt() {
-		return completedAt;
+		return this.completedAt;
 	}
 	
 	public OffsetDateTime getPreviousCompletedAt() {
-		return previousCompletedAt;
+		return this.previousCompletedAt;
 	}
 }

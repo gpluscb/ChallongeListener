@@ -5,21 +5,21 @@ import at.stefangeyer.challonge.model.Tournament;
 import at.stefangeyer.challonge.model.enumeration.MatchState;
 
 public class MatchStateChangedEvent extends GenericMatchChangedEvent {
-	private MatchState state;
-	private MatchState previousState;
+	private final MatchState state;
+	private final MatchState previousState;
 	
-	public MatchStateChangedEvent(Tournament tournament, Tournament previousTournament, Match match,
-			Match previousMatch, MatchState state, MatchState previousState) {
+	public MatchStateChangedEvent(final Tournament tournament, final Tournament previousTournament, final Match match,
+			final Match previousMatch, final MatchState state, final MatchState previousState) {
 		super(tournament, previousTournament, match, previousMatch);
 		this.state = state;
 		this.previousState = previousState;
 	}
 	
 	public MatchState getState() {
-		return state;
+		return this.state;
 	}
 	
 	public MatchState getPreviousState() {
-		return previousState;
+		return this.previousState;
 	}
 }

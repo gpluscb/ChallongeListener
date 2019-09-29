@@ -6,21 +6,22 @@ import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class MatchCreatedAtChangedEvent extends GenericMatchChangedEvent {
-	private OffsetDateTime createdAt;
-	private OffsetDateTime previousCreatedAt;
+	private final OffsetDateTime createdAt;
+	private final OffsetDateTime previousCreatedAt;
 	
-	public MatchCreatedAtChangedEvent(Tournament tournament, Tournament previousTournament, Match match,
-			Match previousMatch, OffsetDateTime createdAt, OffsetDateTime previousCreatedAt) {
+	public MatchCreatedAtChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Match match, final Match previousMatch, final OffsetDateTime createdAt,
+			final OffsetDateTime previousCreatedAt) {
 		super(tournament, previousTournament, match, previousMatch);
 		this.createdAt = createdAt;
 		this.previousCreatedAt = previousCreatedAt;
 	}
 	
 	public OffsetDateTime getCreatedAt() {
-		return createdAt;
+		return this.createdAt;
 	}
 	
 	public OffsetDateTime getPreviousCreatedAt() {
-		return previousCreatedAt;
+		return this.previousCreatedAt;
 	}
 }

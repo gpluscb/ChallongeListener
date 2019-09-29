@@ -4,21 +4,22 @@ import at.stefangeyer.challonge.model.Participant;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class ParticipantEmailHashChangedEvent extends GenericParticipantChangedEvent {
-	private String emailHash;
-	private String previousEmailHash;
+	private final String emailHash;
+	private final String previousEmailHash;
 	
-	public ParticipantEmailHashChangedEvent(Tournament tournament, Tournament previousTournament,
-			Participant participant, Participant previousParticipant, String emailHash, String previousEmailHash) {
+	public ParticipantEmailHashChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Participant participant, final Participant previousParticipant, final String emailHash,
+			final String previousEmailHash) {
 		super(tournament, previousTournament, participant, previousParticipant);
 		this.emailHash = emailHash;
 		this.previousEmailHash = previousEmailHash;
 	}
 	
 	public String getEmailHash() {
-		return emailHash;
+		return this.emailHash;
 	}
 	
 	public String getPreviousEmailHash() {
-		return previousEmailHash;
+		return this.previousEmailHash;
 	}
 }

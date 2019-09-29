@@ -3,21 +3,21 @@ package com.gpluscb.challonge_listener.events.tournament;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class TournamentAnonymousVotingChangedEvent extends GenericTournamentChangedEvent {
-	private Boolean anonymousVoting;
-	private Boolean previousAnonymousVoting;
+	private final Boolean anonymousVoting;
+	private final Boolean previousAnonymousVoting;
 	
-	public TournamentAnonymousVotingChangedEvent(Tournament tournament, Tournament previousTournament,
-			Boolean anonymousVoting, Boolean previousAnonymousVoting) {
+	public TournamentAnonymousVotingChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final Boolean anonymousVoting, final Boolean previousAnonymousVoting) {
 		super(tournament, previousTournament);
 		this.anonymousVoting = anonymousVoting;
 		this.previousAnonymousVoting = previousAnonymousVoting;
 	}
 	
 	public Boolean getAnonymousVoting() {
-		return anonymousVoting;
+		return this.anonymousVoting;
 	}
 	
 	public Boolean getPreviousAnonymousVoting() {
-		return previousAnonymousVoting;
+		return this.previousAnonymousVoting;
 	}
 }

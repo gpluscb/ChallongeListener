@@ -3,21 +3,21 @@ package com.gpluscb.challonge_listener.events.tournament;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class TournamentDescriptionChangedEvent extends GenericTournamentChangedEvent {
-	private String description;
-	private String previousDescription;
+	private final String description;
+	private final String previousDescription;
 	
-	public TournamentDescriptionChangedEvent(Tournament tournament, Tournament previousTournament, String description,
-			String previousDescription) {
+	public TournamentDescriptionChangedEvent(final Tournament tournament, final Tournament previousTournament,
+			final String description, final String previousDescription) {
 		super(tournament, previousTournament);
 		this.description = description;
 		this.previousDescription = previousDescription;
 	}
 	
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 	
 	public String getPreviousDescription() {
-		return previousDescription;
+		return this.previousDescription;
 	}
 }

@@ -5,8 +5,8 @@ import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class AttachmentDeletedEvent extends GenericAttachmentEvent {
-	public AttachmentDeletedEvent(Tournament tournament, Tournament previousTournament, Match match,
-			Match previousMatch, Attachment attachment) {
+	public AttachmentDeletedEvent(final Tournament tournament, final Tournament previousTournament, final Match match,
+			final Match previousMatch, final Attachment attachment) {
 		super(tournament, previousTournament, match, previousMatch, attachment);
 	}
 }
