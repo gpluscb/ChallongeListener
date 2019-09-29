@@ -2,6 +2,8 @@
 A project using the [stefangeyer/challonge-java](https://github.com/stefangeyer/challonge-java) project to fire events to listeners when an owned or co-owned challonge tournament changes.
 
 ## TODOs, no particular order:
+- [ ] Somehow block setters of Models or clone them
+ 
 - [ ] Maybe give ParticipantMatchEvents own abstract class and different names
 	
 	Pro:
