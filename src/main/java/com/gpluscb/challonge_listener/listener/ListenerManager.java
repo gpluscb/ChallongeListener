@@ -698,11 +698,6 @@ public class ListenerManager {
 		return this.state.equals(ManagerState.RUNNING);
 	}
 	
-	@Override
-	protected void finalize() {
-		shutdown();
-	}
-	
 	/**
 	 * Represents the current state of this ListenerManager.
 	 */
