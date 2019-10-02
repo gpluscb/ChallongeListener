@@ -134,7 +134,7 @@ public class ListenerManager {
 			} catch(final DataAccessException e) {
 				System.err.println("DataAccessException caught, trying to continue anyway.");
 				e.printStackTrace();
-			} catch(final Exception e) {
+			} catch(final RuntimeException e) {
 				e.printStackTrace();
 			}
 		}, 0, interval, TimeUnit.MILLISECONDS);
@@ -155,12 +155,16 @@ public class ListenerManager {
 	private List<TournamentWrapper> getSubscribedTournaments() throws DataAccessException {
 		final Set<Long> subscribedToTournamentIds = new HashSet<>();
 		
-		for(final EventListener listener : this.managedListeners)
-			if(listener.getSubscribedTournamentIds() != null)
-				for(final Long tournamentId : listener.getSubscribedTournamentIds())
-					if(tournamentId != null)
+		for(final EventListener listener : this.managedListeners) {
+			if(listener.getSubscribedTournamentIds() != null) {
+				for(final Long tournamentId : listener.getSubscribedTournamentIds()) {
+					if(tournamentId != null) {
 						subscribedToTournamentIds.add(tournamentId);
-					
+					}
+				}
+			}
+		}
+		
 		final List<TournamentWrapper> subscribedToTournaments = new ArrayList<>();
 		
 		for(final long tournamentId : subscribedToTournamentIds) {
@@ -169,8 +173,8 @@ public class ListenerManager {
 			// work.
 			// Try to get tournament four times
 			final int NUM_TRIES = 4;
-			for(int i = 1; i <= NUM_TRIES; i++)
-				if(this.challonge.doesExist(String.valueOf(tournamentId)))
+			for(int i = 1; i <= NUM_TRIES; i++) {
+				if(this.challonge.doesExist(String.valueOf(tournamentId))) {
 					try {
 						final Tournament tournament = this.challonge.getTournament(String.valueOf(tournamentId), true,
 								true, true);
@@ -179,15 +183,17 @@ public class ListenerManager {
 						
 						break;
 					} catch(final DataAccessException e) {
-						if(i >= NUM_TRIES)
+						if(i >= NUM_TRIES) {
 							throw e;
+						}
 						System.err.println("DataAccessException caught while getting Tournaments, trying again.");
 						e.printStackTrace();
 					}
-				else {
+				} else {
 					subscribedToTournaments.add(new TournamentWrapper(Long.valueOf(tournamentId)));
 					break;
 				}
+			}
 		}
 		
 		return subscribedToTournaments;
@@ -196,9 +202,9 @@ public class ListenerManager {
 	private void compareTournaments(final List<TournamentWrapper> previousTournaments,
 			final List<TournamentWrapper> currentTournaments) {
 		
-		if(currentTournaments != null && previousTournaments != null)
-			for(final TournamentWrapper currentTournament : currentTournaments)
-				for(final TournamentWrapper previousTournament : previousTournaments)
+		if(currentTournaments != null && previousTournaments != null) {
+			for(final TournamentWrapper currentTournament : currentTournaments) {
+				for(final TournamentWrapper previousTournament : previousTournaments) {
 					if(currentTournament.getTournamentId().longValue() == previousTournament.getTournamentId()
 							.longValue()) {
 						// They are the same
@@ -228,6 +234,9 @@ public class ListenerManager {
 						
 						break;
 					}
+				}
+			}
+		}
 	}
 	
 	private void compareParticipants(final Tournament previousTournament, final Tournament currentTournament) {
@@ -235,7 +244,7 @@ public class ListenerManager {
 			final List<Participant> deletedParticipants = new ArrayList<>(previousTournament.getParticipants());
 			for(final Participant currentParticipant : currentTournament.getParticipants()) {
 				boolean didExist = false;
-				for(final Participant previousParticipant : previousTournament.getParticipants())
+				for(final Participant previousParticipant : previousTournament.getParticipants()) {
 					if(currentParticipant.getId() == null ? previousParticipant.getId() == null
 							: currentParticipant.getId().equals(previousParticipant.getId())) {
 						// They are the same
@@ -254,6 +263,7 @@ public class ListenerManager {
 								currentParticipant);
 						break;
 					}
+				}
 				
 				if(!didExist) {
 					final ParticipantCreatedEvent event = new ParticipantCreatedEvent(currentTournament,
@@ -278,7 +288,7 @@ public class ListenerManager {
 			final List<Match> deletedMatches = new ArrayList<>(previousParticipant.getMatches());
 			for(final Match currentMatch : currentParticipant.getMatches()) {
 				boolean didExist = false;
-				for(final Match previousMatch : previousParticipant.getMatches())
+				for(final Match previousMatch : previousParticipant.getMatches()) {
 					if(currentMatch.getId() == null ? previousMatch.getId() == null
 							: currentMatch.getId().equals(previousMatch.getId())) {
 						// They are the same
@@ -291,6 +301,7 @@ public class ListenerManager {
 						
 						break;
 					}
+				}
 				
 				if(!didExist) {
 					final ParticipantMatchAddedEvent event = new ParticipantMatchAddedEvent(currentTournament,
@@ -312,7 +323,7 @@ public class ListenerManager {
 			final List<Match> deletedMatches = new ArrayList<>(previousTournament.getMatches());
 			for(final Match currentMatch : currentTournament.getMatches()) {
 				boolean didExist = false;
-				for(final Match previousMatch : previousTournament.getMatches())
+				for(final Match previousMatch : previousTournament.getMatches()) {
 					if(currentMatch.getId() == null ? previousMatch.getId() == null
 							: currentMatch.getId().equals(previousMatch.getId())) {
 						// They are the same
@@ -329,6 +340,7 @@ public class ListenerManager {
 						compareAttachments(previousTournament, currentTournament, previousMatch, currentMatch);
 						break;
 					}
+				}
 				
 				if(!didExist) {
 					final MatchCreatedEvent event = new MatchCreatedEvent(currentTournament, previousTournament,
@@ -351,7 +363,7 @@ public class ListenerManager {
 			final List<Attachment> deletedAttachments = new ArrayList<>(previousMatch.getAttachments());
 			for(final Attachment currentAttachment : currentMatch.getAttachments()) {
 				boolean didExist = false;
-				for(final Attachment previousAttachment : previousMatch.getAttachments())
+				for(final Attachment previousAttachment : previousMatch.getAttachments()) {
 					if(currentAttachment.getId() == null ? previousAttachment.getId() == null
 							: currentAttachment.getId().equals(previousAttachment.getId())) {
 						// They are the same
@@ -367,6 +379,7 @@ public class ListenerManager {
 						
 						break;
 					}
+				}
 				
 				if(!didExist) {
 					final AttachmentCreatedEvent event = new AttachmentCreatedEvent(currentTournament,
@@ -386,11 +399,11 @@ public class ListenerManager {
 	private void compareTournamentValues(final Tournament previousTournament, final Tournament currentTournament) {
 		final Method[] tournamentMethods = Tournament.class.getMethods();
 		
-		for(final Method method : tournamentMethods)
+		for(final Method method : tournamentMethods) {
 			// Filter all getters
 			if(method.getName().startsWith("get") && method.getReturnType() != void.class
 					&& method.getParameterCount() == 0 && method.getModifiers() == Modifier.PUBLIC
-					&& !method.getReturnType().equals(void.class))
+					&& !method.getReturnType().equals(void.class)) {
 				try {
 					// Get the UpperCamelCase name of the property the getter
 					// returns.
@@ -423,17 +436,19 @@ public class ListenerManager {
 					// occur
 					e.printStackTrace();
 				}
+			}
+		}
 	}
 	
 	private void compareParticipantValues(final Tournament previousTournament, final Tournament currentTournament,
 			final Participant previousParticipant, final Participant currentParticipant) {
 		final Method[] participantMethods = Participant.class.getMethods();
 		
-		for(final Method method : participantMethods)
+		for(final Method method : participantMethods) {
 			// Filter all getters
 			if(method.getName().startsWith("get") && method.getReturnType() != void.class
 					&& method.getParameterCount() == 0 && method.getModifiers() == Modifier.PUBLIC
-					&& !method.getReturnType().equals(void.class))
+					&& !method.getReturnType().equals(void.class)) {
 				try {
 					// Get the UpperCamelCase name of the property the getter
 					// returns.
@@ -467,17 +482,19 @@ public class ListenerManager {
 					// occur
 					e.printStackTrace();
 				}
+			}
+		}
 	}
 	
 	private void compareMatchValues(final Tournament previousTournament, final Tournament currentTournament,
 			final Match previousMatch, final Match currentMatch) {
 		final Method[] matchMethods = Match.class.getMethods();
 		
-		for(final Method method : matchMethods)
+		for(final Method method : matchMethods) {
 			// Filter all getters
 			if(method.getName().startsWith("get") && method.getReturnType() != void.class
 					&& method.getParameterCount() == 0 && method.getModifiers() == Modifier.PUBLIC
-					&& !method.getReturnType().equals(void.class))
+					&& !method.getReturnType().equals(void.class)) {
 				try {
 					// Get the UpperCamelCase name of the property the getter
 					// returns
@@ -510,6 +527,8 @@ public class ListenerManager {
 					// If all MatchChangedEvents exist, this should never occur
 					e.printStackTrace();
 				}
+			}
+		}
 	}
 	
 	private void compareAttachmentValues(final Tournament previousTournament, final Tournament currentTournament,
@@ -517,11 +536,11 @@ public class ListenerManager {
 			final Attachment currentAttachment) {
 		final Method[] attachmentMethods = Attachment.class.getMethods();
 		
-		for(final Method method : attachmentMethods)
+		for(final Method method : attachmentMethods) {
 			// Filter all getters
 			if(method.getName().startsWith("get") && method.getReturnType() != void.class
 					&& method.getParameterCount() == 0 && method.getModifiers() == Modifier.PUBLIC
-					&& !method.getReturnType().equals(void.class))
+					&& !method.getReturnType().equals(void.class)) {
 				try {
 					// Get the UpperCamelCase name of the property the getter
 					// returns
@@ -556,6 +575,8 @@ public class ListenerManager {
 					// occur
 					e.printStackTrace();
 				}
+			}
+		}
 	}
 	
 	/**
@@ -565,12 +586,14 @@ public class ListenerManager {
 	 *            The event to be fired
 	 */
 	private void fireEvent(final GenericEvent event) {
-		for(final EventListener listener : this.managedListeners)
-			for(final long tournamentId : listener.getSubscribedTournamentIds())
+		for(final EventListener listener : this.managedListeners) {
+			for(final long tournamentId : listener.getSubscribedTournamentIds()) {
 				if(((GenericTournamentEvent) event).getTournament().getId().longValue() == tournamentId) {
 					listener.onEvent(event);
 					break;
 				}
+			}
+		}
 	}
 	
 	/**
@@ -596,11 +619,13 @@ public class ListenerManager {
 	 *             if the given state is unreachable
 	 */
 	public void awaitState(final ManagerState state) throws InterruptedException, IllegalStateException {
-		if(!this.state.isReachable(state))
+		if(!this.state.isReachable(state)) {
 			throw new IllegalStateException("The given state is unreachable.");
+		}
 		
-		while(this.state.isBefore(state))
+		while(this.state.isBefore(state)) {
 			Thread.sleep(10);
+		}
 	}
 	
 	/**

@@ -65,8 +65,9 @@ public class ChallongeExtension extends Challonge {
 			return true;
 		} catch(final DataAccessException e) {
 			if(e.getMessage().contains(
-					" was not successful (404) and returned: {\"errors\":[\"Requested tournament not found\"]}"))
+					" was not successful (404) and returned: {\"errors\":[\"Requested tournament not found\"]}")) {
 				return false;
+			}
 			throw e;
 		}
 	}
@@ -82,13 +83,15 @@ public class ChallongeExtension extends Challonge {
 	 *             Exchange with the rest api or validation failed
 	 */
 	public boolean doesOwn(final Tournament tournament) throws DataAccessException {
-		for(final Tournament ownedTournament : getTournaments())
+		for(final Tournament ownedTournament : getTournaments()) {
 			if(ownedTournament.getId().equals(tournament.getId())
 					|| ownedTournament.getUrl().equals(tournament.getUrl())
 							&& (ownedTournament.getSubdomain() == null ? tournament.getSubdomain() == null
-									: ownedTournament.getSubdomain().equals(tournament.getSubdomain())))
+									: ownedTournament.getSubdomain().equals(tournament.getSubdomain()))) {
 				return true;
-			
+			}
+		}
+		
 		return false;
 	}
 	
@@ -115,21 +118,26 @@ public class ChallongeExtension extends Challonge {
 	 */
 	public Tournament getTournament(final String tournament, final boolean includeParticipants,
 			final boolean includeMatches, final boolean includeAttachments) throws DataAccessException {
-		if(!includeMatches && includeAttachments)
+		if(!includeMatches && includeAttachments) {
 			throw new IllegalArgumentException("Attachments can only be included if matches are included as well.");
+		}
 		
 		final Tournament ret = getTournament(tournament, includeParticipants, includeMatches);
 		
 		// Matches need to be assigned to participants too
-		if(includeParticipants && includeMatches)
-			for(final Participant participant : ret.getParticipants())
+		if(includeParticipants && includeMatches) {
+			for(final Participant participant : ret.getParticipants()) {
 				assignMissingData(participant, ret.getMatches());
-			
+			}
+		}
+		
 		// Add the attachments to the matches
-		if(includeAttachments)
-			for(final Match match : ret.getMatches())
+		if(includeAttachments) {
+			for(final Match match : ret.getMatches()) {
 				addMissingData(match);
-			
+			}
+		}
+		
 		return ret;
 	}
 	
@@ -145,8 +153,9 @@ public class ChallongeExtension extends Challonge {
 	public List<Tournament> getTournamentsWithFullData() throws DataAccessException {
 		final List<Tournament> tournaments = getTournaments();
 		
-		for(final Tournament tournament : tournaments)
+		for(final Tournament tournament : tournaments) {
 			addMissingData(tournament);
+		}
 		
 		return tournaments;
 	}
@@ -165,8 +174,9 @@ public class ChallongeExtension extends Challonge {
 	public List<Participant> getParticipantsWithFullData(final Tournament tournament) throws DataAccessException {
 		final List<Participant> participants = getParticipants(tournament);
 		
-		for(final Participant participant : participants)
+		for(final Participant participant : participants) {
 			addMissingData(tournament, participant);
+		}
 		
 		return participants;
 	}
@@ -185,8 +195,9 @@ public class ChallongeExtension extends Challonge {
 	public List<Match> getMatchesWithFullData(final Tournament tournament) throws DataAccessException {
 		final List<Match> matches = getMatches(tournament);
 		
-		for(final Match match : matches)
+		for(final Match match : matches) {
 			addMissingData(match);
+		}
 		
 		return matches;
 	}
@@ -208,20 +219,24 @@ public class ChallongeExtension extends Challonge {
 		// of use-cases so it will stay private for now
 		
 		// Adding all matches
-		if(tournament.getMatches() == null || tournament.getMatches().isEmpty())
+		if(tournament.getMatches() == null || tournament.getMatches().isEmpty()) {
 			tournament.setMatches(getMatchesWithFullData(tournament));
+		}
 		
 		// Adding all participants
-		if(tournament.getParticipants() == null || tournament.getParticipants().isEmpty())
+		if(tournament.getParticipants() == null || tournament.getParticipants().isEmpty()) {
 			tournament.setParticipants(getParticipants(tournament));
+		}
 		
 		// Adding all attachments
-		for(final Match match : tournament.getMatches())
+		for(final Match match : tournament.getMatches()) {
 			addMissingData(match);
+		}
 		
 		// Adding all matches to the participants
-		for(final Participant participant : tournament.getParticipants())
+		for(final Participant participant : tournament.getParticipants()) {
 			assignMissingData(participant, tournament.getMatches());
+		}
 	}
 	
 	/**
@@ -234,13 +249,18 @@ public class ChallongeExtension extends Challonge {
 	 *            The matches to be filtered and applied to the participant
 	 */
 	private static void assignMissingData(final Participant participant, final List<Match> matches) {
-		if(participant.getMatches() == null)
+		if(participant.getMatches() == null) {
 			participant.setMatches(new ArrayList<>());
+		}
 		
-		if(participant.getMatches().isEmpty())
-			for(final Match match : matches)
-				if(participant.getId().equals(match.getPlayer1Id()) || participant.getId().equals(match.getPlayer2Id()))
+		if(participant.getMatches().isEmpty()) {
+			for(final Match match : matches) {
+				if(participant.getId().equals(match.getPlayer1Id())
+						|| participant.getId().equals(match.getPlayer2Id())) {
 					participant.getMatches().add(match);
+				}
+			}
+		}
 	}
 	
 	/**
@@ -257,8 +277,9 @@ public class ChallongeExtension extends Challonge {
 	 */
 	private void addMissingData(final Tournament tournament, final Participant participant) throws DataAccessException {
 		// Adding all matches
-		if(participant.getMatches() == null || participant.getMatches().isEmpty())
+		if(participant.getMatches() == null || participant.getMatches().isEmpty()) {
 			participant.setMatches(getMatches(tournament, participant));
+		}
 	}
 	
 	/**
@@ -272,11 +293,13 @@ public class ChallongeExtension extends Challonge {
 	 */
 	private void addMissingData(final Match match) throws DataAccessException {
 		// Adding all attachments
-		if(match.getAttachments() == null)
+		if(match.getAttachments() == null) {
 			match.setAttachments(new ArrayList<>());
+		}
 		
 		if(match.getAttachments().isEmpty() && match.getAttachmentCount() != null
-				&& match.getAttachmentCount().intValue() > 0)
+				&& match.getAttachmentCount().intValue() > 0) {
 			match.setAttachments(getAttachments(match));
+		}
 	}
 }

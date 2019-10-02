@@ -53,16 +53,18 @@ public class ChallongeExtensionTest {
 		owned = challonge.createTournament(tournamentQuery);
 		
 		final List<ParticipantQuery> participantQueries = new ArrayList<>();
-		for(int i = 0; i < 10; i++)
+		for(int i = 0; i < 10; i++) {
 			participantQueries.add(ParticipantQuery.builder().name(String.valueOf(i)).build());
+		}
 		challonge.bulkAddParticipants(owned, participantQueries);
 		
 		owned = challonge.startTournament(owned);
 		
 		final List<Match> ownedMatches = challonge.getMatches(owned);
-		for(int i = 0; i < ownedMatches.size(); i++)
+		for(int i = 0; i < ownedMatches.size(); i++) {
 			challonge.createAttachment(ownedMatches.get(i),
 					AttachmentQuery.builder().description(String.valueOf(i)).build());
+		}
 	}
 	
 	private static String generateRandomUrl(final int length) {
@@ -94,14 +96,16 @@ public class ChallongeExtensionTest {
 		final List<Participant> ownedParticipants = challonge.getParticipants(owned);
 		for(final Participant participant : ownedParticipants) {
 			participant.setMatches(challonge.getMatches(owned, participant));
-			for(final Match match : participant.getMatches())
+			for(final Match match : participant.getMatches()) {
 				match.setAttachments(challonge.getAttachments(match));
+			}
 		}
 		owned.setParticipants(ownedParticipants);
 		
 		final List<Match> ownedMatches = challonge.getMatches(owned);
-		for(final Match match : ownedMatches)
+		for(final Match match : ownedMatches) {
 			match.setAttachments(challonge.getAttachments(match));
+		}
 		owned.setMatches(ownedMatches);
 		
 		notOwned = challonge.getTournament(System.getenv("NotOwnedTournament"));
@@ -123,15 +127,19 @@ public class ChallongeExtensionTest {
 	@Test
 	public static void testGetTournamentStringBooleanBooleanBoolean() throws DataAccessException {
 		assertEquals(owned, challonge.getTournament(owned.getUrl(), true, true, true));
-		for(final Match match : owned.getMatches())
+		for(final Match match : owned.getMatches()) {
 			match.setAttachments(null);
-		for(final Participant participant : owned.getParticipants())
-			for(final Match match : participant.getMatches())
+		}
+		for(final Participant participant : owned.getParticipants()) {
+			for(final Match match : participant.getMatches()) {
 				match.setAttachments(null);
+			}
+		}
 		assertEquals(owned, challonge.getTournament(owned.getUrl(), true, true, false));
 		owned.getMatches().clear();
-		for(final Participant participant : owned.getParticipants())
+		for(final Participant participant : owned.getParticipants()) {
 			participant.setMatches(null);
+		}
 		assertEquals(owned, challonge.getTournament(owned.getUrl(), true, false, false));
 		owned.getParticipants().clear();
 		assertEquals(owned, challonge.getTournament(owned.getUrl(), false, false, false));

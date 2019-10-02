@@ -188,8 +188,9 @@ public abstract class ListenerAdapter implements EventListener {
 	 *            The id(s) of the tournament(s) to subscribe to
 	 */
 	public void subscribeTo(final long... tournamentId) {
-		for(final long id : tournamentId)
+		for(final long id : tournamentId) {
 			this.subscribedTournamentIds.add(Long.valueOf(id));
+		}
 	}
 	
 	/**
@@ -203,10 +204,12 @@ public abstract class ListenerAdapter implements EventListener {
 	public boolean unsubscribeFrom(final long... tournamentId) {
 		boolean removed = false;
 		
-		for(final long id : tournamentId)
-			if(this.subscribedTournamentIds.remove(Long.valueOf(id)))
+		for(final long id : tournamentId) {
+			if(this.subscribedTournamentIds.remove(Long.valueOf(id))) {
 				removed = true;
-			
+			}
+		}
+		
 		return removed;
 	}
 	
@@ -227,54 +230,57 @@ public abstract class ListenerAdapter implements EventListener {
 		onGenericEvent(event);
 		if(event instanceof GenericTournamentEvent) {
 			onGenericTournamentEvent((GenericTournamentEvent) event);
-			if(event instanceof TournamentCreatedEvent)
+			if(event instanceof TournamentCreatedEvent) {
 				onTournamentCreatedEvent((TournamentCreatedEvent) event);
-			else if(event instanceof TournamentDeletedEvent)
+			} else if(event instanceof TournamentDeletedEvent) {
 				onTournamentDeletedEvent((TournamentDeletedEvent) event);
-			else if(event instanceof GenericTournamentChangedEvent) {
+			} else if(event instanceof GenericTournamentChangedEvent) {
 				onGenericTournamentChangedEvent((GenericTournamentChangedEvent) event);
 				if(event instanceof GenericParticipantEvent) {
 					onGenericParticipantEvent((GenericParticipantEvent) event);
-					if(event instanceof ParticipantCreatedEvent)
+					if(event instanceof ParticipantCreatedEvent) {
 						onParticipantCreatedEvent((ParticipantCreatedEvent) event);
-					else if(event instanceof ParticipantDeletedEvent)
+					} else if(event instanceof ParticipantDeletedEvent) {
 						onParticipantDeletedEvent((ParticipantDeletedEvent) event);
-					else if(event instanceof GenericParticipantChangedEvent) {
+					} else if(event instanceof GenericParticipantChangedEvent) {
 						onGenericParticipantChangedEvent((GenericParticipantChangedEvent) event);
-						if(event instanceof ParticipantMatchAddedEvent)
+						if(event instanceof ParticipantMatchAddedEvent) {
 							onParticipantMatchAddedEvent((ParticipantMatchAddedEvent) event);
-						else if(event instanceof ParticipantMatchRemovedEvent)
+						} else if(event instanceof ParticipantMatchRemovedEvent) {
 							onParticipantMatchRemovedEvent((ParticipantMatchRemovedEvent) event);
-						else
+						} else {
 							// Is normal participant property changed event
 							handleParticipantPropertyChangedEvent((GenericParticipantChangedEvent) event);
+						}
 					}
 				} else if(event instanceof GenericMatchEvent) {
 					onGenericMatchEvent((GenericMatchEvent) event);
-					if(event instanceof MatchCreatedEvent)
+					if(event instanceof MatchCreatedEvent) {
 						onMatchCreatedEvent((MatchCreatedEvent) event);
-					else if(event instanceof MatchDeletedEvent)
+					} else if(event instanceof MatchDeletedEvent) {
 						onMatchDeletedEvent((MatchDeletedEvent) event);
-					else if(event instanceof GenericMatchChangedEvent) {
+					} else if(event instanceof GenericMatchChangedEvent) {
 						onGenericMatchChangedEvent((GenericMatchChangedEvent) event);
 						if(event instanceof GenericAttachmentEvent) {
 							onGenericAttachmentEvent((GenericAttachmentEvent) event);
-							if(event instanceof AttachmentCreatedEvent)
+							if(event instanceof AttachmentCreatedEvent) {
 								onAttachmentCreatedEvent((AttachmentCreatedEvent) event);
-							else if(event instanceof AttachmentDeletedEvent)
+							} else if(event instanceof AttachmentDeletedEvent) {
 								onAttachmentDeletedEvent((AttachmentDeletedEvent) event);
-							else if(event instanceof GenericAttachmentChangedEvent) {
+							} else if(event instanceof GenericAttachmentChangedEvent) {
 								onAttachmentChangedEvent((GenericAttachmentChangedEvent) event);
 								// Is normal attachment property changed event
 								handleAttachmentPropertyChangedEvent((GenericAttachmentChangedEvent) event);
 							}
-						} else
+						} else {
 							// Is normal match property changed event
 							handleMatchPropertyChangedEvent((GenericMatchChangedEvent) event);
+						}
 					}
-				} else
+				} else {
 					// Is normal tournament property changed event
 					handleTournamentPropertyChangedEvent((GenericTournamentChangedEvent) event);
+				}
 			}
 		}
 	}

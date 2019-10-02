@@ -62,8 +62,9 @@ public class ChallongeListenerDemonstration extends ListenerAdapter {
 	public void onGenericTournamentEvent(final GenericTournamentEvent event) {
 		// Removes all time based events, as they are fired constantly
 		// for some reason.
-		if(!event.getClass().getName().endsWith("AtChangedEvent"))
+		if(!event.getClass().getName().endsWith("AtChangedEvent")) {
 			System.out.println(event + " in Tournament " + event.getTournament().getFullChallongeUrl());
+		}
 	}
 	
 	@Override
