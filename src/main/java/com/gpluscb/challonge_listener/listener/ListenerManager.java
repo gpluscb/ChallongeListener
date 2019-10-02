@@ -174,7 +174,7 @@ public class ListenerManager {
 			// Try to get tournament four times
 			final int NUM_TRIES = 4;
 			for(int i = 1; i <= NUM_TRIES; i++) {
-				if(this.challonge.doesExist(String.valueOf(tournamentId))) {
+				if(this.challonge.doesTournamentExist(String.valueOf(tournamentId))) {
 					try {
 						final Tournament tournament = this.challonge.getTournament(String.valueOf(tournamentId), true,
 								true, true);

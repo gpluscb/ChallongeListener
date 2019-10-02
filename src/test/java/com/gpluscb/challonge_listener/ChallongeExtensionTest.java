@@ -89,8 +89,9 @@ public class ChallongeExtensionTest {
 		client.close();
 	}
 	
+	@SuppressWarnings("static-method")
 	@Before
-	public static void beforeTest() throws DataAccessException {
+	public void beforeTest() throws DataAccessException {
 		owned = challonge.getTournament(randomUrl);
 		
 		final List<Participant> ownedParticipants = challonge.getParticipants(owned);
@@ -111,21 +112,115 @@ public class ChallongeExtensionTest {
 		notOwned = challonge.getTournament(System.getenv("NotOwnedTournament"));
 	}
 	
+	@SuppressWarnings("static-method")
 	@Test
-	public static void testDoesExist() throws DataAccessException {
-		assertTrue(challonge.doesExist(owned.getUrl()));
-		assertTrue(challonge.doesExist(String.valueOf(owned.getId())));
-		assertFalse(challonge.doesExist("As far as I know impossible to exist due to spaces in url"));
+	public void testDoesTournamentExist() throws DataAccessException {
+		assertTrue(challonge.doesTournamentExist(owned.getUrl()));
+		assertTrue(challonge.doesTournamentExist(String.valueOf(owned.getId())));
+		assertFalse(challonge.doesTournamentExist("As far as I know impossible to exist due to spaces in url"));
 	}
 	
+	@SuppressWarnings("static-method")
 	@Test
-	public static void testDoesOwn() throws DataAccessException {
+	public void testDoesMatchExist() throws DataAccessException {
+		assertTrue(challonge.doesMatchExist(owned, owned.getMatches().get(0).getId().longValue()));
+		assertFalse(challonge.doesMatchExist(owned, -1));
+		try {
+			owned.setId(Long.valueOf(-1));
+			challonge.doesMatchExist(owned, owned.getMatches().get(0).getId().longValue());
+			fail();
+		} catch(@SuppressWarnings("unused") final DataAccessException e) {
+			// Expected
+		}
+		// TODO: Currently there is a bug in challonge-java, no null checks are
+		// present and it will give the tournament "https://challonge.com/null".
+		// This part of the test only makes sense when it is fixed.
+		// @formatter:off
+//		try {
+//			owned.setId(null);
+//			owned.setUrl("As far as I know impossible to exist due to spaces in url");
+//			challonge.doesMatchExist(owned, owned.getMatches().get(0).getId().longValue());
+//			fail();
+//		} catch(@SuppressWarnings("unused") final DataAccessException e) {
+//			// Expected
+//		}
+		// @formatter:on
+	}
+	
+	@SuppressWarnings("static-method")
+	@Test
+	public void testDoesParticipantExist() throws DataAccessException {
+		assertTrue(challonge.doesParticipantExist(owned, owned.getParticipants().get(0).getId().longValue()));
+		assertFalse(challonge.doesParticipantExist(owned, -1));
+		try {
+			owned.setId(Long.valueOf(-1));
+			challonge.doesParticipantExist(owned, owned.getParticipants().get(0).getId().longValue());
+			fail();
+		} catch(@SuppressWarnings("unused") final DataAccessException e) {
+			// Expected
+		}
+		// TODO: Currently there is a bug in challonge-java, no null checks are
+		// present and it will give the tournament "https://challonge.com/null".
+		// This part of the test only makes sense when it is fixed.
+		// @formatter:off
+//		try {
+//			owned.setId(null);
+//			owned.setUrl("As far as I know impossible to exist due to spaces in url");
+//			challonge.doesParticipantExist(owned, owned.getParticipants().get(0).getId().longValue());
+//			fail();
+//		} catch(@SuppressWarnings("unused") final DataAccessException e) {
+//			// Expected
+//		}
+		// @formatter:on
+	}
+	
+	@SuppressWarnings("static-method")
+	@Test
+	public void testDoesAttachmentExist() throws DataAccessException {
+		assertTrue(challonge.doesAttachmentExist(owned.getMatches().get(0),
+				owned.getMatches().get(0).getAttachments().get(0).getId().longValue()));
+		assertFalse(challonge.doesAttachmentExist(owned.getMatches().get(0), -1));
+		try {
+			owned.getMatches().get(0).setId(Long.valueOf(-1));
+			challonge.doesAttachmentExist(owned.getMatches().get(0),
+					owned.getMatches().get(0).getAttachments().get(0).getId().longValue());
+			fail();
+		} catch(@SuppressWarnings("unused") final DataAccessException e) {
+			// Expected
+		}
+		try {
+			owned.getMatches().get(0).setId(null);
+			challonge.doesAttachmentExist(owned.getMatches().get(0),
+					owned.getMatches().get(0).getAttachments().get(0).getId().longValue());
+			fail();
+		} catch(@SuppressWarnings("unused") final NullPointerException e) {
+			// Expected
+		}
+		// TODO: Currently there is a bug in challonge-java, no null checks are
+		// present and it will give the tournament "https://challonge.com/null".
+		// This part of the test only makes sense when it is fixed.
+		// @formatter:off
+//		try {
+//			owned.setId(null);
+//			owned.setUrl("As far as I know impossible to exist due to spaces in url");
+//			challonge.doesAttachmentExist(owned.getMatches().get(1), owned.getMatches().get(1).getAttachments().get(0).getId().longValue());
+//			fail();
+//		} catch(@SuppressWarnings("unused") final DataAccessException e) {
+//			// Expected
+//		}
+		// @formatter:on
+	}
+	
+	@SuppressWarnings("static-method")
+	@Test
+	public void testDoesOwn() throws DataAccessException {
 		assertTrue(challonge.doesOwn(owned));
 		assertFalse(challonge.doesOwn(notOwned));
 	}
 	
+	@SuppressWarnings("static-method")
 	@Test
-	public static void testGetTournamentStringBooleanBooleanBoolean() throws DataAccessException {
+	public void testGetTournamentStringBooleanBooleanBoolean() throws DataAccessException {
 		assertEquals(owned, challonge.getTournament(owned.getUrl(), true, true, true));
 		for(final Match match : owned.getMatches()) {
 			match.setAttachments(null);
@@ -151,13 +246,15 @@ public class ChallongeExtensionTest {
 		}
 	}
 	
+	@SuppressWarnings("static-method")
 	@Test
-	public static void testGetTournamentsWithFullData() throws DataAccessException {
+	public void testGetTournamentsWithFullData() throws DataAccessException {
 		assertTrue(challonge.getTournamentsWithFullData().contains(owned));
 	}
 	
+	@SuppressWarnings("static-method")
 	@Test
-	public static void testGetMatchesWithFullData() throws DataAccessException {
+	public void testGetMatchesWithFullData() throws DataAccessException {
 		assertEquals(owned.getMatches(), challonge.getMatchesWithFullData(owned));
 	}
 }

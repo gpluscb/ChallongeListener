@@ -55,17 +55,103 @@ public class ChallongeExtension extends Challonge {
 	 *             Exchange with the rest api or validation failed in a way that
 	 *             does not indicate that the tournament does not exist
 	 */
-	public boolean doesExist(final String tournament) throws DataAccessException {
+	public boolean doesTournamentExist(final String tournament) throws DataAccessException {
 		// TODO: make the check better and safer for api updates, no ideas yet.
 		// getCause() with instanceof checks and casts so that there might be
-		// some kind
-		// of getErrorCode() method?
+		// some kind of getErrorCode() method?
 		try {
 			getTournament(tournament);
 			return true;
 		} catch(final DataAccessException e) {
 			if(e.getMessage().contains(
 					" was not successful (404) and returned: {\"errors\":[\"Requested tournament not found\"]}")) {
+				return false;
+			}
+			throw e;
+		}
+	}
+	
+	/**
+	 * Checks whether a match exists
+	 *
+	 * @param tournament
+	 *            The matches tournament. Must contain id or url with an
+	 *            optional subdomain
+	 * @param matchId
+	 *            The id of the match to be checked
+	 * @return Whether the match exists
+	 * @throws DataAccessException
+	 *             Exchange with the rest api or validation failed in a way that
+	 *             does not indicate that the match does not exist
+	 */
+	public boolean doesMatchExist(final Tournament tournament, final long matchId) throws DataAccessException {
+		// TODO: make the check better and safer for api updates, no ideas yet.
+		// getCause() with instanceof checks and casts so that there might be
+		// some kind of getErrorCode() method?
+		try {
+			getMatch(tournament, matchId);
+			return true;
+		} catch(final DataAccessException e) {
+			if(e.getMessage().contains(
+					" was not successful (404) and returned: {\"errors\":[\"Match not found for tournament ID ")) {
+				return false;
+			}
+			throw e;
+		}
+	}
+	
+	/**
+	 * Checks whether a participant exists
+	 *
+	 * @param tournament
+	 *            The matches tournament. Must contain id or url with an
+	 *            optional subdomain
+	 * @param participantId
+	 *            The id of the participant to be checked
+	 * @return Whether the participant exists
+	 * @throws DataAccessException
+	 *             Exchange with the rest api or validation failed in a way that
+	 *             does not indicate that the participant does not exist
+	 */
+	public boolean doesParticipantExist(final Tournament tournament, final long participantId)
+			throws DataAccessException {
+		// TODO: make the check better and safer for api updates, no ideas yet.
+		// getCause() with instanceof checks and casts so that there might be
+		// some kind of getErrorCode() method?
+		try {
+			getParticipant(tournament, participantId);
+			return true;
+		} catch(final DataAccessException e) {
+			if(e.getMessage().contains(
+					" was not successful (404) and returned: {\"errors\":[\"Participant not found for tournament ID ")) {
+				return false;
+			}
+			throw e;
+		}
+	}
+	
+	/**
+	 * Checks whether a attachment exists
+	 *
+	 * @param match
+	 *            The match. Must contain id and the tournament id
+	 * @param attachmentId
+	 *            The id of the attachment to be checked
+	 * @return Whether the attachment exists
+	 * @throws DataAccessException
+	 *             Exchange with the rest api or validation failed in a way that
+	 *             does not indicate that the attachment does not exist
+	 */
+	public boolean doesAttachmentExist(final Match match, final long attachmentId) throws DataAccessException {
+		// TODO: make the check better and safer for api updates, no ideas yet.
+		// getCause() with instanceof checks and casts so that there might be
+		// some kind of getErrorCode() method?
+		try {
+			getAttachment(match, attachmentId);
+			return true;
+		} catch(final DataAccessException e) {
+			if(e.getMessage().contains(
+					" was not successful (404) and returned: {\"errors\":[\"Attachment with that ID was not found for match ID ")) {
 				return false;
 			}
 			throw e;
