@@ -25,7 +25,7 @@ A project using the [stefangeyer/challonge-java](https://github.com/stefangeyer/
 	* Unnecessary work
 
 - [ ] Public void ListenerManager#update() method for manual updates
-
+	
 	Pro:
 	* Neat feature for anyone who would need it (and testing)
 	
