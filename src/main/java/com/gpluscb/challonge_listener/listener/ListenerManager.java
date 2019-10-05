@@ -77,7 +77,7 @@ public class ListenerManager {
 	
 	private final ChallongeExtension challonge;
 	
-	private long interval;
+	private final long interval;
 	
 	private final List<EventListener> managedListeners;
 	
@@ -648,17 +648,6 @@ public class ListenerManager {
 				}
 			}, "ListenerManager OnShutdownChangeState").start();
 		}
-	}
-	
-	/**
-	 * Adjusts the interval the tournaments are updated at.
-	 *
-	 * @param interval
-	 *            The new interval to try to update at in milliseconds. If it is
-	 *            0, it tries to update as quickly as possible.
-	 */
-	public void setInterval(final long interval) {
-		this.interval = interval;
 	}
 	
 	/**
