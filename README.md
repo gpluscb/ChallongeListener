@@ -1,50 +1,44 @@
 # ChallongeListener
-A project using the [stefangeyer/challonge-java](https://github.com/stefangeyer/challonge-java) project to fire events to listeners when an owned or co-owned challonge tournament changes.
+A project using the [stefangeyer/challonge-java](https://github.com/stefangeyer/challonge-java) project to fire events to listeners when a tournament changes.
 
-## TODOs, no particular order:
-- [ ] Somehow block setters of Models or clone them
- 
-- [ ] Maybe give ParticipantMatchEvents own abstract class and different names
-	
-	Pro:
-	* Technically more consistent
-	* Might be useful for reflection
-	
-	Con:
-	* Potentially less readable
-	* Would treat these events as more than just another ParticipantChangedEvent, which is at least worth a discussion
+## Using this project:
 
-- [x] Maybe use reflection in ListenerAdapter#onEvent(GenericEvent event)
-	
-	Pro:
-	* Shorter, maybe more readable
-	* Already used reflection for similiar tasks
-	
-	Con:
-	* ParticipantMatchEvents mark some inconsistency reflection would have a hard time dealing with
-	* Potentially attracting errors, difficult to test
-	* Unnecessary work
+### Download:
+As of now, there are no releases nor is this repo published via a package manager, thus you have to download or clone this repo and compile it yourself.
 
-- [ ] Public void ListenerManager#update() method for manual updates
-	
-	Pro:
-	* Neat feature for anyone who would need it (and testing)
-	
-	Con:
-	* Cannot think of anyone who would need it (except tests)
+### Getting started:
+Check out the [ChallongeListener demostration](src/test/java/com/gpluscb/challonge_listener/ChallongeListenerDemonstration.java) for a quick example.
 
-- [ ] Find better solution than a private object for wait/notify calls. Also learn about synchronizing and race conditions
+#### ListenerManager
+To listen to anything, you need a [ListenerManager](src/main/java/gpluscb/challonge_listener/listener/ListenerManager.java) instance. This instance will fire all the events to your listeners.\
+`final ListenerManager manager = new ListenerManager(challonge, 5000);`\
+As you can see, you will need to pass a ChallongeExtension instance and (optionally) a long value to the constructor.
+The [ChallongeExtension class](src/main/java/gpluscb/challonge_listener/ChallongeExtension.java) works mostly the same as the [Challonge class](https://github.com/stefangeyer/challonge-java/blob/master/core/src/main/java/at/stefangeyer/challonge/Challonge.java) of the challonge-java project, the difference being that ChallongeExtension implements some methods that go beyond what the [Challonge API](https://api.challonge.com/v1) directly offers whereas the usual Challonge class is intended to be more of a direct representation of the Challonge API in java.
+The long value represents the time of the update cycle. Since the Challonge API does not push updates to our client as they happen, the state of a tournament has to be requested from the Challonge API at fixed times and then compared to its previous state. The long value passed to the constructor is the minimum time between updates in milliseconds. 5000ms/5s is the default, if you only pass the ChallongeExtension instance to the constructor. If you pass 0, the instance will try to update as quickly as possible. There is no official stance on api spam or something like that by Challonge as far as I can tell, so I am not at fault if you get limited or banned. Just a quick heads up: the more unique tournaments you subscribe to and the more attachments these tournaments have, the more api calls are made each update cycle.
 
-- [ ] Replace ugly multiple try system for the case that a tournament changes in the middle of getting it from the api
+#### EventListeners
+If you want to subscribe to tournaments and utilize events, you need to add EventListeners. There are currently two classes you can utilize as EventListeners: [EventListener](src/main/java/gpluscb/challonge_listener/listener/EventListener.java) and [ListenerAdapter](src/main/java/gpluscb/challonge_listener/listener/ListenerAdapter.java).
+EventListener is an interface and you can override its `onEvent(GenericEvent)` and `getSubscribedToTournamentIds()` methods. The `onEvent` method is called whenever a tournament of which the id is contained within the list returned by the `getSubscribedToTournamentIds` method by the ListenerManager instances the listener is added to changes.
+ListenerAdapter is an abstract class with a method for each possible event. Thus you can extend for example only from the\
+`onTournamentDescriptionChangedEvent(TournamentDescriptionChangedEvent)`\
+method to have your code executed every time the tournament description changes. The ListenerAdapter also implements methods to both add an id to and remove an id from the list of subscribed to tournaments, so you do not have to worry about that too much. These methods are `subscribeTo(long)` and `unsubscribeFrom(long)`.
+Of course, your ListenerManager instance cannot fire any events to your listeners if it does not know about these. You can change that by using the `ListenerManager#addListener(EventListener)` method.
 
-- [ ] Make ChallongeExtension#doesExist(String tournament) check more elegant and safer
+#### Application flow
+Since the ListenerManager runs on a seperate thread, there are several methods to communicate between threads and control application flow.
+For a start, if you want your application to shut down smoothly, you will need to shut down your ListenerManager as well using the `shutdown()` method.
+Also, you can wait until the ListenerManager instance reaches some specified state via its `awaitState(ManagerState)` or its `awaitReady()` method.
 
-- [ ] Make ChallongeExtension#addMissingData() methods public
-	
-	Pro:
-	* Neat feature for anyone who would need it
-	
-	Con:
-	* Cannot think of anyone who would need it when methods to get stuff with full data already exist.
+### Documentation:
+The documentation is not by a web server, but it can be found in the [doc](doc) folder. You can open [doc/index.html](doc/index.html) in your webbrowser to access the docs, but it really cannot be accessed within github I think.
 
-- [x] Noticed weird behaviour of match/has_attachment (always false) and match/attachment_count (null until attachment is added (not 0, null)). Should annoy Challonge support about that
+## Bigger ideas:
+
+### 1: Reflection vs. script code generation vs. annotation based code generation:
+Currently, runtime based reflection is used to handle the enormous amount of events. The events themselves as well as the methods in the ListenerAdapter class are partially hand-written but mostly procedurally generated by some scripts not contained in this repo. I have tried to use compile-time annotation processing before, as I think it would be pretty elegant, but I could not get it to work. Using all the fields/getters of the challonge-java models it would be possible to just update the challonge-java library, recompile and have all the new events immediately.
+In the case file-editing scripts are used instead, they should be published within this repo and (in case gradle works like that I have no idea lul) a gradle task to run those should be added.
+
+### 2: Publishing:
+Currently, I do not have much knowledge of gradle and how publishing to mavenCentral for example works. So for now, the easiest way to use this repository is to clone or download it and compile it into a jar yourself, until I either add a release or figure automatic publishing out.
+
+Smaller TODOs can be found near the elements they affect in "// TODO:" comments.
