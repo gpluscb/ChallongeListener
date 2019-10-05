@@ -7,7 +7,7 @@ A project using the [stefangeyer/challonge-java](https://github.com/stefangeyer/
 As of now, there are no releases nor is this repo published via a package manager, thus you have to download or clone this repo and compile it yourself.
 
 ### Getting started:
-Check out the [ChallongeListener demostration](src/test/java/com/gpluscb/challonge_listener/ChallongeListenerDemonstration.java) for a quick example.
+Check out the [ChallongeListener example](src/examples/java/com/gpluscb/challonge_listener/ChallongeListenerExample.java) for a quick example.
 
 #### ListenerManager
 To listen to anything, you need a [ListenerManager](src/main/java/gpluscb/challonge_listener/listener/ListenerManager.java) instance. This instance will fire all the events to your listeners.\
