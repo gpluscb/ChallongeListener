@@ -69,6 +69,7 @@ import at.stefangeyer.challonge.model.Tournament;
 // maybe even include a constructor that allows the listenerThread to not start.
 // Can't think of a good use case right now.
 // TODO: Block setters of Tournament etc. or clone them.
+// TODO: Know when to use synchronize
 public class ListenerManager {
 	private final ScheduledExecutorService executor;
 	
