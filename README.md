@@ -18,7 +18,7 @@ The long value represents the time of the update cycle. Since the Challonge API 
 
 #### EventListeners
 If you want to subscribe to tournaments and utilize events, you need to add EventListeners. There are currently two classes you can utilize as EventListeners: [EventListener](src/main/java/gpluscb/challonge_listener/listener/EventListener.java) and [ListenerAdapter](src/main/java/gpluscb/challonge_listener/listener/ListenerAdapter.java).
-EventListener is an interface and you can override its `onEvent(GenericEvent)` and `getSubscribedToTournamentIds()` methods. The `onEvent` method is called whenever a tournament of which the id is contained within the list returned by the `getSubscribedToTournamentIds` method by the ListenerManager instances the listener is added to changes.
+EventListener is an interface and you can override its `onEvent(GenericEvent)` and `getSubscribedTournamentIds()` methods. The `onEvent` method is called whenever a tournament of which the id is contained within the list returned by the `getSubscribedTournamentIds` method by the ListenerManager instances the listener is added to changes.
 ListenerAdapter is an abstract class with a method for each possible event. Thus you can extend for example only from the\
 `onTournamentDescriptionChangedEvent(TournamentDescriptionChangedEvent)`\
 method to have your code executed every time the tournament description changes. The ListenerAdapter also implements methods to both add an id to and remove an id from the list of subscribed to tournaments, so you do not have to worry about that too much. These methods are `subscribeTo(long)` and `unsubscribeFrom(long)`.
