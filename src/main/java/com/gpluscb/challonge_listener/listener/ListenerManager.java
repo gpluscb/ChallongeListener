@@ -38,21 +38,20 @@ import at.stefangeyer.challonge.model.Participant;
 import at.stefangeyer.challonge.model.Tournament;
 
 /**
- * The heart of this project. Requests all the tournament created or co-owned by
- * your account at specific intervals and compares all of the tournaments. If a
+ * The heart of this project. Requests all the tournaments specified by the
+ * listeners at specific intervals and compares all of the tournaments. If a
  * difference is found,
  * {@link com.gpluscb.challonge_listener.events.GenericEvent GenericEvents} are
  * fired to all managed
- * {@link com.gpluscb.challonge_listener.listener.EventListener EventListeners}.
- * Events exist for all theoretically possible properties, including events that
- * will never be fired like
+ * {@link com.gpluscb.challonge_listener.listener.EventListener EventListeners}
+ * that are subscribed to the tournament the event is from. Events exist for all
+ * theoretically possible properties, including events that will never be fired
+ * like
  * {@link com.gpluscb.challonge_listener.events.tournament.TournamentIdChangedEvent
  * TournamentIdChangedEvent}. If the id of a tournament really changed, it would
  * not be seen as the same tournament anymore, therefore a
  * {@link com.gpluscb.challonge_listener.events.tournament.TournamentDeletedEvent
- * TournamentDeletedEvent} and a
- * {@link com.gpluscb.challonge_listener.events.tournament.TournamentCreatedEvent
- * TournamentCreatedEvent} would be fired rather than a
+ * TournamentDeletedEvent} would be fired rather than a
  * {@link com.gpluscb.challonge_listener.events.tournament.TournamentIdChangedEvent
  * TournamentIdChangedEvent}.
  * <h3>The manager can be in various states, the states progress as
