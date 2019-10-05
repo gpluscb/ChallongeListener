@@ -16,7 +16,7 @@ import at.stefangeyer.challonge.rest.retrofit.RetrofitRestClient;
 import at.stefangeyer.challonge.serializer.Serializer;
 import at.stefangeyer.challonge.serializer.gson.GsonSerializer;
 
-public class ChallongeListenerDemonstration extends ListenerAdapter {
+public class ChallongeListenerExample extends ListenerAdapter {
 	public static void main(final String[] args) {
 		try(final RetrofitRestClient client = new RetrofitRestClient(); final Scanner s = new Scanner(System.in)) {
 			System.out.println("Starting...");
@@ -30,7 +30,7 @@ public class ChallongeListenerDemonstration extends ListenerAdapter {
 			
 			final ListenerManager manager = new ListenerManager(challonge, 5000);
 			
-			manager.addListener(new ChallongeListenerDemonstration(challonge));
+			manager.addListener(new ChallongeListenerExample(challonge));
 			
 			manager.awaitRunning();
 			
@@ -50,7 +50,7 @@ public class ChallongeListenerDemonstration extends ListenerAdapter {
 		}
 	}
 	
-	public ChallongeListenerDemonstration(final ChallongeExtension challonge) throws DataAccessException {
+	public ChallongeListenerExample(final ChallongeExtension challonge) throws DataAccessException {
 		System.out.println("Subscribed to tournaments:");
 		for(final Tournament tournament : challonge.getTournaments()) {
 			subscribeTo(tournament.getId().longValue());
