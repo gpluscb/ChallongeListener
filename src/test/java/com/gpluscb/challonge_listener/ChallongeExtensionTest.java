@@ -89,7 +89,6 @@ public class ChallongeExtensionTest {
 		client.close();
 	}
 	
-	@SuppressWarnings("static-method")
 	@Before
 	public void beforeTest() throws DataAccessException {
 		owned = challonge.getTournament(randomUrl);
@@ -112,7 +111,6 @@ public class ChallongeExtensionTest {
 		notOwned = challonge.getTournament(System.getenv("NotOwnedTournament"));
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test
 	public void testDoesTournamentExist() throws DataAccessException {
 		assertTrue(challonge.doesTournamentExist(owned.getUrl()));
@@ -120,7 +118,6 @@ public class ChallongeExtensionTest {
 		assertFalse(challonge.doesTournamentExist("As far as I know impossible to exist due to spaces in url"));
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test
 	public void testDoesMatchExist() throws DataAccessException {
 		assertTrue(challonge.doesMatchExist(owned, owned.getMatches().get(0).getId().longValue()));
@@ -147,7 +144,6 @@ public class ChallongeExtensionTest {
 		// @formatter:on
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test
 	public void testDoesParticipantExist() throws DataAccessException {
 		assertTrue(challonge.doesParticipantExist(owned, owned.getParticipants().get(0).getId().longValue()));
@@ -174,7 +170,6 @@ public class ChallongeExtensionTest {
 		// @formatter:on
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test
 	public void testDoesAttachmentExist() throws DataAccessException {
 		assertTrue(challonge.doesAttachmentExist(owned.getMatches().get(0),
@@ -211,14 +206,12 @@ public class ChallongeExtensionTest {
 		// @formatter:on
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test
 	public void testDoesOwn() throws DataAccessException {
 		assertTrue(challonge.doesOwn(owned));
 		assertFalse(challonge.doesOwn(notOwned));
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test
 	public void testGetTournamentStringBooleanBooleanBoolean() throws DataAccessException {
 		assertEquals(owned, challonge.getTournament(owned.getUrl(), true, true, true));
@@ -246,13 +239,11 @@ public class ChallongeExtensionTest {
 		}
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test
 	public void testGetTournamentsWithFullData() throws DataAccessException {
 		assertTrue(challonge.getTournamentsWithFullData().contains(owned));
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test
 	public void testGetMatchesWithFullData() throws DataAccessException {
 		assertEquals(owned.getMatches(), challonge.getMatchesWithFullData(owned));

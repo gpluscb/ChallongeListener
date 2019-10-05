@@ -359,432 +359,341 @@ public abstract class ListenerAdapter implements EventListener {
 		}
 	}
 	
-	protected void onGenericEvent(@SuppressWarnings("unused") final GenericEvent event) {}
+	protected void onGenericEvent(final GenericEvent event) {}
 	
 	// Tournament methods
-	protected void onGenericTournamentEvent(@SuppressWarnings("unused") final GenericTournamentEvent event) {}
+	protected void onGenericTournamentEvent(final GenericTournamentEvent event) {}
 	
-	protected void onTournamentCreatedEvent(@SuppressWarnings("unused") final TournamentCreatedEvent event) {}
+	protected void onTournamentCreatedEvent(final TournamentCreatedEvent event) {}
 	
-	protected void onTournamentDeletedEvent(@SuppressWarnings("unused") final TournamentDeletedEvent event) {}
+	protected void onTournamentDeletedEvent(final TournamentDeletedEvent event) {}
 	
-	protected void onGenericTournamentChangedEvent(
-			@SuppressWarnings("unused") final GenericTournamentChangedEvent event) {}
+	protected void onGenericTournamentChangedEvent(final GenericTournamentChangedEvent event) {}
 	
-	protected void onTournamentIdChangedEvent(@SuppressWarnings("unused") final TournamentIdChangedEvent event) {}
+	protected void onTournamentIdChangedEvent(final TournamentIdChangedEvent event) {}
 	
-	protected void onTournamentUrlChangedEvent(@SuppressWarnings("unused") final TournamentUrlChangedEvent event) {}
+	protected void onTournamentUrlChangedEvent(final TournamentUrlChangedEvent event) {}
 	
-	protected void onTournamentNameChangedEvent(@SuppressWarnings("unused") final TournamentNameChangedEvent event) {}
+	protected void onTournamentNameChangedEvent(final TournamentNameChangedEvent event) {}
 	
-	protected void onTournamentTournamentTypeChangedEvent(
-			@SuppressWarnings("unused") final TournamentTournamentTypeChangedEvent event) {}
+	protected void onTournamentTournamentTypeChangedEvent(final TournamentTournamentTypeChangedEvent event) {}
 	
-	protected void onTournamentSubdomainChangedEvent(
-			@SuppressWarnings("unused") final TournamentSubdomainChangedEvent event) {}
+	protected void onTournamentSubdomainChangedEvent(final TournamentSubdomainChangedEvent event) {}
 	
-	protected void onTournamentDescriptionChangedEvent(
-			@SuppressWarnings("unused") final TournamentDescriptionChangedEvent event) {}
+	protected void onTournamentDescriptionChangedEvent(final TournamentDescriptionChangedEvent event) {}
 	
-	protected void onTournamentOpenSignupChangedEvent(
-			@SuppressWarnings("unused") final TournamentOpenSignupChangedEvent event) {}
+	protected void onTournamentOpenSignupChangedEvent(final TournamentOpenSignupChangedEvent event) {}
 	
-	protected void onTournamentHoldThirdPlaceMatchChangedEvent(
-			@SuppressWarnings("unused") final TournamentHoldThirdPlaceMatchChangedEvent event) {}
+	protected void onTournamentHoldThirdPlaceMatchChangedEvent(final TournamentHoldThirdPlaceMatchChangedEvent event) {}
 	
-	protected void onTournamentPointsForMatchWinChangedEvent(
-			@SuppressWarnings("unused") final TournamentPointsForMatchWinChangedEvent event) {}
+	protected void onTournamentPointsForMatchWinChangedEvent(final TournamentPointsForMatchWinChangedEvent event) {}
 	
-	protected void onTournamentPointsForMatchTieChangedEvent(
-			@SuppressWarnings("unused") final TournamentPointsForMatchTieChangedEvent event) {}
+	protected void onTournamentPointsForMatchTieChangedEvent(final TournamentPointsForMatchTieChangedEvent event) {}
 	
-	protected void onTournamentPointsForGameWinChangedEvent(
-			@SuppressWarnings("unused") final TournamentPointsForGameWinChangedEvent event) {}
+	protected void onTournamentPointsForGameWinChangedEvent(final TournamentPointsForGameWinChangedEvent event) {}
 	
-	protected void onTournamentPointsForGameTieChangedEvent(
-			@SuppressWarnings("unused") final TournamentPointsForGameTieChangedEvent event) {}
+	protected void onTournamentPointsForGameTieChangedEvent(final TournamentPointsForGameTieChangedEvent event) {}
 	
-	protected void onTournamentPointsForByeChangedEvent(
-			@SuppressWarnings("unused") final TournamentPointsForByeChangedEvent event) {}
+	protected void onTournamentPointsForByeChangedEvent(final TournamentPointsForByeChangedEvent event) {}
 	
-	protected void onTournamentSwissRoundsChangedEvent(
-			@SuppressWarnings("unused") final TournamentSwissRoundsChangedEvent event) {}
+	protected void onTournamentSwissRoundsChangedEvent(final TournamentSwissRoundsChangedEvent event) {}
 	
-	protected void onTournamentRankedByChangedEvent(
-			@SuppressWarnings("unused") final TournamentRankedByChangedEvent event) {}
+	protected void onTournamentRankedByChangedEvent(final TournamentRankedByChangedEvent event) {}
 	
 	protected void onTournamentRoundRobinPointsForGameWinChangedEvent(
-			@SuppressWarnings("unused") final TournamentRoundRobinPointsForGameWinChangedEvent event) {}
+			final TournamentRoundRobinPointsForGameWinChangedEvent event) {}
 	
 	protected void onTournamentRoundRobinPointsForGameTieChangedEvent(
-			@SuppressWarnings("unused") final TournamentRoundRobinPointsForGameTieChangedEvent event) {}
+			final TournamentRoundRobinPointsForGameTieChangedEvent event) {}
 	
 	protected void onTournamentRoundRobinPointsForMatchWinChangedEvent(
-			@SuppressWarnings("unused") final TournamentRoundRobinPointsForMatchWinChangedEvent event) {}
+			final TournamentRoundRobinPointsForMatchWinChangedEvent event) {}
 	
 	protected void onTournamentRoundRobinPointsForMatchTieChangedEvent(
-			@SuppressWarnings("unused") final TournamentRoundRobinPointsForMatchTieChangedEvent event) {}
+			final TournamentRoundRobinPointsForMatchTieChangedEvent event) {}
 	
-	protected void onTournamentAcceptAttachmentsChangedEvent(
-			@SuppressWarnings("unused") final TournamentAcceptAttachmentsChangedEvent event) {}
+	protected void onTournamentAcceptAttachmentsChangedEvent(final TournamentAcceptAttachmentsChangedEvent event) {}
 	
-	protected void onTournamentHideForumChangedEvent(
-			@SuppressWarnings("unused") final TournamentHideForumChangedEvent event) {}
+	protected void onTournamentHideForumChangedEvent(final TournamentHideForumChangedEvent event) {}
 	
-	protected void onTournamentShowRoundsChangedEvent(
-			@SuppressWarnings("unused") final TournamentShowRoundsChangedEvent event) {}
+	protected void onTournamentShowRoundsChangedEvent(final TournamentShowRoundsChangedEvent event) {}
 	
-	protected void onTournamentPrivateOnlyChangedEvent(
-			@SuppressWarnings("unused") final TournamentPrivateOnlyChangedEvent event) {}
+	protected void onTournamentPrivateOnlyChangedEvent(final TournamentPrivateOnlyChangedEvent event) {}
 	
 	protected void onTournamentNotifyUsersWhenTheTournamentEndsChangedEvent(
-			@SuppressWarnings("unused") final TournamentNotifyUsersWhenTheTournamentEndsChangedEvent event) {}
+			final TournamentNotifyUsersWhenTheTournamentEndsChangedEvent event) {}
 	
-	protected void onTournamentSequentialPairingsChangedEvent(
-			@SuppressWarnings("unused") final TournamentSequentialPairingsChangedEvent event) {}
+	protected void onTournamentSequentialPairingsChangedEvent(final TournamentSequentialPairingsChangedEvent event) {}
 	
-	protected void onTournamentSignupCapChangedEvent(
-			@SuppressWarnings("unused") final TournamentSignupCapChangedEvent event) {}
+	protected void onTournamentSignupCapChangedEvent(final TournamentSignupCapChangedEvent event) {}
 	
-	protected void onTournamentStartAtChangedEvent(
-			@SuppressWarnings("unused") final TournamentStartAtChangedEvent event) {}
+	protected void onTournamentStartAtChangedEvent(final TournamentStartAtChangedEvent event) {}
 	
-	protected void onTournamentCheckInDurationChangedEvent(
-			@SuppressWarnings("unused") final TournamentCheckInDurationChangedEvent event) {}
+	protected void onTournamentCheckInDurationChangedEvent(final TournamentCheckInDurationChangedEvent event) {}
 	
 	protected void onTournamentAllowParticipantMatchReportingChangedEvent(
-			@SuppressWarnings("unused") final TournamentAllowParticipantMatchReportingChangedEvent event) {}
+			final TournamentAllowParticipantMatchReportingChangedEvent event) {}
 	
-	protected void onTournamentAnonymousVotingChangedEvent(
-			@SuppressWarnings("unused") final TournamentAnonymousVotingChangedEvent event) {}
+	protected void onTournamentAnonymousVotingChangedEvent(final TournamentAnonymousVotingChangedEvent event) {}
 	
-	protected void onTournamentCategoryChangedEvent(
-			@SuppressWarnings("unused") final TournamentCategoryChangedEvent event) {}
+	protected void onTournamentCategoryChangedEvent(final TournamentCategoryChangedEvent event) {}
 	
-	protected void onTournamentCompletedAtChangedEvent(
-			@SuppressWarnings("unused") final TournamentCompletedAtChangedEvent event) {}
+	protected void onTournamentCompletedAtChangedEvent(final TournamentCompletedAtChangedEvent event) {}
 	
-	protected void onTournamentCreatedAtChangedEvent(
-			@SuppressWarnings("unused") final TournamentCreatedAtChangedEvent event) {}
+	protected void onTournamentCreatedAtChangedEvent(final TournamentCreatedAtChangedEvent event) {}
 	
-	protected void onTournamentCreatedByApiChangedEvent(
-			@SuppressWarnings("unused") final TournamentCreatedByApiChangedEvent event) {}
+	protected void onTournamentCreatedByApiChangedEvent(final TournamentCreatedByApiChangedEvent event) {}
 	
-	protected void onTournamentCreditCappedChangedEvent(
-			@SuppressWarnings("unused") final TournamentCreditCappedChangedEvent event) {}
+	protected void onTournamentCreditCappedChangedEvent(final TournamentCreditCappedChangedEvent event) {}
 	
-	protected void onTournamentGameIdChangedEvent(
-			@SuppressWarnings("unused") final TournamentGameIdChangedEvent event) {}
+	protected void onTournamentGameIdChangedEvent(final TournamentGameIdChangedEvent event) {}
 	
-	protected void onTournamentGroupStagesEnabledChangedEvent(
-			@SuppressWarnings("unused") final TournamentGroupStagesEnabledChangedEvent event) {}
+	protected void onTournamentGroupStagesEnabledChangedEvent(final TournamentGroupStagesEnabledChangedEvent event) {}
 	
-	protected void onTournamentHideSeedsChangedEvent(
-			@SuppressWarnings("unused") final TournamentHideSeedsChangedEvent event) {}
+	protected void onTournamentHideSeedsChangedEvent(final TournamentHideSeedsChangedEvent event) {}
 	
 	protected void onTournamentMaxPredictionsPerUserChangedEvent(
-			@SuppressWarnings("unused") final TournamentMaxPredictionsPerUserChangedEvent event) {}
+			final TournamentMaxPredictionsPerUserChangedEvent event) {}
 	
 	protected void onTournamentNotifyUsersWhenMatchesOpenChangedEvent(
-			@SuppressWarnings("unused") final TournamentNotifyUsersWhenMatchesOpenChangedEvent event) {}
+			final TournamentNotifyUsersWhenMatchesOpenChangedEvent event) {}
 	
-	protected void onTournamentParticipantsCountChangedEvent(
-			@SuppressWarnings("unused") final TournamentParticipantsCountChangedEvent event) {}
+	protected void onTournamentParticipantsCountChangedEvent(final TournamentParticipantsCountChangedEvent event) {}
 	
-	protected void onTournamentPredictionMethodChangedEvent(
-			@SuppressWarnings("unused") final TournamentPredictionMethodChangedEvent event) {}
+	protected void onTournamentPredictionMethodChangedEvent(final TournamentPredictionMethodChangedEvent event) {}
 	
-	protected void onTournamentPredictionsOpenedAtChangedEvent(
-			@SuppressWarnings("unused") final TournamentPredictionsOpenedAtChangedEvent event) {}
+	protected void onTournamentPredictionsOpenedAtChangedEvent(final TournamentPredictionsOpenedAtChangedEvent event) {}
 	
-	protected void onTournamentProgressMeterChangedEvent(
-			@SuppressWarnings("unused") final TournamentProgressMeterChangedEvent event) {}
+	protected void onTournamentProgressMeterChangedEvent(final TournamentProgressMeterChangedEvent event) {}
 	
-	protected void onTournamentQuickAdvanceChangedEvent(
-			@SuppressWarnings("unused") final TournamentQuickAdvanceChangedEvent event) {}
+	protected void onTournamentQuickAdvanceChangedEvent(final TournamentQuickAdvanceChangedEvent event) {}
 	
 	protected void onTournamentRequireScoreAgreementChangedEvent(
-			@SuppressWarnings("unused") final TournamentRequireScoreAgreementChangedEvent event) {}
+			final TournamentRequireScoreAgreementChangedEvent event) {}
 	
-	protected void onTournamentStartedAtChangedEvent(
-			@SuppressWarnings("unused") final TournamentStartedAtChangedEvent event) {}
+	protected void onTournamentStartedAtChangedEvent(final TournamentStartedAtChangedEvent event) {}
 	
-	protected void onTournamentStartedCheckingInAtChangedEvent(
-			@SuppressWarnings("unused") final TournamentStartedCheckingInAtChangedEvent event) {}
+	protected void onTournamentStartedCheckingInAtChangedEvent(final TournamentStartedCheckingInAtChangedEvent event) {}
 	
-	protected void onTournamentStateChangedEvent(@SuppressWarnings("unused") final TournamentStateChangedEvent event) {}
+	protected void onTournamentStateChangedEvent(final TournamentStateChangedEvent event) {}
 	
-	protected void onTournamentTeamsChangedEvent(@SuppressWarnings("unused") final TournamentTeamsChangedEvent event) {}
+	protected void onTournamentTeamsChangedEvent(final TournamentTeamsChangedEvent event) {}
 	
-	protected void onTournamentTieBreaksChangedEvent(
-			@SuppressWarnings("unused") final TournamentTieBreaksChangedEvent event) {}
+	protected void onTournamentTieBreaksChangedEvent(final TournamentTieBreaksChangedEvent event) {}
 	
-	protected void onTournamentUpdatedAtChangedEvent(
-			@SuppressWarnings("unused") final TournamentUpdatedAtChangedEvent event) {}
+	protected void onTournamentUpdatedAtChangedEvent(final TournamentUpdatedAtChangedEvent event) {}
 	
-	protected void onTournamentDescriptionSourceChangedEvent(
-			@SuppressWarnings("unused") final TournamentDescriptionSourceChangedEvent event) {}
+	protected void onTournamentDescriptionSourceChangedEvent(final TournamentDescriptionSourceChangedEvent event) {}
 	
-	protected void onTournamentFullChallongeUrlChangedEvent(
-			@SuppressWarnings("unused") final TournamentFullChallongeUrlChangedEvent event) {}
+	protected void onTournamentFullChallongeUrlChangedEvent(final TournamentFullChallongeUrlChangedEvent event) {}
 	
-	protected void onTournamentLiveImageUrlChangedEvent(
-			@SuppressWarnings("unused") final TournamentLiveImageUrlChangedEvent event) {}
+	protected void onTournamentLiveImageUrlChangedEvent(final TournamentLiveImageUrlChangedEvent event) {}
 	
-	protected void onTournamentSignUpUrlChangedEvent(
-			@SuppressWarnings("unused") final TournamentSignUpUrlChangedEvent event) {}
+	protected void onTournamentSignUpUrlChangedEvent(final TournamentSignUpUrlChangedEvent event) {}
 	
 	protected void onTournamentReviewBeforeFinalizingChangedEvent(
-			@SuppressWarnings("unused") final TournamentReviewBeforeFinalizingChangedEvent event) {}
+			final TournamentReviewBeforeFinalizingChangedEvent event) {}
 	
 	protected void onTournamentAcceptingPredictionsChangedEvent(
-			@SuppressWarnings("unused") final TournamentAcceptingPredictionsChangedEvent event) {}
+			final TournamentAcceptingPredictionsChangedEvent event) {}
 	
-	protected void onTournamentParticipantsLockedChangedEvent(
-			@SuppressWarnings("unused") final TournamentParticipantsLockedChangedEvent event) {}
+	protected void onTournamentParticipantsLockedChangedEvent(final TournamentParticipantsLockedChangedEvent event) {}
 	
-	protected void onTournamentGameNameChangedEvent(
-			@SuppressWarnings("unused") final TournamentGameNameChangedEvent event) {}
+	protected void onTournamentGameNameChangedEvent(final TournamentGameNameChangedEvent event) {}
 	
 	protected void onTournamentParticipantsSwappableChangedEvent(
-			@SuppressWarnings("unused") final TournamentParticipantsSwappableChangedEvent event) {}
+			final TournamentParticipantsSwappableChangedEvent event) {}
 	
-	protected void onTournamentTeamConvertableChangedEvent(
-			@SuppressWarnings("unused") final TournamentTeamConvertableChangedEvent event) {}
+	protected void onTournamentTeamConvertableChangedEvent(final TournamentTeamConvertableChangedEvent event) {}
 	
 	protected void onTournamentGroupStagesWereStartedChangedEvent(
-			@SuppressWarnings("unused") final TournamentGroupStagesWereStartedChangedEvent event) {}
+			final TournamentGroupStagesWereStartedChangedEvent event) {}
 	
-	protected void onTournamentLockedAtChangedEvent(
-			@SuppressWarnings("unused") final TournamentLockedAtChangedEvent event) {}
+	protected void onTournamentLockedAtChangedEvent(final TournamentLockedAtChangedEvent event) {}
 	
-	protected void onTournamentEventIdChangedEvent(
-			@SuppressWarnings("unused") final TournamentEventIdChangedEvent event) {}
+	protected void onTournamentEventIdChangedEvent(final TournamentEventIdChangedEvent event) {}
 	
 	protected void onTournamentprotectedPredictionsBeforeStartTimeChangedEvent(
-			@SuppressWarnings("unused") final TournamentPublicPredictionsBeforeStartTimeChangedEvent event) {}
+			final TournamentPublicPredictionsBeforeStartTimeChangedEvent event) {}
 	
-	protected void onTournamentGrandFinalsModifierChangedEvent(
-			@SuppressWarnings("unused") final TournamentGrandFinalsModifierChangedEvent event) {}
+	protected void onTournamentGrandFinalsModifierChangedEvent(final TournamentGrandFinalsModifierChangedEvent event) {}
 	
-	protected void onTournamentParticipantsChangedEvent(
-			@SuppressWarnings("unused") final TournamentParticipantsChangedEvent event) {}
+	protected void onTournamentParticipantsChangedEvent(final TournamentParticipantsChangedEvent event) {}
 	
-	protected void onTournamentMatchesChangedEvent(
-			@SuppressWarnings("unused") final TournamentMatchesChangedEvent event) {}
+	protected void onTournamentMatchesChangedEvent(final TournamentMatchesChangedEvent event) {}
 	
 	// Participant methods
-	protected void onGenericParticipantEvent(@SuppressWarnings("unused") final GenericParticipantEvent event) {}
+	protected void onGenericParticipantEvent(final GenericParticipantEvent event) {}
 	
-	protected void onParticipantCreatedEvent(@SuppressWarnings("unused") final ParticipantCreatedEvent event) {}
+	protected void onParticipantCreatedEvent(final ParticipantCreatedEvent event) {}
 	
-	protected void onParticipantDeletedEvent(@SuppressWarnings("unused") final ParticipantDeletedEvent event) {}
+	protected void onParticipantDeletedEvent(final ParticipantDeletedEvent event) {}
 	
-	protected void onGenericParticipantChangedEvent(
-			@SuppressWarnings("unused") final GenericParticipantChangedEvent event) {}
+	protected void onGenericParticipantChangedEvent(final GenericParticipantChangedEvent event) {}
 	
-	protected void onParticipantIdChangedEvent(@SuppressWarnings("unused") final ParticipantIdChangedEvent event) {}
+	protected void onParticipantIdChangedEvent(final ParticipantIdChangedEvent event) {}
 	
-	protected void onParticipantTournamentIdChangedEvent(
-			@SuppressWarnings("unused") final ParticipantTournamentIdChangedEvent event) {}
+	protected void onParticipantTournamentIdChangedEvent(final ParticipantTournamentIdChangedEvent event) {}
 	
-	protected void onParticipantNameChangedEvent(@SuppressWarnings("unused") final ParticipantNameChangedEvent event) {}
+	protected void onParticipantNameChangedEvent(final ParticipantNameChangedEvent event) {}
 	
-	protected void onParticipantChallongeUsernameChangedEvent(
-			@SuppressWarnings("unused") final ParticipantChallongeUsernameChangedEvent event) {}
+	protected void onParticipantChallongeUsernameChangedEvent(final ParticipantChallongeUsernameChangedEvent event) {}
 	
-	protected void onParticipantSeedChangedEvent(@SuppressWarnings("unused") final ParticipantSeedChangedEvent event) {}
+	protected void onParticipantSeedChangedEvent(final ParticipantSeedChangedEvent event) {}
 	
-	protected void onParticipantMiscChangedEvent(@SuppressWarnings("unused") final ParticipantMiscChangedEvent event) {}
+	protected void onParticipantMiscChangedEvent(final ParticipantMiscChangedEvent event) {}
 	
-	protected void onParticipantActiveChangedEvent(
-			@SuppressWarnings("unused") final ParticipantActiveChangedEvent event) {}
+	protected void onParticipantActiveChangedEvent(final ParticipantActiveChangedEvent event) {}
 	
-	protected void onParticipantCheckedInAtChangedEvent(
-			@SuppressWarnings("unused") final ParticipantCheckedInAtChangedEvent event) {}
+	protected void onParticipantCheckedInAtChangedEvent(final ParticipantCheckedInAtChangedEvent event) {}
 	
-	protected void onParticipantCreatedAtChangedEvent(
-			@SuppressWarnings("unused") final ParticipantCreatedAtChangedEvent event) {}
+	protected void onParticipantCreatedAtChangedEvent(final ParticipantCreatedAtChangedEvent event) {}
 	
-	protected void onParticipantFinalRankChangedEvent(
-			@SuppressWarnings("unused") final ParticipantFinalRankChangedEvent event) {}
+	protected void onParticipantFinalRankChangedEvent(final ParticipantFinalRankChangedEvent event) {}
 	
-	protected void onParticipantGroupIdChangedEvent(
-			@SuppressWarnings("unused") final ParticipantGroupIdChangedEvent event) {}
+	protected void onParticipantGroupIdChangedEvent(final ParticipantGroupIdChangedEvent event) {}
 	
-	protected void onParticipantIconChangedEvent(@SuppressWarnings("unused") final ParticipantIconChangedEvent event) {}
+	protected void onParticipantIconChangedEvent(final ParticipantIconChangedEvent event) {}
 	
-	protected void onParticipantInvitationIdChangedEvent(
-			@SuppressWarnings("unused") final ParticipantInvitationIdChangedEvent event) {}
+	protected void onParticipantInvitationIdChangedEvent(final ParticipantInvitationIdChangedEvent event) {}
 	
-	protected void onParticipantInviteEmailChangedEvent(
-			@SuppressWarnings("unused") final ParticipantInviteEmailChangedEvent event) {}
+	protected void onParticipantInviteEmailChangedEvent(final ParticipantInviteEmailChangedEvent event) {}
 	
-	protected void onParticipantOnWaitingListChangedEvent(
-			@SuppressWarnings("unused") final ParticipantOnWaitingListChangedEvent event) {}
+	protected void onParticipantOnWaitingListChangedEvent(final ParticipantOnWaitingListChangedEvent event) {}
 	
-	protected void onParticipantUpdatedAtChangedEvent(
-			@SuppressWarnings("unused") final ParticipantUpdatedAtChangedEvent event) {}
+	protected void onParticipantUpdatedAtChangedEvent(final ParticipantUpdatedAtChangedEvent event) {}
 	
 	protected void onParticipantChallongeEmailAddressVerifiedChangedEvent(
-			@SuppressWarnings("unused") final ParticipantChallongeEmailAddressVerifiedChangedEvent event) {}
+			final ParticipantChallongeEmailAddressVerifiedChangedEvent event) {}
 	
-	protected void onParticipantRemovableChangedEvent(
-			@SuppressWarnings("unused") final ParticipantRemovableChangedEvent event) {}
+	protected void onParticipantRemovableChangedEvent(final ParticipantRemovableChangedEvent event) {}
 	
 	protected void onParticipantParticipatableOrInvitationAttachedChangedEvent(
-			@SuppressWarnings("unused") final ParticipantParticipatableOrInvitationAttachedChangedEvent event) {}
+			final ParticipantParticipatableOrInvitationAttachedChangedEvent event) {}
 	
-	protected void onParticipantConfirmRemoveChangedEvent(
-			@SuppressWarnings("unused") final ParticipantConfirmRemoveChangedEvent event) {}
+	protected void onParticipantConfirmRemoveChangedEvent(final ParticipantConfirmRemoveChangedEvent event) {}
 	
-	protected void onParticipantInvitationPendingChangedEvent(
-			@SuppressWarnings("unused") final ParticipantInvitationPendingChangedEvent event) {}
+	protected void onParticipantInvitationPendingChangedEvent(final ParticipantInvitationPendingChangedEvent event) {}
 	
 	protected void onParticipantDisplayNameWithInvitationEmailAddressChangedEvent(
-			@SuppressWarnings("unused") final ParticipantDisplayNameWithInvitationEmailAddressChangedEvent event) {}
+			final ParticipantDisplayNameWithInvitationEmailAddressChangedEvent event) {}
 	
-	protected void onParticipantEmailHashChangedEvent(
-			@SuppressWarnings("unused") final ParticipantEmailHashChangedEvent event) {}
+	protected void onParticipantEmailHashChangedEvent(final ParticipantEmailHashChangedEvent event) {}
 	
-	protected void onParticipantUsernameChangedEvent(
-			@SuppressWarnings("unused") final ParticipantUsernameChangedEvent event) {}
+	protected void onParticipantUsernameChangedEvent(final ParticipantUsernameChangedEvent event) {}
 	
 	protected void onParticipantAttachedParticipatablePortraitUrlChangedEvent(
-			@SuppressWarnings("unused") final ParticipantAttachedParticipatablePortraitUrlChangedEvent event) {}
+			final ParticipantAttachedParticipatablePortraitUrlChangedEvent event) {}
 	
-	protected void onParticipantCanCheckInChangedEvent(
-			@SuppressWarnings("unused") final ParticipantCanCheckInChangedEvent event) {}
+	protected void onParticipantCanCheckInChangedEvent(final ParticipantCanCheckInChangedEvent event) {}
 	
-	protected void onParticipantCheckedInChangedEvent(
-			@SuppressWarnings("unused") final ParticipantCheckedInChangedEvent event) {}
+	protected void onParticipantCheckedInChangedEvent(final ParticipantCheckedInChangedEvent event) {}
 	
-	protected void onParticipantReactivatableChangedEvent(
-			@SuppressWarnings("unused") final ParticipantReactivatableChangedEvent event) {}
+	protected void onParticipantReactivatableChangedEvent(final ParticipantReactivatableChangedEvent event) {}
 	
-	protected void onParticipantMatchesChangedEvent(
-			@SuppressWarnings("unused") final ParticipantMatchesChangedEvent event) {}
+	protected void onParticipantMatchesChangedEvent(final ParticipantMatchesChangedEvent event) {}
 	
-	protected void onParticipantMatchAddedEvent(@SuppressWarnings("unused") final ParticipantMatchAddedEvent event) {}
+	protected void onParticipantMatchAddedEvent(final ParticipantMatchAddedEvent event) {}
 	
-	protected void onParticipantMatchRemovedEvent(
-			@SuppressWarnings("unused") final ParticipantMatchRemovedEvent event) {}
+	protected void onParticipantMatchRemovedEvent(final ParticipantMatchRemovedEvent event) {}
 	
 	// Match methods
-	protected void onGenericMatchEvent(@SuppressWarnings("unused") final GenericMatchEvent event) {}
+	protected void onGenericMatchEvent(final GenericMatchEvent event) {}
 	
-	protected void onMatchCreatedEvent(@SuppressWarnings("unused") final MatchCreatedEvent event) {}
+	protected void onMatchCreatedEvent(final MatchCreatedEvent event) {}
 	
-	protected void onMatchDeletedEvent(@SuppressWarnings("unused") final MatchDeletedEvent event) {}
+	protected void onMatchDeletedEvent(final MatchDeletedEvent event) {}
 	
-	protected void onGenericMatchChangedEvent(@SuppressWarnings("unused") final GenericMatchChangedEvent event) {}
+	protected void onGenericMatchChangedEvent(final GenericMatchChangedEvent event) {}
 	
-	protected void onMatchIdChangedEvent(@SuppressWarnings("unused") final MatchIdChangedEvent event) {}
+	protected void onMatchIdChangedEvent(final MatchIdChangedEvent event) {}
 	
-	protected void onMatchTournamentIdChangedEvent(
-			@SuppressWarnings("unused") final MatchTournamentIdChangedEvent event) {}
+	protected void onMatchTournamentIdChangedEvent(final MatchTournamentIdChangedEvent event) {}
 	
-	protected void onMatchAttachmentCountChangedEvent(
-			@SuppressWarnings("unused") final MatchAttachmentCountChangedEvent event) {}
+	protected void onMatchAttachmentCountChangedEvent(final MatchAttachmentCountChangedEvent event) {}
 	
-	protected void onMatchCreatedAtChangedEvent(@SuppressWarnings("unused") final MatchCreatedAtChangedEvent event) {}
+	protected void onMatchCreatedAtChangedEvent(final MatchCreatedAtChangedEvent event) {}
 	
-	protected void onMatchGroupIdChangedEvent(@SuppressWarnings("unused") final MatchGroupIdChangedEvent event) {}
+	protected void onMatchGroupIdChangedEvent(final MatchGroupIdChangedEvent event) {}
 	
-	protected void onMatchHasAttachmentChangedEvent(
-			@SuppressWarnings("unused") final MatchHasAttachmentChangedEvent event) {}
+	protected void onMatchHasAttachmentChangedEvent(final MatchHasAttachmentChangedEvent event) {}
 	
-	protected void onMatchIdentifierChangedEvent(@SuppressWarnings("unused") final MatchIdentifierChangedEvent event) {}
+	protected void onMatchIdentifierChangedEvent(final MatchIdentifierChangedEvent event) {}
 	
-	protected void onMatchLocationChangedEvent(@SuppressWarnings("unused") final MatchLocationChangedEvent event) {}
+	protected void onMatchLocationChangedEvent(final MatchLocationChangedEvent event) {}
 	
-	protected void onMatchLoserIdChangedEvent(@SuppressWarnings("unused") final MatchLoserIdChangedEvent event) {}
+	protected void onMatchLoserIdChangedEvent(final MatchLoserIdChangedEvent event) {}
 	
-	protected void onMatchWinnerIdChangedEvent(@SuppressWarnings("unused") final MatchWinnerIdChangedEvent event) {}
+	protected void onMatchWinnerIdChangedEvent(final MatchWinnerIdChangedEvent event) {}
 	
-	protected void onMatchPlayer1IdChangedEvent(@SuppressWarnings("unused") final MatchPlayer1IdChangedEvent event) {}
+	protected void onMatchPlayer1IdChangedEvent(final MatchPlayer1IdChangedEvent event) {}
 	
 	protected void onMatchPlayer1IsPrerequisiteMatchLoserChangedEvent(
-			@SuppressWarnings("unused") final MatchPlayer1IsPrerequisiteMatchLoserChangedEvent event) {}
+			final MatchPlayer1IsPrerequisiteMatchLoserChangedEvent event) {}
 	
 	protected void onMatchPlayer1PrerequisiteMatchIdChangedEvent(
-			@SuppressWarnings("unused") final MatchPlayer1PrerequisiteMatchIdChangedEvent event) {}
+			final MatchPlayer1PrerequisiteMatchIdChangedEvent event) {}
 	
-	protected void onMatchPlayer1VotesChangedEvent(
-			@SuppressWarnings("unused") final MatchPlayer1VotesChangedEvent event) {}
+	protected void onMatchPlayer1VotesChangedEvent(final MatchPlayer1VotesChangedEvent event) {}
 	
-	protected void onMatchPlayer2IdChangedEvent(@SuppressWarnings("unused") final MatchPlayer2IdChangedEvent event) {}
+	protected void onMatchPlayer2IdChangedEvent(final MatchPlayer2IdChangedEvent event) {}
 	
 	protected void onMatchPlayer2IsPrerequisiteMatchLoserChangedEvent(
-			@SuppressWarnings("unused") final MatchPlayer2IsPrerequisiteMatchLoserChangedEvent event) {}
+			final MatchPlayer2IsPrerequisiteMatchLoserChangedEvent event) {}
 	
 	protected void onMatchPlayer2PrerequisiteMatchIdChangedEvent(
-			@SuppressWarnings("unused") final MatchPlayer2PrerequisiteMatchIdChangedEvent event) {}
+			final MatchPlayer2PrerequisiteMatchIdChangedEvent event) {}
 	
-	protected void onMatchPlayer2VotesChangedEvent(
-			@SuppressWarnings("unused") final MatchPlayer2VotesChangedEvent event) {}
+	protected void onMatchPlayer2VotesChangedEvent(final MatchPlayer2VotesChangedEvent event) {}
 	
-	protected void onMatchRoundChangedEvent(@SuppressWarnings("unused") final MatchRoundChangedEvent event) {}
+	protected void onMatchRoundChangedEvent(final MatchRoundChangedEvent event) {}
 	
-	protected void onMatchScheduledTimeChangedEvent(
-			@SuppressWarnings("unused") final MatchScheduledTimeChangedEvent event) {}
+	protected void onMatchScheduledTimeChangedEvent(final MatchScheduledTimeChangedEvent event) {}
 	
-	protected void onMatchStartedAtChangedEvent(@SuppressWarnings("unused") final MatchStartedAtChangedEvent event) {}
+	protected void onMatchStartedAtChangedEvent(final MatchStartedAtChangedEvent event) {}
 	
-	protected void onMatchStateChangedEvent(@SuppressWarnings("unused") final MatchStateChangedEvent event) {}
+	protected void onMatchStateChangedEvent(final MatchStateChangedEvent event) {}
 	
-	protected void onMatchUnderwayAtChangedEvent(@SuppressWarnings("unused") final MatchUnderwayAtChangedEvent event) {}
+	protected void onMatchUnderwayAtChangedEvent(final MatchUnderwayAtChangedEvent event) {}
 	
-	protected void onMatchUpdatedAtChangedEvent(@SuppressWarnings("unused") final MatchUpdatedAtChangedEvent event) {}
+	protected void onMatchUpdatedAtChangedEvent(final MatchUpdatedAtChangedEvent event) {}
 	
-	protected void onMatchPrerequisiteMatchIdsCsvChangedEvent(
-			@SuppressWarnings("unused") final MatchPrerequisiteMatchIdsCsvChangedEvent event) {}
+	protected void onMatchPrerequisiteMatchIdsCsvChangedEvent(final MatchPrerequisiteMatchIdsCsvChangedEvent event) {}
 	
-	protected void onMatchScoresCsvChangedEvent(@SuppressWarnings("unused") final MatchScoresCsvChangedEvent event) {}
+	protected void onMatchScoresCsvChangedEvent(final MatchScoresCsvChangedEvent event) {}
 	
-	protected void onMatchAttachmentsChangedEvent(
-			@SuppressWarnings("unused") final MatchAttachmentsChangedEvent event) {}
+	protected void onMatchAttachmentsChangedEvent(final MatchAttachmentsChangedEvent event) {}
 	
 	// Attachment methods
-	protected void onGenericAttachmentEvent(@SuppressWarnings("unused") final GenericAttachmentEvent event) {}
+	protected void onGenericAttachmentEvent(final GenericAttachmentEvent event) {}
 	
-	protected void onAttachmentCreatedEvent(@SuppressWarnings("unused") final AttachmentCreatedEvent event) {}
+	protected void onAttachmentCreatedEvent(final AttachmentCreatedEvent event) {}
 	
-	protected void onAttachmentDeletedEvent(@SuppressWarnings("unused") final AttachmentDeletedEvent event) {}
+	protected void onAttachmentDeletedEvent(final AttachmentDeletedEvent event) {}
 	
-	protected void onAttachmentChangedEvent(@SuppressWarnings("unused") final GenericAttachmentChangedEvent event) {}
+	protected void onAttachmentChangedEvent(final GenericAttachmentChangedEvent event) {}
 	
-	protected void onAttachmentIdChangedEvent(@SuppressWarnings("unused") final AttachmentIdChangedEvent event) {}
+	protected void onAttachmentIdChangedEvent(final AttachmentIdChangedEvent event) {}
 	
-	protected void onAttachmentMatchIdChangedEvent(
-			@SuppressWarnings("unused") final AttachmentMatchIdChangedEvent event) {}
+	protected void onAttachmentMatchIdChangedEvent(final AttachmentMatchIdChangedEvent event) {}
 	
-	protected void onAttachmentUserIdChangedEvent(
-			@SuppressWarnings("unused") final AttachmentUserIdChangedEvent event) {}
+	protected void onAttachmentUserIdChangedEvent(final AttachmentUserIdChangedEvent event) {}
 	
-	protected void onAttachmentDescriptionChangedEvent(
-			@SuppressWarnings("unused") final AttachmentDescriptionChangedEvent event) {}
+	protected void onAttachmentDescriptionChangedEvent(final AttachmentDescriptionChangedEvent event) {}
 	
-	protected void onAttachmentUrlChangedEvent(@SuppressWarnings("unused") final AttachmentUrlChangedEvent event) {}
+	protected void onAttachmentUrlChangedEvent(final AttachmentUrlChangedEvent event) {}
 	
-	protected void onAttachmentOriginalFileNameChangedEvent(
-			@SuppressWarnings("unused") final AttachmentOriginalFileNameChangedEvent event) {}
+	protected void onAttachmentOriginalFileNameChangedEvent(final AttachmentOriginalFileNameChangedEvent event) {}
 	
-	protected void onAttachmentCreatedAtChangedEvent(
-			@SuppressWarnings("unused") final AttachmentCreatedAtChangedEvent event) {}
+	protected void onAttachmentCreatedAtChangedEvent(final AttachmentCreatedAtChangedEvent event) {}
 	
-	protected void onAttachmentUpdatedAtChangedEvent(
-			@SuppressWarnings("unused") final AttachmentUpdatedAtChangedEvent event) {}
+	protected void onAttachmentUpdatedAtChangedEvent(final AttachmentUpdatedAtChangedEvent event) {}
 	
-	protected void onAttachmentAssetFileNameChangedEvent(
-			@SuppressWarnings("unused") final AttachmentAssetFileNameChangedEvent event) {}
+	protected void onAttachmentAssetFileNameChangedEvent(final AttachmentAssetFileNameChangedEvent event) {}
 	
-	protected void onAttachmentAssetContentTypeChangedEvent(
-			@SuppressWarnings("unused") final AttachmentAssetContentTypeChangedEvent event) {}
+	protected void onAttachmentAssetContentTypeChangedEvent(final AttachmentAssetContentTypeChangedEvent event) {}
 	
-	protected void onAttachmentAssetFileSizeChangedEvent(
-			@SuppressWarnings("unused") final AttachmentAssetFileSizeChangedEvent event) {}
+	protected void onAttachmentAssetFileSizeChangedEvent(final AttachmentAssetFileSizeChangedEvent event) {}
 	
-	protected void onAttachmentAssetUrlChangedEvent(
-			@SuppressWarnings("unused") final AttachmentAssetUrlChangedEvent event) {}
+	protected void onAttachmentAssetUrlChangedEvent(final AttachmentAssetUrlChangedEvent event) {}
 }
