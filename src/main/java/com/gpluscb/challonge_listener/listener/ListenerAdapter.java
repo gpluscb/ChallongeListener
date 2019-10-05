@@ -3,6 +3,7 @@ package com.gpluscb.challonge_listener.listener;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.gpluscb.challonge_listener.events.GenericEvent;
@@ -187,7 +188,7 @@ public abstract class ListenerAdapter implements EventListener {
 	 * @param tournamentId
 	 *            The id(s) of the tournament(s) to subscribe to
 	 */
-	public void subscribeTo(final long... tournamentId) {
+	public final void subscribeTo(final long... tournamentId) {
 		for(final long id : tournamentId) {
 			this.subscribedTournamentIds.add(Long.valueOf(id));
 		}
@@ -201,7 +202,7 @@ public abstract class ListenerAdapter implements EventListener {
 	 *            The id(s) of the tournament(s) to unsubscribe from
 	 * @return Whether at least one tournament has been unsubscribed from
 	 */
-	public boolean unsubscribeFrom(final long... tournamentId) {
+	public final boolean unsubscribeFrom(final long... tournamentId) {
 		boolean removed = false;
 		
 		for(final long id : tournamentId) {
@@ -214,8 +215,8 @@ public abstract class ListenerAdapter implements EventListener {
 	}
 	
 	@Override
-	public List<Long> getSubscribedTournamentIds() {
-		return this.subscribedTournamentIds;
+	public final List<Long> getSubscribedTournamentIds() {
+		return Collections.unmodifiableList(this.subscribedTournamentIds);
 	}
 	
 	/**
