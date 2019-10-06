@@ -27,7 +27,7 @@ Of course, your ListenerManager instance cannot fire any events to your listener
 #### Application flow
 Since the ListenerManager runs on a seperate thread, there are several methods to communicate between threads and control application flow.
 For a start, if you want your application to shut down smoothly, you will need to shut down your ListenerManager as well using the `shutdown()` method.
-Also, you can wait until the ListenerManager instance reaches some specified state via its `awaitState(ManagerState)` or its `awaitReady()` method.
+Also, you can wait until the ListenerManager instance reaches some specified state via its `awaitState(ManagerState)` method. Use its `awaitReady()` method to block the current thread until the ListenerManager is ready.
 
 ### Documentation:
 The documentation is not by a web server, but it can be found in the [doc](doc) folder. You can open [doc/index.html](doc/index.html) in your webbrowser to access the docs, but it really cannot be accessed within github I think.
