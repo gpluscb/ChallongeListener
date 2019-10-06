@@ -51,6 +51,7 @@ import com.gpluscb.challonge_listener.events.tournament.TournamentPointsForGameT
 import com.gpluscb.challonge_listener.events.tournament.TournamentPointsForGameWinChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.TournamentPointsForMatchTieChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.TournamentPointsForMatchWinChangedEvent;
+import com.gpluscb.challonge_listener.events.tournament.TournamentPredictTheLosersBracketChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.TournamentPredictionMethodChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.TournamentPredictionsOpenedAtChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.TournamentPrivateOnlyChangedEvent;
@@ -58,8 +59,12 @@ import com.gpluscb.challonge_listener.events.tournament.TournamentProgressMeterC
 import com.gpluscb.challonge_listener.events.tournament.TournamentPublicPredictionsBeforeStartTimeChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.TournamentQuickAdvanceChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.TournamentRankedByChangedEvent;
+import com.gpluscb.challonge_listener.events.tournament.TournamentRankedChangedEvent;
+import com.gpluscb.challonge_listener.events.tournament.TournamentRegistrationFeeChangedEvent;
+import com.gpluscb.challonge_listener.events.tournament.TournamentRegistrationTypeChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.TournamentRequireScoreAgreementChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.TournamentReviewBeforeFinalizingChangedEvent;
+import com.gpluscb.challonge_listener.events.tournament.TournamentRoundRobinIterationsChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.TournamentRoundRobinPointsForGameTieChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.TournamentRoundRobinPointsForGameWinChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.TournamentRoundRobinPointsForMatchTieChangedEvent;
@@ -84,15 +89,18 @@ import com.gpluscb.challonge_listener.events.tournament.match.GenericMatchChange
 import com.gpluscb.challonge_listener.events.tournament.match.GenericMatchEvent;
 import com.gpluscb.challonge_listener.events.tournament.match.MatchAttachmentCountChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.match.MatchAttachmentsChangedEvent;
+import com.gpluscb.challonge_listener.events.tournament.match.MatchCompletedAtChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.match.MatchCreatedAtChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.match.MatchCreatedEvent;
 import com.gpluscb.challonge_listener.events.tournament.match.MatchDeletedEvent;
+import com.gpluscb.challonge_listener.events.tournament.match.MatchForfeitedChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.match.MatchGroupIdChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.match.MatchHasAttachmentChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.match.MatchIdChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.match.MatchIdentifierChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.match.MatchLocationChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.match.MatchLoserIdChangedEvent;
+import com.gpluscb.challonge_listener.events.tournament.match.MatchOptionalChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.match.MatchPlayer1IdChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.match.MatchPlayer1IsPrerequisiteMatchLoserChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.match.MatchPlayer1PrerequisiteMatchIdChangedEvent;
@@ -134,16 +142,19 @@ import com.gpluscb.challonge_listener.events.tournament.participant.ParticipantA
 import com.gpluscb.challonge_listener.events.tournament.participant.ParticipantCanCheckInChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.participant.ParticipantChallongeEmailAddressVerifiedChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.participant.ParticipantChallongeUsernameChangedEvent;
+import com.gpluscb.challonge_listener.events.tournament.participant.ParticipantCheckInOpenChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.participant.ParticipantCheckedInAtChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.participant.ParticipantCheckedInChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.participant.ParticipantConfirmRemoveChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.participant.ParticipantCreatedAtChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.participant.ParticipantCreatedEvent;
 import com.gpluscb.challonge_listener.events.tournament.participant.ParticipantDeletedEvent;
+import com.gpluscb.challonge_listener.events.tournament.participant.ParticipantDisplayNameChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.participant.ParticipantDisplayNameWithInvitationEmailAddressChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.participant.ParticipantEmailHashChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.participant.ParticipantFinalRankChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.participant.ParticipantGroupIdChangedEvent;
+import com.gpluscb.challonge_listener.events.tournament.participant.ParticipantHasIrrelevantSeedChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.participant.ParticipantIconChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.participant.ParticipantIdChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.participant.ParticipantInvitationIdChangedEvent;
@@ -387,6 +398,11 @@ public abstract class ListenerAdapter implements EventListener {
 	
 	protected void onTournamentHoldThirdPlaceMatchChangedEvent(final TournamentHoldThirdPlaceMatchChangedEvent event) {}
 	
+	protected void onTournamentRankedChangedEvent(final TournamentRankedChangedEvent event) {}
+	
+	protected void onTournamentPredictTheLosersBracketChangedEvent(
+			final TournamentPredictTheLosersBracketChangedEvent event) {}
+	
 	protected void onTournamentPointsForMatchWinChangedEvent(final TournamentPointsForMatchWinChangedEvent event) {}
 	
 	protected void onTournamentPointsForMatchTieChangedEvent(final TournamentPointsForMatchTieChangedEvent event) {}
@@ -400,6 +416,9 @@ public abstract class ListenerAdapter implements EventListener {
 	protected void onTournamentSwissRoundsChangedEvent(final TournamentSwissRoundsChangedEvent event) {}
 	
 	protected void onTournamentRankedByChangedEvent(final TournamentRankedByChangedEvent event) {}
+	
+	protected void onTournamentRoundRobinIterationsChangedEvent(
+			final TournamentRoundRobinIterationsChangedEvent event) {}
 	
 	protected void onTournamentRoundRobinPointsForGameWinChangedEvent(
 			final TournamentRoundRobinPointsForGameWinChangedEvent event) {}
@@ -425,6 +444,10 @@ public abstract class ListenerAdapter implements EventListener {
 			final TournamentNotifyUsersWhenTheTournamentEndsChangedEvent event) {}
 	
 	protected void onTournamentSequentialPairingsChangedEvent(final TournamentSequentialPairingsChangedEvent event) {}
+	
+	protected void onTournamentRegistrationFeeChangedEvent(final TournamentRegistrationFeeChangedEvent event) {}
+	
+	protected void onTournamentRegistrationTypeChangedEvent(final TournamentRegistrationTypeChangedEvent event) {}
 	
 	protected void onTournamentSignupCapChangedEvent(final TournamentSignupCapChangedEvent event) {}
 	
@@ -514,7 +537,7 @@ public abstract class ListenerAdapter implements EventListener {
 	
 	protected void onTournamentEventIdChangedEvent(final TournamentEventIdChangedEvent event) {}
 	
-	protected void onTournamentprotectedPredictionsBeforeStartTimeChangedEvent(
+	protected void onTournamentPublicPredictionsBeforeStartTimeChangedEvent(
 			final TournamentPublicPredictionsBeforeStartTimeChangedEvent event) {}
 	
 	protected void onTournamentGrandFinalsModifierChangedEvent(final TournamentGrandFinalsModifierChangedEvent event) {}
@@ -537,6 +560,12 @@ public abstract class ListenerAdapter implements EventListener {
 	protected void onParticipantTournamentIdChangedEvent(final ParticipantTournamentIdChangedEvent event) {}
 	
 	protected void onParticipantNameChangedEvent(final ParticipantNameChangedEvent event) {}
+	
+	protected void onParticipantDisplayNameChangedEvent(final ParticipantDisplayNameChangedEvent event) {}
+	
+	protected void onParticipantCheckInOpenChangedEvent(final ParticipantCheckInOpenChangedEvent event) {}
+	
+	protected void onParticipantHasIrrelevantSeedChangedEvent(final ParticipantHasIrrelevantSeedChangedEvent event) {}
 	
 	protected void onParticipantChallongeUsernameChangedEvent(final ParticipantChallongeUsernameChangedEvent event) {}
 	
@@ -659,9 +688,15 @@ public abstract class ListenerAdapter implements EventListener {
 	
 	protected void onMatchUpdatedAtChangedEvent(final MatchUpdatedAtChangedEvent event) {}
 	
+	protected void onMatchCompletedAtChangedEvent(final MatchCompletedAtChangedEvent event) {}
+	
 	protected void onMatchPrerequisiteMatchIdsCsvChangedEvent(final MatchPrerequisiteMatchIdsCsvChangedEvent event) {}
 	
 	protected void onMatchScoresCsvChangedEvent(final MatchScoresCsvChangedEvent event) {}
+	
+	protected void onMatchOptionalChangedEvent(final MatchOptionalChangedEvent event) {}
+	
+	protected void onMatchForfeitedChangedEvent(final MatchForfeitedChangedEvent event) {}
 	
 	protected void onMatchAttachmentsChangedEvent(final MatchAttachmentsChangedEvent event) {}
 	
