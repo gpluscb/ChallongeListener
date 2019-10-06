@@ -13,6 +13,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.gpluscb.challonge_listener.ChallongeExtension;
 import com.gpluscb.challonge_listener.events.GenericEvent;
 import com.gpluscb.challonge_listener.events.tournament.GenericTournamentChangedEvent;
@@ -80,8 +81,6 @@ public class ListenerManager {
 	
 	private final List<EventListener> managedListeners;
 	
-	private List<TournamentWrapper> previousTournaments;
-	
 	/**
 	 * Creates a running instance that tries to update every 5 seconds.<br>
 	 * The instance will run until the {@link ListenerManager#shutdown()
@@ -125,31 +124,37 @@ public class ListenerManager {
 		this.interval = interval;
 		
 		this.managedListeners = new ArrayList<>();
-		this.previousTournaments = null;
 		
-		this.executor = Executors.newSingleThreadScheduledExecutor();
-		this.executor.scheduleAtFixedRate(() -> {
-			try {
-				update();
-			} catch(final DataAccessException e) {
-				System.err.println("DataAccessException caught, trying to continue anyway.");
-				e.printStackTrace();
-			} catch(final RuntimeException e) {
-				e.printStackTrace();
+		this.executor = Executors.newSingleThreadScheduledExecutor(
+				new ThreadFactoryBuilder().setNameFormat("ListenerManager-%d").build());
+		this.executor.scheduleAtFixedRate(new Runnable() {
+			private List<TournamentWrapper> previousTournaments = null;
+			
+			@Override
+			public void run() {
+				try {
+					this.previousTournaments = update(this.previousTournaments);
+				} catch(final DataAccessException e) {
+					System.err.println("DataAccessException caught, trying to continue anyway.");
+					e.printStackTrace();
+				} catch(final RuntimeException e) {
+					e.printStackTrace();
+				}
 			}
 		}, 0, interval, TimeUnit.MILLISECONDS);
 		
 		this.state = ManagerState.RUNNING;
 	}
 	
-	private void update() throws DataAccessException {
+	private List<TournamentWrapper> update(final List<TournamentWrapper> previousTournaments)
+			throws DataAccessException {
 		// Fetch current tournaments state
 		final List<TournamentWrapper> currentTournaments = getSubscribedTournaments();
 		
 		// Does nothing if prevoiusTournaments is null
-		compareTournaments(this.previousTournaments, currentTournaments);
+		compareTournaments(previousTournaments, currentTournaments);
 		
-		this.previousTournaments = currentTournaments;
+		return currentTournaments;
 	}
 	
 	private List<TournamentWrapper> getSubscribedTournaments() throws DataAccessException {
