@@ -129,19 +129,6 @@ public class ChallongeExtensionTest {
 		} catch(@SuppressWarnings("unused") final DataAccessException e) {
 			// Expected
 		}
-		// TODO: Currently there is a bug in challonge-java, no null checks are
-		// present and it will give the tournament "https://challonge.com/null".
-		// This part of the test only makes sense when it is fixed.
-		// @formatter:off
-//		try {
-//			owned.setId(null);
-//			owned.setUrl("As far as I know impossible to exist due to spaces in url");
-//			challonge.doesMatchExist(owned, owned.getMatches().get(0).getId().longValue());
-//			fail();
-//		} catch(@SuppressWarnings("unused") final DataAccessException e) {
-//			// Expected
-//		}
-		// @formatter:on
 	}
 	
 	@Test
@@ -155,19 +142,6 @@ public class ChallongeExtensionTest {
 		} catch(@SuppressWarnings("unused") final DataAccessException e) {
 			// Expected
 		}
-		// TODO: Currently there is a bug in challonge-java, no null checks are
-		// present and it will give the tournament "https://challonge.com/null".
-		// This part of the test only makes sense when it is fixed.
-		// @formatter:off
-//		try {
-//			owned.setId(null);
-//			owned.setUrl("As far as I know impossible to exist due to spaces in url");
-//			challonge.doesParticipantExist(owned, owned.getParticipants().get(0).getId().longValue());
-//			fail();
-//		} catch(@SuppressWarnings("unused") final DataAccessException e) {
-//			// Expected
-//		}
-		// @formatter:on
 	}
 	
 	@Test
@@ -183,27 +157,6 @@ public class ChallongeExtensionTest {
 		} catch(@SuppressWarnings("unused") final DataAccessException e) {
 			// Expected
 		}
-		try {
-			owned.getMatches().get(0).setId(null);
-			challonge.doesAttachmentExist(owned.getMatches().get(0),
-					owned.getMatches().get(0).getAttachments().get(0).getId().longValue());
-			fail();
-		} catch(@SuppressWarnings("unused") final NullPointerException e) {
-			// Expected
-		}
-		// TODO: Currently there is a bug in challonge-java, no null checks are
-		// present and it will give the tournament "https://challonge.com/null".
-		// This part of the test only makes sense when it is fixed.
-		// @formatter:off
-//		try {
-//			owned.setId(null);
-//			owned.setUrl("As far as I know impossible to exist due to spaces in url");
-//			challonge.doesAttachmentExist(owned.getMatches().get(1), owned.getMatches().get(1).getAttachments().get(0).getId().longValue());
-//			fail();
-//		} catch(@SuppressWarnings("unused") final DataAccessException e) {
-//			// Expected
-//		}
-		// @formatter:on
 	}
 	
 	@Test
