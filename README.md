@@ -4,7 +4,38 @@ A project using the [stefangeyer/challonge-java](https://github.com/stefangeyer/
 ## Using this project:
 
 ### Download:
-As of now, there are no releases nor is this repo published via a package manager, thus you have to download or clone this repo and compile it yourself.
+This repo is published as a snapshot on Sonatype OSS. You can download it [here](https://oss.sonatype.org/content/repositories/snapshots/com/github/gpluscb/ChallongeListener/).\
+If you are using Maven, add the following to your repositories in your pom.xml:
+```
+<repository>
+	<id>oss.sonatype.org-snapshot</id>
+	<url>http://oss.sonatype.org/content/repositories/snapshots</url>
+	<releases>
+		<enabled>false</enabled>
+	</releases>
+	<snapshots>
+		<enabled>true</enabled>
+	</snapshots>
+</repository>
+```
+And this to your dependencies:
+```
+<dependency>
+	<groupId>com.github.gpluscb</groupId>
+	<artifactId>ChallongeListener</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+</dependency>
+```
+If you are using Gradle, add the following to your repositories in your build.gradle:
+```
+maven {
+	url 'https://oss.sonatype.org/content/repositories/snapshots/'
+}
+```
+And this to your dependencies:
+```
+compile group: 'com.github.gpluscb', name: 'ChallongeListener', version: '1.0.0-SNAPSHOT'
+```
 
 ### Getting started:
 Check out the [ChallongeListener example](src/examples/java/com/gpluscb/challonge_listener/ChallongeListenerExample.java) for a quick example.
