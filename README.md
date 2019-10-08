@@ -34,7 +34,7 @@ maven {
 ```
 And this to your dependencies:
 ```
-compile group: 'com.github.gpluscb', name: 'ChallongeListener', version: '1.0.0-SNAPSHOT'
+implementation group: 'com.github.gpluscb', name: 'ChallongeListener', version: '1.0.0-SNAPSHOT'
 ```
 
 ### Getting started:
