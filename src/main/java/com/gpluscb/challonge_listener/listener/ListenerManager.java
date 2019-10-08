@@ -138,7 +138,7 @@ public class ListenerManager {
 					e.printStackTrace();
 				}
 			}
-		}, 0, interval, TimeUnit.MILLISECONDS);
+		}, 0, Math.max(interval, 1), TimeUnit.MILLISECONDS);
 		
 		this.state = ManagerState.RUNNING;
 	}
