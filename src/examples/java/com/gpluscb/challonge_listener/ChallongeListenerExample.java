@@ -2,11 +2,12 @@ package com.gpluscb.challonge_listener;
 
 import java.util.Scanner;
 
-import com.gpluscb.challonge_listener.events.tournament.GenericTournamentEvent;
-import com.gpluscb.challonge_listener.events.tournament.TournamentDescriptionChangedEvent;
-import com.gpluscb.challonge_listener.listener.ListenerAdapter;
-import com.gpluscb.challonge_listener.listener.ListenerManager;
-import com.gpluscb.challonge_listener.listener.ListenerManager.ManagerState;
+import com.github.gpluscb.challonge_listener.ChallongeExtension;
+import com.github.gpluscb.challonge_listener.events.tournament.GenericTournamentEvent;
+import com.github.gpluscb.challonge_listener.events.tournament.TournamentDescriptionChangedEvent;
+import com.github.gpluscb.challonge_listener.listener.ListenerAdapter;
+import com.github.gpluscb.challonge_listener.listener.ListenerManager;
+import com.github.gpluscb.challonge_listener.listener.ListenerManager.ManagerState;
 
 import at.stefangeyer.challonge.exception.DataAccessException;
 import at.stefangeyer.challonge.model.Credentials;
