@@ -20,6 +20,7 @@ import com.gpluscb.challonge_listener.events.tournament.GenericTournamentChanged
 import com.gpluscb.challonge_listener.events.tournament.GenericTournamentEvent;
 import com.gpluscb.challonge_listener.events.tournament.TournamentCreatedEvent;
 import com.gpluscb.challonge_listener.events.tournament.TournamentDeletedEvent;
+import com.gpluscb.challonge_listener.events.tournament.TournamentDoesOwnChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.match.GenericMatchChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.match.MatchCreatedEvent;
 import com.gpluscb.challonge_listener.events.tournament.match.MatchDeletedEvent;
@@ -183,8 +184,9 @@ public class ListenerManager {
 					try {
 						final Tournament tournament = this.challonge.getTournament(String.valueOf(tournamentId), true,
 								true, true);
-						
-						subscribedToTournaments.add(new TournamentWrapper(Long.valueOf(tournamentId), tournament));
+						final Boolean doesOwn = Boolean.valueOf(this.challonge.doesOwn(tournament));
+						subscribedToTournaments
+								.add(new TournamentWrapper(Long.valueOf(tournamentId), tournament, doesOwn));
 						
 						break;
 					} catch(final DataAccessException e) {
@@ -216,6 +218,15 @@ public class ListenerManager {
 						if(previousTournament.exists()) {
 							if(currentTournament.exists()) {
 								// Both exist
+								if(previousTournament.getDoesOwn().booleanValue()
+										^ currentTournament.getDoesOwn().booleanValue()) {
+									// doesOwn changed
+									final TournamentDoesOwnChangedEvent event = new TournamentDoesOwnChangedEvent(
+											currentTournament.getTournament(), previousTournament.getTournament(),
+											currentTournament.getDoesOwn(), previousTournament.getDoesOwn());
+									fireEvent(event);
+								}
+								
 								// Compare tournament values
 								compareTournamentValues(previousTournament.getTournament(),
 										currentTournament.getTournament());
@@ -791,14 +802,16 @@ public class ListenerManager {
 	private static class TournamentWrapper {
 		private final Long tournamentId;
 		private final Tournament tournament;
+		private final Boolean doesOwn;
 		
-		public TournamentWrapper(final Long tournamentId, final Tournament tournament) {
+		public TournamentWrapper(final Long tournamentId, final Tournament tournament, final Boolean doesOwn) {
 			this.tournamentId = tournamentId;
 			this.tournament = tournament;
+			this.doesOwn = doesOwn;
 		}
 		
 		public TournamentWrapper(final Long tournamentId) {
-			this(tournamentId, null);
+			this(tournamentId, null, null);
 		}
 		
 		public Long getTournamentId() {
@@ -807,6 +820,10 @@ public class ListenerManager {
 		
 		public Tournament getTournament() {
 			return this.tournament;
+		}
+		
+		public Boolean getDoesOwn() {
+			return this.doesOwn;
 		}
 		
 		public boolean exists() {

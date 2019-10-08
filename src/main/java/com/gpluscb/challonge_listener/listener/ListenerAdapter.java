@@ -23,6 +23,7 @@ import com.gpluscb.challonge_listener.events.tournament.TournamentCreditCappedCh
 import com.gpluscb.challonge_listener.events.tournament.TournamentDeletedEvent;
 import com.gpluscb.challonge_listener.events.tournament.TournamentDescriptionChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.TournamentDescriptionSourceChangedEvent;
+import com.gpluscb.challonge_listener.events.tournament.TournamentDoesOwnChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.TournamentEventIdChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.TournamentFullChallongeUrlChangedEvent;
 import com.gpluscb.challonge_listener.events.tournament.TournamentGameIdChangedEvent;
@@ -381,6 +382,8 @@ public abstract class ListenerAdapter implements EventListener {
 	protected void onTournamentDeletedEvent(final TournamentDeletedEvent event) {}
 	
 	protected void onGenericTournamentChangedEvent(final GenericTournamentChangedEvent event) {}
+	
+	protected void onTournamentDoesOwnChangedEvent(final TournamentDoesOwnChangedEvent event) {}
 	
 	protected void onTournamentIdChangedEvent(final TournamentIdChangedEvent event) {}
 	
