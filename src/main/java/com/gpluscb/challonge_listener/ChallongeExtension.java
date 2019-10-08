@@ -300,10 +300,6 @@ public class ChallongeExtension extends Challonge {
 	 *             the tournament is significantly changed during the operation
 	 */
 	private void addMissingData(final Tournament tournament) throws DataAccessException {
-		// TODO: Make these methods public(?) Positive: (barely) useful
-		// convenience method; Negative: should write tests. Can't think
-		// of use-cases so it will stay private for now
-		
 		// Adding all matches
 		if(tournament.getMatches() == null || tournament.getMatches().isEmpty()) {
 			tournament.setMatches(getMatchesWithFullData(tournament));

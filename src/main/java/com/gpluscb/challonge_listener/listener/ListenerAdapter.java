@@ -237,7 +237,6 @@ public abstract class ListenerAdapter implements EventListener {
 	 * @param event
 	 *            The event to be fired
 	 */
-	// TODO: Give ParticipantMatchChangedEvents own abstract class
 	@Override
 	public final void onEvent(final GenericEvent event) {
 		onGenericEvent(event);

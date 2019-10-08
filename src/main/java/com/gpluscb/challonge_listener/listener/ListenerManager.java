@@ -65,10 +65,6 @@ import at.stefangeyer.challonge.model.Tournament;
  * <li>SHUT_DOWN</li>
  * </ul>
  */
-// TODO: Maybe make a void update() method public (would need Tournament
-// previousState field for that) for manual update handling after shutdown or
-// maybe even include a constructor that allows the listenerThread to not start.
-// Can't think of a good use case right now.
 // TODO: Block setters of Tournament etc. or clone them.
 // TODO: Know when to use synchronize
 public class ListenerManager {
