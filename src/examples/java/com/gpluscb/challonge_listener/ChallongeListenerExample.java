@@ -76,6 +76,7 @@ public class ChallongeListenerExample extends ListenerAdapter {
 		}
 	}
 	
+	// Called every time a GenericTournamentEvent is fired.
 	@Override
 	public void onGenericTournamentEvent(final GenericTournamentEvent event) {
 		// Removes all time based events, as they are fired constantly
@@ -85,6 +86,7 @@ public class ChallongeListenerExample extends ListenerAdapter {
 		}
 	}
 	
+	// Called every time the description of a tournament changes.
 	@Override
 	protected void onTournamentDescriptionChangedEvent(final TournamentDescriptionChangedEvent event) {
 		System.out.println("The description of the tournament " + event.getTournament().getFullChallongeUrl()
