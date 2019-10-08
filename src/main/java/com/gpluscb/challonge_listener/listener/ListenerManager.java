@@ -13,7 +13,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.gpluscb.challonge_listener.ChallongeExtension;
 import com.gpluscb.challonge_listener.events.GenericEvent;
 import com.gpluscb.challonge_listener.events.tournament.GenericTournamentChangedEvent;
@@ -122,8 +121,7 @@ public class ListenerManager {
 		
 		this.managedListeners = new ArrayList<>();
 		
-		this.executor = Executors.newSingleThreadScheduledExecutor(
-				new ThreadFactoryBuilder().setNameFormat("ListenerManager-%d").build());
+		this.executor = Executors.newSingleThreadScheduledExecutor(runnable -> new Thread(runnable, "ListenerManager"));
 		this.executor.scheduleAtFixedRate(new Runnable() {
 			private List<TournamentWrapper> previousTournaments = null;
 			
