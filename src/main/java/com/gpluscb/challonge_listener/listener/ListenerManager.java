@@ -167,6 +167,8 @@ public class ListenerManager {
 			}
 		}
 		
+		final List<Tournament> ownedTournaments = this.challonge.getTournaments();
+		
 		final List<TournamentWrapper> subscribedToTournaments = new ArrayList<>();
 		
 		for(final long tournamentId : subscribedToTournamentIds) {
@@ -180,7 +182,15 @@ public class ListenerManager {
 					try {
 						final Tournament tournament = this.challonge.getTournament(String.valueOf(tournamentId), true,
 								true, true);
-						final Boolean doesOwn = Boolean.valueOf(this.challonge.doesOwn(tournament));
+						
+						Boolean doesOwn = Boolean.FALSE;
+						for(final Tournament ownedTournament : ownedTournaments) {
+							if(ownedTournament.getId().longValue() == tournamentId) {
+								doesOwn = Boolean.TRUE;
+								break;
+							}
+						}
+						
 						subscribedToTournaments
 								.add(new TournamentWrapper(Long.valueOf(tournamentId), tournament, doesOwn));
 						
@@ -630,6 +640,7 @@ public class ListenerManager {
 	 * @throws IllegalStateException
 	 *             if the given state is unreachable
 	 */
+	// TODO: Somehow use notify when the state updates
 	public void awaitState(final ManagerState state) throws InterruptedException, IllegalStateException {
 		if(!this.state.isReachable(state)) {
 			throw new IllegalStateException("The given state is unreachable.");
