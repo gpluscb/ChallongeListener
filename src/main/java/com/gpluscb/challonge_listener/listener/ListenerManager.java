@@ -41,7 +41,7 @@ import at.stefangeyer.challonge.model.Tournament;
 /**
  * The heart of this project. Requests all the tournaments specified by the
  * listeners at specific intervals and compares all of the tournaments. If a
- * difference is found,
+ * difference is found, specific implementations of
  * {@link com.gpluscb.challonge_listener.events.GenericEvent GenericEvents} are
  * fired to all managed
  * {@link com.gpluscb.challonge_listener.listener.EventListener EventListeners}
@@ -78,9 +78,11 @@ public class ListenerManager {
 	private final List<EventListener> managedListeners;
 	
 	/**
-	 * Creates a running instance that tries to update every 5 seconds.<br>
+	 * Creates a running instance that tries to update every 5 seconds. Note
+	 * that if something is changed but then changed back in-between updates the
+	 * changes may not fire events.<br>
 	 * The instance will run until the {@link ListenerManager#shutdown()
-	 * shutdown()} method is called or the garbage collector destroys it.
+	 * shutdown()} method is called.
 	 *
 	 * @param challonge
 	 *            The ChallongeExtension instance used to get all the tournament
@@ -97,7 +99,7 @@ public class ListenerManager {
 	 * interval. Note that if something is changed but then changed back
 	 * in-between updates the changes may not fire events.<br>
 	 * The instance will run until the {@link ListenerManager#shutdown()
-	 * shutdown()} method is called or the garbage collector destroys it.
+	 * shutdown()} method is called.
 	 *
 	 * @param challonge
 	 *            The ChallongeExtension instance used to get all the tournament
