@@ -116,7 +116,7 @@ public class ListenerManager {
 	 *             Exchange with the rest api or validation failed
 	 */
 	public ListenerManager(final ChallongeExtension challonge, final long interval) throws DataAccessException {
-		this.state = ManagerState.INITIALIZING;
+		setState(ManagerState.INITIALIZING);
 		
 		// Check if the ChallongeExtension works in principle. Reducing failures
 		// inside of ChallongeListener thread
@@ -625,8 +625,10 @@ public class ListenerManager {
 	private void setState(final ManagerState state) {
 		final ManagerState prevState = this.state;
 		this.state = state;
-		synchronized(prevState) {
-			prevState.notify();
+		if(prevState != null) {
+			synchronized(prevState) {
+				prevState.notify();
+			}
 		}
 	}
 	
