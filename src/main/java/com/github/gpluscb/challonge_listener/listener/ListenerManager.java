@@ -57,12 +57,16 @@ import at.stefangeyer.challonge.model.Tournament;
  * TournamentIdChangedEvent}.
  * <h3>The manager can be in various states, the states progress as
  * follows:</h3>
- * <ul>
- * <li>INITIALIZING</li>
- * <li>RUNNING</li>
- * <li>SHUTTING_DOWN</li>
- * <li>SHUT_DOWN</li>
- * </ul>
+ * <ol>
+ * <li>{@link com.github.gpluscb.challonge_listener.listener.ListenerManager.ManagerState#INITIALIZING
+ * INITIALIZING}</li>
+ * <li>{@link com.github.gpluscb.challonge_listener.listener.ListenerManager.ManagerState#RUNNING
+ * RUNNING}</li>
+ * <li>{@link com.github.gpluscb.challonge_listener.listener.ListenerManager.ManagerState#SHUTTING_DOWN
+ * SHUTTING_DOWN}</li>
+ * <li>{@link com.github.gpluscb.challonge_listener.listener.ListenerManager.ManagerState#SHUT_DOWN
+ * SHUT_DOWN}</li>
+ * </ol>
  */
 // TODO: Block setters of Tournament etc. or clone them.
 // TODO: Know when to use synchronize
@@ -745,7 +749,18 @@ public class ListenerManager {
 	}
 	
 	/**
-	 * Represents the current state of this ListenerManager.
+	 * Represents a possible state of a ListenerManager.<br>
+	 * The states progress as follows:
+	 * <ol>
+	 * <li>{@link com.github.gpluscb.challonge_listener.listener.ListenerManager.ManagerState#INITIALIZING
+	 * INITIALIZING}</li>
+	 * <li>{@link com.github.gpluscb.challonge_listener.listener.ListenerManager.ManagerState#RUNNING
+	 * RUNNING}</li>
+	 * <li>{@link com.github.gpluscb.challonge_listener.listener.ListenerManager.ManagerState#SHUTTING_DOWN
+	 * SHUTTING_DOWN}</li>
+	 * <li>{@link com.github.gpluscb.challonge_listener.listener.ListenerManager.ManagerState#SHUT_DOWN
+	 * SHUT_DOWN}</li>
+	 * </ol>
 	 */
 	public enum ManagerState {
 		/**

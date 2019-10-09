@@ -1,7 +1,7 @@
-com.gpluscb.challonge_listener
-com.gpluscb.challonge_listener.events
-com.gpluscb.challonge_listener.events.tournament
-com.gpluscb.challonge_listener.events.tournament.match
-com.gpluscb.challonge_listener.events.tournament.match.attachment
-com.gpluscb.challonge_listener.events.tournament.participant
-com.gpluscb.challonge_listener.listener
+com.github.gpluscb.challonge_listener
+com.github.gpluscb.challonge_listener.events
+com.github.gpluscb.challonge_listener.events.tournament
+com.github.gpluscb.challonge_listener.events.tournament.match
+com.github.gpluscb.challonge_listener.events.tournament.match.attachment
+com.github.gpluscb.challonge_listener.events.tournament.participant
+com.github.gpluscb.challonge_listener.listener
