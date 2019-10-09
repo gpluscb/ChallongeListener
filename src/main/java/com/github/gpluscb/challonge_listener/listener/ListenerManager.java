@@ -42,12 +42,12 @@ import at.stefangeyer.challonge.model.Tournament;
  * The heart of this project. Requests all the tournaments specified by the
  * listeners at specific intervals and compares all of the tournaments. If a
  * difference is found, specific implementations of
- * {@link com.github.gpluscb.challonge_listener.events.GenericEvent GenericEvents} are
- * fired to all managed
- * {@link com.github.gpluscb.challonge_listener.listener.EventListener EventListeners}
- * that are subscribed to the tournament the event is from. Events exist for all
- * theoretically possible properties, including events that will never be fired
- * like
+ * {@link com.github.gpluscb.challonge_listener.events.GenericEvent
+ * GenericEvents} are fired to all managed
+ * {@link com.github.gpluscb.challonge_listener.listener.EventListener
+ * EventListeners} that are subscribed to the tournament the event is from.
+ * Events exist for all theoretically possible properties, including events that
+ * will never be fired like
  * {@link com.github.gpluscb.challonge_listener.events.tournament.TournamentIdChangedEvent
  * TournamentIdChangedEvent}. If the id of a tournament really changed, it would
  * not be seen as the same tournament anymore, therefore a
@@ -140,7 +140,7 @@ public class ListenerManager {
 			}
 		}, 0, Math.max(interval, 1), TimeUnit.MILLISECONDS);
 		
-		this.state = ManagerState.RUNNING;
+		setState(ManagerState.RUNNING);
 	}
 	
 	private List<TournamentWrapper> update(final List<TournamentWrapper> previousTournaments)
@@ -618,6 +618,14 @@ public class ListenerManager {
 		}
 	}
 	
+	private void setState(final ManagerState state) {
+		final ManagerState prevState = this.state;
+		this.state = state;
+		synchronized(prevState) {
+			prevState.notify();
+		}
+	}
+	
 	/**
 	 * Blocks the current thread until the main cycle is started.
 	 *
@@ -640,14 +648,15 @@ public class ListenerManager {
 	 * @throws IllegalStateException
 	 *             if the given state is unreachable
 	 */
-	// TODO: Somehow use notify when the state updates
 	public void awaitState(final ManagerState state) throws InterruptedException, IllegalStateException {
 		if(!this.state.isReachable(state)) {
 			throw new IllegalStateException("The given state is unreachable.");
 		}
 		
 		while(this.state.isBefore(state)) {
-			Thread.sleep(10);
+			synchronized(this.state) {
+				this.state.wait();
+			}
 		}
 	}
 	
@@ -658,13 +667,13 @@ public class ListenerManager {
 	 */
 	public void shutdown() {
 		if(this.state.isBefore(ManagerState.SHUTTING_DOWN)) {
-			this.state = ManagerState.SHUTTING_DOWN;
+			setState(ManagerState.SHUTTING_DOWN);
 			this.executor.shutdown();
 			
 			new Thread(() -> {
 				try {
 					while(!this.executor.awaitTermination(10, TimeUnit.SECONDS)) {}
-					this.state = ManagerState.SHUT_DOWN;
+					setState(ManagerState.SHUT_DOWN);
 				} catch(final InterruptedException e) {
 					e.printStackTrace();
 				}
