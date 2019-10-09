@@ -25,11 +25,11 @@ dependencies {
 	// Use JUnit test framework
 	testImplementation group: 'junit', name: 'junit', version: '4.12'
 	
-	// challonge-java SNAPSHOT
+	// challonge-java
 	api group: 'at.stefangeyer.challonge', name: 'core', version: '3.0.0-SNAPSHOT'
-	// needed for tests SNAPSHOT
-	testImplementation group: 'at.stefangeyer.challonge.serializer', name: 'gson', version: '3.0.0-SNAPSHOT'
-	testImplementation group: 'at.stefangeyer.challonge.rest', name: 'retrofit', version: '3.0.0-SNAPSHOT'
+	// needed for tests and examples
+	implementation group: 'at.stefangeyer.challonge.serializer', name: 'gson', version: '3.0.0-SNAPSHOT'
+	implementation group: 'at.stefangeyer.challonge.rest', name: 'retrofit', version: '3.0.0-SNAPSHOT'
 }
 
 uploadArchives {
