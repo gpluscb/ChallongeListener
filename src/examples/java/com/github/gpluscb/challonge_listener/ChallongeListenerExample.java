@@ -1,4 +1,4 @@
-package com.gpluscb.challonge_listener;
+package com.github.gpluscb.challonge_listener;
 
 import java.util.Scanner;
 

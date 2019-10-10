@@ -446,7 +446,7 @@ public class ListenerManager {
 						// They are different
 						// Get the corresponding TournamentChangedEvent
 						final Class<?> eventClass = Class
-								.forName("com.gpluscb.challonge_listener.events.tournament.Tournament" + propertyName
+								.forName("com.github.gpluscb.challonge_listener.events.tournament.Tournament" + propertyName
 										+ "ChangedEvent");
 						final Constructor<?> constructor = eventClass.getConstructor(Tournament.class, Tournament.class,
 								propertyType, propertyType);
@@ -491,7 +491,7 @@ public class ListenerManager {
 						// They are different
 						// Get the corresponding ParticipantChangedEvent
 						final Class<?> eventClass = Class
-								.forName("com.gpluscb.challonge_listener.events.tournament.participant.Participant"
+								.forName("com.github.gpluscb.challonge_listener.events.tournament.participant.Participant"
 										+ propertyName + "ChangedEvent");
 						final Constructor<?> constructor = eventClass.getConstructor(Tournament.class, Tournament.class,
 								Participant.class, Participant.class, propertyType, propertyType);
@@ -537,7 +537,7 @@ public class ListenerManager {
 						// They are different
 						// Get the corresponding MatchChangedEvent
 						final Class<?> eventClass = Class
-								.forName("com.gpluscb.challonge_listener.events.tournament.match.Match" + propertyName
+								.forName("com.github.gpluscb.challonge_listener.events.tournament.match.Match" + propertyName
 										+ "ChangedEvent");
 						final Constructor<?> constructor = eventClass.getConstructor(Tournament.class, Tournament.class,
 								Match.class, Match.class, propertyType, propertyType);
@@ -583,7 +583,7 @@ public class ListenerManager {
 						// They are different
 						// Get the corresponding AttachmentChangedEvent
 						final Class<?> eventClass = Class
-								.forName("com.gpluscb.challonge_listener.events.tournament.match.attachment.Attachment"
+								.forName("com.github.gpluscb.challonge_listener.events.tournament.match.attachment.Attachment"
 										+ propertyName + "ChangedEvent");
 						final Constructor<?> constructor = eventClass.getConstructor(Tournament.class, Tournament.class,
 								Match.class, Match.class, Attachment.class, Attachment.class, propertyType,
