@@ -136,10 +136,8 @@ public class ListenerManager {
 				try {
 					this.previousTournaments = update(this.previousTournaments);
 				} catch(final DataAccessException e) {
-					System.err.println("DataAccessException caught, trying to continue anyway.");
-					e.printStackTrace();
-				} catch(final RuntimeException e) {
-					e.printStackTrace();
+					System.out.println("ListenerManager: DataAccessException caught, trying to continue anyway: "
+							+ e.getMessage());
 				}
 			}
 		}, 0, Math.max(interval, 1), TimeUnit.MILLISECONDS);
@@ -182,33 +180,32 @@ public class ListenerManager {
 			// Try to get tournament four times
 			final int NUM_TRIES = 4;
 			for(int i = 1; i <= NUM_TRIES; i++) {
-				if(this.challonge.doesTournamentExist(String.valueOf(tournamentId))) {
-					try {
-						final Tournament tournament = this.challonge.getTournament(String.valueOf(tournamentId), true,
-								true, true);
-						
-						Boolean doesOwn = Boolean.FALSE;
+				try {
+					final Tournament tournament = this.challonge.getTournamentOrNull(String.valueOf(tournamentId), true,
+							true, true);
+					
+					Boolean doesOwn = null;
+					
+					if(tournament != null) {
+						doesOwn = Boolean.FALSE;
 						for(final Tournament ownedTournament : ownedTournaments) {
 							if(ownedTournament.getId().longValue() == tournamentId) {
 								doesOwn = Boolean.TRUE;
 								break;
 							}
 						}
-						
-						subscribedToTournaments
-								.add(new TournamentWrapper(Long.valueOf(tournamentId), tournament, doesOwn));
-						
-						break;
-					} catch(final DataAccessException e) {
-						if(i >= NUM_TRIES) {
-							throw e;
-						}
-						System.err.println("DataAccessException caught while getting Tournaments, trying again.");
-						e.printStackTrace();
 					}
-				} else {
-					subscribedToTournaments.add(new TournamentWrapper(Long.valueOf(tournamentId)));
+					
+					subscribedToTournaments.add(new TournamentWrapper(Long.valueOf(tournamentId), tournament, doesOwn));
+					
 					break;
+				} catch(final DataAccessException e) {
+					if(i >= NUM_TRIES) {
+						throw e;
+					}
+					System.out.println(
+							"ListenerManager: DataAccessException caught while getting Tournaments, trying again: "
+									+ e.getMessage());
 				}
 			}
 		}
@@ -446,8 +443,8 @@ public class ListenerManager {
 						// They are different
 						// Get the corresponding TournamentChangedEvent
 						final Class<?> eventClass = Class
-								.forName("com.github.gpluscb.challonge_listener.events.tournament.Tournament" + propertyName
-										+ "ChangedEvent");
+								.forName("com.github.gpluscb.challonge_listener.events.tournament.Tournament"
+										+ propertyName + "ChangedEvent");
 						final Constructor<?> constructor = eventClass.getConstructor(Tournament.class, Tournament.class,
 								propertyType, propertyType);
 						// Create and fire the corresponding event
@@ -490,8 +487,8 @@ public class ListenerManager {
 					if(currentProperty == null ? previousProperty != null : !currentProperty.equals(previousProperty)) {
 						// They are different
 						// Get the corresponding ParticipantChangedEvent
-						final Class<?> eventClass = Class
-								.forName("com.github.gpluscb.challonge_listener.events.tournament.participant.Participant"
+						final Class<?> eventClass = Class.forName(
+								"com.github.gpluscb.challonge_listener.events.tournament.participant.Participant"
 										+ propertyName + "ChangedEvent");
 						final Constructor<?> constructor = eventClass.getConstructor(Tournament.class, Tournament.class,
 								Participant.class, Participant.class, propertyType, propertyType);
@@ -537,8 +534,8 @@ public class ListenerManager {
 						// They are different
 						// Get the corresponding MatchChangedEvent
 						final Class<?> eventClass = Class
-								.forName("com.github.gpluscb.challonge_listener.events.tournament.match.Match" + propertyName
-										+ "ChangedEvent");
+								.forName("com.github.gpluscb.challonge_listener.events.tournament.match.Match"
+										+ propertyName + "ChangedEvent");
 						final Constructor<?> constructor = eventClass.getConstructor(Tournament.class, Tournament.class,
 								Match.class, Match.class, propertyType, propertyType);
 						// Create and fire the corresponding event
@@ -582,8 +579,8 @@ public class ListenerManager {
 					if(currentProperty == null ? previousProperty != null : !currentProperty.equals(previousProperty)) {
 						// They are different
 						// Get the corresponding AttachmentChangedEvent
-						final Class<?> eventClass = Class
-								.forName("com.github.gpluscb.challonge_listener.events.tournament.match.attachment.Attachment"
+						final Class<?> eventClass = Class.forName(
+								"com.github.gpluscb.challonge_listener.events.tournament.match.attachment.Attachment"
 										+ propertyName + "ChangedEvent");
 						final Constructor<?> constructor = eventClass.getConstructor(Tournament.class, Tournament.class,
 								Match.class, Match.class, Attachment.class, Attachment.class, propertyType,
@@ -841,10 +838,6 @@ public class ListenerManager {
 			this.tournamentId = tournamentId;
 			this.tournament = tournament;
 			this.doesOwn = doesOwn;
-		}
-		
-		public TournamentWrapper(final Long tournamentId) {
-			this(tournamentId, null, null);
 		}
 		
 		public Long getTournamentId() {
