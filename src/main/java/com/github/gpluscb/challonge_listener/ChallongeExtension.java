@@ -19,6 +19,7 @@ import at.stefangeyer.challonge.serializer.Serializer;
  * Note that those methods need to use multiple api requests and are therefore
  * more resource consuming.
  */
+// TODO: Additional methods should support async
 public class ChallongeExtension extends Challonge {
 	/**
 	 * Creates a completely functional instance. It can be used directly.
@@ -56,19 +57,7 @@ public class ChallongeExtension extends Challonge {
 	 *             does not indicate that the tournament does not exist
 	 */
 	public boolean doesTournamentExist(final String tournament) throws DataAccessException {
-		// TODO: make the check better and safer for api updates, no ideas yet.
-		// getCause() with instanceof checks and casts so that there might be
-		// some kind of getErrorCode() method?
-		try {
-			getTournament(tournament);
-			return true;
-		} catch(final DataAccessException e) {
-			if(e.getMessage().contains(
-					" was not successful (404) and returned: {\"errors\":[\"Requested tournament not found\"]}")) {
-				return false;
-			}
-			throw e;
-		}
+		return getTournamentOrNull(tournament) != null;
 	}
 	
 	/**
@@ -179,6 +168,80 @@ public class ChallongeExtension extends Challonge {
 		}
 		
 		return false;
+	}
+	
+	/**
+	 * Gets a tournament or returns null if it does not exist
+	 *
+	 * @param tournament
+	 *            Tournament ID (e.g. 10230) or URL (e.g. 'single_elim' for
+	 *            challonge.com/single_elim). If assigned to a subdomain, URL
+	 *            format must be :subdomain-:tournament_url (e.g.
+	 *            'test-mytourney' for test.challonge.com/mytourney)
+	 * @return The tournament if it exists or null
+	 * @throws DataAccessException
+	 *             Exchange with the rest api or validation failed in a way that
+	 *             does not indicate that the tournament does not exist
+	 */
+	public Tournament getTournamentOrNull(final String tournament) throws DataAccessException {
+		return getTournamentOrNull(tournament, false, false, false);
+	}
+	
+	/**
+	 * Gets a tournament or returns null if it does not exist
+	 *
+	 * @param tournament
+	 *            Tournament ID (e.g. 10230) or URL (e.g. 'single_elim' for
+	 *            challonge.com/single_elim). If assigned to a subdomain, URL
+	 *            format must be :subdomain-:tournament_url (e.g.
+	 *            'test-mytourney' for test.challonge.com/mytourney)
+	 * @param includeParticipants
+	 *            Include a list of participants in the response
+	 * @param includeMatches
+	 *            Include a list of matches in the response
+	 * @return The tournament if it exists or null
+	 * @throws DataAccessException
+	 *             Exchange with the rest api or validation failed in a way that
+	 *             does not indicate that the tournament does not exist
+	 */
+	public Tournament getTournamentOrNull(final String tournament, final boolean includeParticipants,
+			final boolean includeMatches) throws DataAccessException {
+		return getTournamentOrNull(tournament, includeParticipants, includeMatches, false);
+	}
+	
+	/**
+	 * Gets a tournament or returns null if it does not exist
+	 *
+	 * @param tournament
+	 *            Tournament ID (e.g. 10230) or URL (e.g. 'single_elim' for
+	 *            challonge.com/single_elim). If assigned to a subdomain, URL
+	 *            format must be :subdomain-:tournament_url (e.g.
+	 *            'test-mytourney' for test.challonge.com/mytourney)
+	 * @param includeParticipants
+	 *            Include a list of participants in the response
+	 * @param includeMatches
+	 *            Include a list of matches in the response
+	 * @param includeAttachments
+	 *            Include a list of attachments for each match in the response
+	 * @return The tournament if it exists or null
+	 * @throws DataAccessException
+	 *             Exchange with the rest api or validation failed in a way that
+	 *             does not indicate that the tournament does not exist
+	 */
+	public Tournament getTournamentOrNull(final String tournament, final boolean includeParticipants,
+			final boolean includeMatches, final boolean includeAttachments) throws DataAccessException {
+		// TODO: make the check better and safer for api updates, no ideas yet.
+		// getCause() with instanceof checks and casts so that there might be
+		// some kind of getErrorCode() method?
+		try {
+			return getTournament(tournament, includeParticipants, includeMatches, includeAttachments);
+		} catch(final DataAccessException e) {
+			if(e.getMessage().contains(
+					" was not successful (404) and returned: {\"errors\":[\"Requested tournament not found\"]}")) {
+				return null;
+			}
+			throw e;
+		}
 	}
 	
 	/**
