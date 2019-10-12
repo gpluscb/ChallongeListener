@@ -1,6 +1,9 @@
 # ChallongeListener
 A project using the [stefangeyer/challonge-java](https://github.com/stefangeyer/challonge-java) project to fire events to listeners when a tournament changes.
 
+**Quick disclaimer**:\
+There is no official stance on api spam or something similar by Challonge as of now. So you are entirely at your own risk when using this project as it automates api calls. I am not at fault if you get limited, timed-out, banned, or punished in any other way. Just a quick heads up: the more unique tournaments you subscribe to and the more matches with attachments these tournaments have, the more api calls are made each update cycle.
+
 ## Using this project:
 
 ### Download:
@@ -47,7 +50,7 @@ final ListenerManager manager = new ListenerManager(challonge, 5000);
 ```
 As you can see, you will need to pass a ChallongeExtension instance and (optionally) a long value to the constructor.\
 The [ChallongeExtension class](src/main/java/com/gpluscb/challonge_listener/ChallongeExtension.java) works mostly the same as the [Challonge class](https://github.com/stefangeyer/challonge-java/blob/master/core/src/main/java/at/stefangeyer/challonge/Challonge.java) of the challonge-java project, the difference being that ChallongeExtension implements some methods that go beyond what the [Challonge API](https://api.challonge.com/v1) directly offers whereas the usual Challonge class is intended to be more of a direct representation of the Challonge API in java.\
-The long value represents the time of the update cycle. Since the Challonge API does not push updates to our client as they happen, the state of a tournament has to be requested from the Challonge API at fixed times and then compared to its previous state. The long value passed to the constructor is the minimum time between updates in milliseconds. 5000ms/5s is the default, if you only pass the ChallongeExtension instance to the constructor. If you pass 0, the instance will try to update as quickly as possible. There is no official stance on api spam or something like that by Challonge as far as I can tell, so I am not at fault if you get limited or banned. Just a quick heads up: the more unique tournaments you subscribe to and the more attachments these tournaments have, the more api calls are made each update cycle.
+The long value represents the time of the update cycle. Since the Challonge API does not push updates to our client as they happen, the state of a tournament has to be requested from the Challonge API at fixed times and then compared to its previous state. The long value passed to the constructor is the minimum time between updates in milliseconds. 5000ms/5s is the default, if you only pass the ChallongeExtension instance to the constructor. If you pass 0, the instance will try to update as quickly as possible.
 
 #### EventListeners
 If you want to subscribe to tournaments and utilize events, you need to add EventListeners. There are currently two classes you can utilize as EventListeners: [EventListener](src/main/java/com/gpluscb/challonge_listener/listener/EventListener.java) and [ListenerAdapter](src/main/java/com/gpluscb/challonge_listener/listener/ListenerAdapter.java).\
