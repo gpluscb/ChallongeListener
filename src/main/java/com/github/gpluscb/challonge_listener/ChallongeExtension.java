@@ -641,13 +641,7 @@ public class ChallongeExtension extends Challonge {
 	 *             a tournament is significantly changed during the operation
 	 */
 	public List<Tournament> getTournamentsWithFullData() throws DataAccessException {
-		final List<Tournament> tournaments = getTournaments();
-		
-		for(final Tournament tournament : tournaments) {
-			addMissingData(tournament);
-		}
-		
-		return tournaments;
+		return getTournamentsWithFullData(null, null, null, null, null);
 	}
 	
 	/**
@@ -679,6 +673,55 @@ public class ChallongeExtension extends Challonge {
 		}
 		
 		return tournaments;
+	}
+	
+	/**
+	 * Retrieve all the tournaments created with or co-owned by your account
+	 * with all participants, matches and attachments.
+	 * 
+	 * @param onSuccess
+	 *            Called with result if call was successful
+	 * @param onFailure
+	 *            Called with exception if call was not successful
+	 */
+	public void getTournamentsWithFullData(final Callback<List<Tournament>> onSuccess,
+			final Callback<DataAccessException> onFailure) {
+		getTournamentsWithFullData(null, null, null, null, null, onSuccess, onFailure);
+	}
+	
+	/**
+	 * Retrieve a set of tournaments created with or co-owned by your account
+	 * with all participants, matches and attachments.
+	 * 
+	 * @param state
+	 *            Only get tournaments with this state
+	 * @param type
+	 *            Only get tournaments with this type
+	 * @param createdAfter
+	 *            Get tournaments created after this date
+	 * @param createdBefore
+	 *            Get tournaments created before this date
+	 * @param subdomain
+	 *            Only get tournaments with this subdomain
+	 * @param onSuccess
+	 *            Called with result if call was successful
+	 * @param onFailure
+	 *            Called with exception if call was not successful
+	 */
+	public void getTournamentsWithFullData(final TournamentQueryState state, final TournamentType type,
+			final OffsetDateTime createdAfter, final OffsetDateTime createdBefore, final String subdomain,
+			final Callback<List<Tournament>> onSuccess, final Callback<DataAccessException> onFailure) {
+		getTournaments(state, type, createdAfter, createdBefore, tournaments -> {
+			try {
+				for(final Tournament tournament : tournaments) {
+					addMissingData(tournament);
+				}
+				
+				onSuccess.accept(tournaments);
+			} catch(final DataAccessException e) {
+				onFailure.accept(e);
+			}
+		}, onFailure);
 	}
 	
 	/**
