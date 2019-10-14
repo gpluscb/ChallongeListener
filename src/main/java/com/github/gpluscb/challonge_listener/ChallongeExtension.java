@@ -25,7 +25,6 @@ import at.stefangeyer.challonge.serializer.Serializer;
  * Note that those methods need to use multiple api requests and are therefore
  * more resource consuming.
  */
-// TODO: Additional methods should support async
 public class ChallongeExtension extends Challonge {
 	/**
 	 * Creates a completely functional instance. It can be used directly.
