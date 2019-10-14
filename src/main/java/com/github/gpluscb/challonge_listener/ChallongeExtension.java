@@ -5,6 +5,7 @@ import java.util.List;
 
 import at.stefangeyer.challonge.Challonge;
 import at.stefangeyer.challonge.exception.DataAccessException;
+import at.stefangeyer.challonge.model.Attachment;
 import at.stefangeyer.challonge.model.Credentials;
 import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Participant;
@@ -74,19 +75,7 @@ public class ChallongeExtension extends Challonge {
 	 *             does not indicate that the match does not exist
 	 */
 	public boolean doesMatchExist(final Tournament tournament, final long matchId) throws DataAccessException {
-		// TODO: make the check better and safer for api updates, no ideas yet.
-		// getCause() with instanceof checks and casts so that there might be
-		// some kind of getErrorCode() method?
-		try {
-			getMatch(tournament, matchId);
-			return true;
-		} catch(final DataAccessException e) {
-			if(e.getMessage().contains(
-					" was not successful (404) and returned: {\"errors\":[\"Match not found for tournament ID ")) {
-				return false;
-			}
-			throw e;
-		}
+		return getMatchOrNull(tournament, matchId) != null;
 	}
 	
 	/**
@@ -132,19 +121,7 @@ public class ChallongeExtension extends Challonge {
 	 *             does not indicate that the attachment does not exist
 	 */
 	public boolean doesAttachmentExist(final Match match, final long attachmentId) throws DataAccessException {
-		// TODO: make the check better and safer for api updates, no ideas yet.
-		// getCause() with instanceof checks and casts so that there might be
-		// some kind of getErrorCode() method?
-		try {
-			getAttachment(match, attachmentId);
-			return true;
-		} catch(final DataAccessException e) {
-			if(e.getMessage().contains(
-					" was not successful (404) and returned: {\"errors\":[\"Attachment with that ID was not found for match ID ")) {
-				return false;
-			}
-			throw e;
-		}
+		return getAttachmentOrNull(match, attachmentId) != null;
 	}
 	
 	/**
@@ -223,7 +200,7 @@ public class ChallongeExtension extends Challonge {
 	 *            Include a list of matches in the response
 	 * @param includeAttachments
 	 *            Include a list of attachments for each match in the response
-	 * @return The tournament if it exists or null
+	 * @return The requested tournament or null
 	 * @throws DataAccessException
 	 *             Exchange with the rest api or validation failed in a way that
 	 *             does not indicate that the tournament does not exist
@@ -238,6 +215,82 @@ public class ChallongeExtension extends Challonge {
 		} catch(final DataAccessException e) {
 			if(e.getMessage().contains(
 					" was not successful (404) and returned: {\"errors\":[\"Requested tournament not found\"]}")) {
+				return null;
+			}
+			throw e;
+		}
+	}
+	
+	/**
+	 * Gets a match or returns null if it does not exist
+	 *
+	 * @param tournament
+	 *            The tournament to get the match from. Must contain tournament
+	 *            id
+	 * @param matchId
+	 *            The match's unique ID
+	 * @return The requested match or null
+	 * @throws DataAccessException
+	 *             Exchange with the rest api or validation failed in a way that
+	 *             does not indicate that the tournament does not exist
+	 */
+	public Match getMatchOrNull(final Tournament tournament, final long matchId) throws DataAccessException {
+		return getMatchOrNull(tournament, matchId, false);
+	}
+	
+	/**
+	 * Gets a match or returns null if it does not exist
+	 *
+	 * @param tournament
+	 *            The tournament to get the match from. Must contain tournament
+	 *            id
+	 * @param matchId
+	 *            The match's unique ID
+	 * @param includeAttachments
+	 *            Include an array of associated attachment records
+	 * @return The requested match or null
+	 * @throws DataAccessException
+	 *             Exchange with the rest api or validation failed in a way that
+	 *             does not indicate that the tournament does not exist
+	 */
+	public Match getMatchOrNull(final Tournament tournament, final long matchId, final boolean includeAttachments)
+			throws DataAccessException {
+		// TODO: make the check better and safer for api updates, no ideas yet.
+		// getCause() with instanceof checks and casts so that there might be
+		// some kind of getErrorCode() method?
+		try {
+			return getMatch(tournament, matchId, includeAttachments);
+		} catch(final DataAccessException e) {
+			if(e.getMessage().contains(
+					" was not successful (404) and returned: {\"errors\":[\"Match not found for tournament ID ")) {
+				return null;
+			}
+			throw e;
+		}
+	}
+	
+	/**
+	 * Gets an attachment or returns null if it does not exist
+	 *
+	 * @param match
+	 *            The match to get the attachment from. Must contain the
+	 *            tournament- and match id
+	 * @param attachmentId
+	 *            The attachment's unique ID
+	 * @return The requested attachment or null
+	 * @throws DataAccessException
+	 *             Exchange with the rest api or validation failed in a way that
+	 *             does not indicate that the tournament does not exist
+	 */
+	public Attachment getAttachmentOrNull(final Match match, final long attachmentId) throws DataAccessException {
+		// TODO: make the check better and safer for api updates, no ideas yet.
+		// getCause() with instanceof checks and casts so that there might be
+		// some kind of getErrorCode() method?
+		try {
+			return getAttachment(match, attachmentId);
+		} catch(final DataAccessException e) {
+			if(e.getMessage().contains(
+					" was not successful (404) and returned: {\"errors\":[\"Attachment with that ID was not found for match ID ")) {
 				return null;
 			}
 			throw e;
