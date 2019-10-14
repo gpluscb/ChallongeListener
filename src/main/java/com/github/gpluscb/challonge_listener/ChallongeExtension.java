@@ -96,19 +96,7 @@ public class ChallongeExtension extends Challonge {
 	 */
 	public boolean doesParticipantExist(final Tournament tournament, final long participantId)
 			throws DataAccessException {
-		// TODO: make the check better and safer for api updates, no ideas yet.
-		// getCause() with instanceof checks and casts so that there might be
-		// some kind of getErrorCode() method?
-		try {
-			getParticipant(tournament, participantId);
-			return true;
-		} catch(final DataAccessException e) {
-			if(e.getMessage().contains(
-					" was not successful (404) and returned: {\"errors\":[\"Participant not found for tournament ID ")) {
-				return false;
-			}
-			throw e;
-		}
+		return getParticipantOrNull(tournament, participantId) != null;
 	}
 	
 	/**
@@ -294,6 +282,22 @@ public class ChallongeExtension extends Challonge {
 		} catch(final DataAccessException e) {
 			if(e.getMessage().contains(
 					" was not successful (404) and returned: {\"errors\":[\"Attachment with that ID was not found for match ID ")) {
+				return null;
+			}
+			throw e;
+		}
+	}
+	
+	public Participant getParticipantOrNull(final Tournament tournament, final long participantId)
+			throws DataAccessException {
+		// TODO: make the check better and safer for api updates, no ideas yet.
+		// getCause() with instanceof checks and casts so that there might be
+		// some kind of getErrorCode() method?
+		try {
+			return getParticipant(tournament, participantId);
+		} catch(final DataAccessException e) {
+			if(e.getMessage().contains(
+					" was not successful (404) and returned: {\"errors\":[\"Participant not found for tournament ID ")) {
 				return null;
 			}
 			throw e;
