@@ -1,5 +1,6 @@
 package com.github.gpluscb.challonge_listener;
 
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,8 @@ import at.stefangeyer.challonge.model.Credentials;
 import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Participant;
 import at.stefangeyer.challonge.model.Tournament;
+import at.stefangeyer.challonge.model.enumeration.TournamentType;
+import at.stefangeyer.challonge.model.query.enumeration.TournamentQueryState;
 import at.stefangeyer.challonge.rest.RestClient;
 import at.stefangeyer.challonge.serializer.Serializer;
 
@@ -354,6 +357,37 @@ public class ChallongeExtension extends Challonge {
 	 */
 	public List<Tournament> getTournamentsWithFullData() throws DataAccessException {
 		final List<Tournament> tournaments = getTournaments();
+		
+		for(final Tournament tournament : tournaments) {
+			addMissingData(tournament);
+		}
+		
+		return tournaments;
+	}
+	
+	/**
+	 * Retrieve a set of tournaments created with or co-owned by your account
+	 * with all participants, matches and attachments.
+	 *
+	 * @param state
+	 *            Only get tournaments with this state
+	 * @param type
+	 *            Only get tournaments with this type
+	 * @param createdAfter
+	 *            Get tournaments created after this date
+	 * @param createdBefore
+	 *            Get tournaments created before this date
+	 * @param subdomain
+	 *            Only get tournaments with this subdomain
+	 * @return The tournaments
+	 * @throws DataAccessException
+	 *             Exchange with the rest api or validation failed. Can occur if
+	 *             a tournament is significantly changed during the operation
+	 */
+	public List<Tournament> getTournamentsWithFullData(final TournamentQueryState state, final TournamentType type,
+			final OffsetDateTime createdAfter, final OffsetDateTime createdBefore, final String subdomain)
+			throws DataAccessException {
+		final List<Tournament> tournaments = getTournaments(state, type, createdAfter, createdBefore, subdomain);
 		
 		for(final Tournament tournament : tournaments) {
 			addMissingData(tournament);
