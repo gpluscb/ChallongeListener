@@ -337,6 +337,55 @@ public class ChallongeExtension extends Challonge {
 	}
 	
 	/**
+	 * Gets a participant or returns null if it does not exist.
+	 *
+	 * @param tournament
+	 *            The tournament to get the participant from. Must contain
+	 *            tournament id
+	 * @param participantId
+	 *            The participant's unique ID
+	 * @param onSuccess
+	 *            Called with result if call was successful
+	 * @param onFailure
+	 *            Called with exception if call was not successful
+	 */
+	public void getParticipantOrNull(final Tournament tournament, final long participantId,
+			final Callback<Participant> onSuccess, final Callback<DataAccessException> onFailure) {
+		getParticipantOrNull(tournament, participantId, false, onSuccess, onFailure);
+	}
+	
+	/**
+	 * Gets a participant or returns null if it does not exist.
+	 *
+	 * @param tournament
+	 *            The tournament to get the participant from. Must contain
+	 *            tournament id
+	 * @param participantId
+	 *            The participant's unique ID
+	 * @param includeMatches
+	 *            Includes an array of associated match records
+	 * @param onSuccess
+	 *            Called with result if call was successful
+	 * @param onFailure
+	 *            Called with exception if call was not successful
+	 */
+	public void getParticipantOrNull(final Tournament tournament, final long participantId,
+			final boolean includeMatches, final Callback<Participant> onSuccess,
+			final Callback<DataAccessException> onFailure) {
+		// TODO: make the check better and safer for api updates, no ideas yet.
+		// getCause() with instanceof checks and casts so that there might be
+		// some kind of getErrorCode() method?
+		getParticipant(tournament, participantId, includeMatches, onSuccess, e -> {
+			if(e.getMessage().contains(
+					" was not successful (404) and returned: {\"errors\":[\"Participant not found for tournament ID ")) {
+				onSuccess.accept(null);
+			} else {
+				onFailure.accept(e);
+			}
+		});
+	}
+	
+	/**
 	 * Gets a match or returns null if it does not exist.
 	 *
 	 * @param tournament
@@ -382,6 +431,54 @@ public class ChallongeExtension extends Challonge {
 			}
 			throw e;
 		}
+	}
+	
+	/**
+	 * Gets a match or returns null if it does not exist.
+	 *
+	 * @param tournament
+	 *            The tournament to get the match from. Must contain tournament
+	 *            id
+	 * @param matchId
+	 *            The match's unique ID
+	 * @param onSuccess
+	 *            Called with result if call was successful
+	 * @param onFailure
+	 *            Called with exception if call was not successful
+	 */
+	public void getMatchOrNull(final Tournament tournament, final long matchId, final Callback<Match> onSuccess,
+			final Callback<DataAccessException> onFailure) {
+		getMatchOrNull(tournament, matchId, false, onSuccess, onFailure);
+	}
+	
+	/**
+	 * Gets a match or returns null if it does not exist.
+	 *
+	 * @param tournament
+	 *            The tournament to get the match from. Must contain tournament
+	 *            id
+	 * @param matchId
+	 *            The match's unique ID
+	 * @param includeAttachments
+	 *            Include an array of associated attachment records
+	 * @param onSuccess
+	 *            Called with result if call was successful
+	 * @param onFailure
+	 *            Called with exception if call was not successful
+	 */
+	public void getMatchOrNull(final Tournament tournament, final long matchId, final boolean includeAttachments,
+			final Callback<Match> onSuccess, final Callback<DataAccessException> onFailure) {
+		// TODO: make the check better and safer for api updates, no ideas yet.
+		// getCause() with instanceof checks and casts so that there might be
+		// some kind of getErrorCode() method?
+		getMatch(tournament, matchId, includeAttachments, onSuccess, e -> {
+			if(e.getMessage().contains(
+					" was not successful (404) and returned: {\"errors\":[\"Match not found for tournament ID ")) {
+				onSuccess.accept(null);
+			} else {
+				onFailure.accept(e);
+			}
+		});
 	}
 	
 	/**
