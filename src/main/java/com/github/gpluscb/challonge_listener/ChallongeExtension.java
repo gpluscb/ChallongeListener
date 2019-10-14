@@ -746,6 +746,32 @@ public class ChallongeExtension extends Challonge {
 	}
 	
 	/**
+	 * Retrieve all the participants in the tournament with all matches.
+	 *
+	 * @param tournament
+	 *            The tournament to get the matches from. Must contain id or url
+	 *            with an optional subdomain
+	 * @param onSuccess
+	 *            Called with result if call was successful
+	 * @param onFailure
+	 *            Called with exception if call was not successful
+	 */
+	public void getParticipantsWithFullData(final Tournament tournament, final Callback<List<Participant>> onSuccess,
+			final Callback<DataAccessException> onFailure) {
+		getParticipants(tournament, participants -> {
+			try {
+				for(final Participant participant : participants) {
+					addMissingData(tournament, participant);
+				}
+				
+				onSuccess.accept(participants);
+			} catch(final DataAccessException e) {
+				onFailure.accept(e);
+			}
+		}, onFailure);
+	}
+	
+	/**
 	 * Retrieve all the matches in the tournament with all attachments.
 	 *
 	 * @param tournament
