@@ -48,7 +48,7 @@ public class ChallongeExtension extends Challonge {
 	}
 	
 	/**
-	 * Checks whether a tournament exists
+	 * Checks whether a tournament exists.
 	 *
 	 * @param tournament
 	 *            Tournament ID (e.g. 10230) or URL (e.g. 'single_elim' for
@@ -65,7 +65,7 @@ public class ChallongeExtension extends Challonge {
 	}
 	
 	/**
-	 * Checks whether a match exists
+	 * Checks whether a match exists.
 	 *
 	 * @param tournament
 	 *            The matches tournament. Must contain id or url with an
@@ -82,7 +82,7 @@ public class ChallongeExtension extends Challonge {
 	}
 	
 	/**
-	 * Checks whether a participant exists
+	 * Checks whether a participant exists.
 	 *
 	 * @param tournament
 	 *            The matches tournament. Must contain id or url with an
@@ -100,7 +100,7 @@ public class ChallongeExtension extends Challonge {
 	}
 	
 	/**
-	 * Checks whether a attachment exists
+	 * Checks whether a attachment exists.
 	 *
 	 * @param match
 	 *            The match. Must contain id and the tournament id
@@ -139,7 +139,7 @@ public class ChallongeExtension extends Challonge {
 	}
 	
 	/**
-	 * Gets a tournament or returns null if it does not exist
+	 * Gets a tournament or returns null if it does not exist.
 	 *
 	 * @param tournament
 	 *            Tournament ID (e.g. 10230) or URL (e.g. 'single_elim' for
@@ -156,7 +156,7 @@ public class ChallongeExtension extends Challonge {
 	}
 	
 	/**
-	 * Gets a tournament or returns null if it does not exist
+	 * Gets a tournament or returns null if it does not exist.
 	 *
 	 * @param tournament
 	 *            Tournament ID (e.g. 10230) or URL (e.g. 'single_elim' for
@@ -178,7 +178,7 @@ public class ChallongeExtension extends Challonge {
 	}
 	
 	/**
-	 * Gets a tournament or returns null if it does not exist
+	 * Gets a tournament or returns null if it does not exist.
 	 *
 	 * @param tournament
 	 *            Tournament ID (e.g. 10230) or URL (e.g. 'single_elim' for
@@ -213,7 +213,7 @@ public class ChallongeExtension extends Challonge {
 	}
 	
 	/**
-	 * Gets a match or returns null if it does not exist
+	 * Gets a match or returns null if it does not exist.
 	 *
 	 * @param tournament
 	 *            The tournament to get the match from. Must contain tournament
@@ -230,7 +230,7 @@ public class ChallongeExtension extends Challonge {
 	}
 	
 	/**
-	 * Gets a match or returns null if it does not exist
+	 * Gets a match or returns null if it does not exist.
 	 *
 	 * @param tournament
 	 *            The tournament to get the match from. Must contain tournament
@@ -261,7 +261,7 @@ public class ChallongeExtension extends Challonge {
 	}
 	
 	/**
-	 * Gets an attachment or returns null if it does not exist
+	 * Gets an attachment or returns null if it does not exist.
 	 *
 	 * @param match
 	 *            The match to get the attachment from. Must contain the
@@ -288,13 +288,44 @@ public class ChallongeExtension extends Challonge {
 		}
 	}
 	
+	/**
+	 * Gets a participant or returns null if it does not exist.
+	 *
+	 * @param tournament
+	 *            The tournament to get the participant from. Must contain
+	 *            tournament id
+	 * @param participantId
+	 *            The participant's unique ID
+	 * @return The requested participant
+	 * @throws DataAccessException
+	 *             Exchange with the rest api or validation failed
+	 */
 	public Participant getParticipantOrNull(final Tournament tournament, final long participantId)
 			throws DataAccessException {
+		return getParticipantOrNull(tournament, participantId, false);
+	}
+	
+	/**
+	 * Gets a participant or returns null if it does not exist.
+	 *
+	 * @param tournament
+	 *            The tournament to get the participant from. Must contain
+	 *            tournament id
+	 * @param participantId
+	 *            The participant's unique ID
+	 * @param includeMatches
+	 *            Includes an array of associated match records
+	 * @return The requested participant
+	 * @throws DataAccessException
+	 *             Exchange with the rest api or validation failed
+	 */
+	public Participant getParticipantOrNull(final Tournament tournament, final long participantId,
+			final boolean includeMatches) throws DataAccessException {
 		// TODO: make the check better and safer for api updates, no ideas yet.
 		// getCause() with instanceof checks and casts so that there might be
 		// some kind of getErrorCode() method?
 		try {
-			return getParticipant(tournament, participantId);
+			return getParticipant(tournament, participantId, includeMatches);
 		} catch(final DataAccessException e) {
 			if(e.getMessage().contains(
 					" was not successful (404) and returned: {\"errors\":[\"Participant not found for tournament ID ")) {
