@@ -12,6 +12,7 @@ import at.stefangeyer.challonge.model.Credentials;
 import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Participant;
 import at.stefangeyer.challonge.model.Tournament;
+import at.stefangeyer.challonge.model.enumeration.MatchState;
 import at.stefangeyer.challonge.model.enumeration.TournamentType;
 import at.stefangeyer.challonge.model.query.enumeration.TournamentQueryState;
 import at.stefangeyer.challonge.rest.RestClient;
@@ -783,7 +784,48 @@ public class ChallongeExtension extends Challonge {
 	 *             the tournament is significantly changed during the operation
 	 */
 	public List<Match> getMatchesWithFullData(final Tournament tournament) throws DataAccessException {
-		final List<Match> matches = getMatches(tournament);
+		return getMatchesWithFullData(tournament, (Participant) null, null);
+	}
+	
+	/**
+	 * Retrieve a set of matches in the tournament with all attachments.
+	 *
+	 * @param tournament
+	 *            The tournament to get the matches from. Must contain id or url
+	 *            with an optional subdomain
+	 * @param participant
+	 *            Only retrieve matches that include the specified participant.
+	 *            This parameter is optional. Provide null if you want to skip
+	 *            it.
+	 * @return The tournament's matches
+	 * @throws DataAccessException
+	 *             Exchange with the rest api or validation failed
+	 */
+	public List<Match> getMatchesWithFullData(final Tournament tournament, final Participant participant)
+			throws DataAccessException {
+		return getMatchesWithFullData(tournament, participant, null);
+	}
+	
+	/**
+	 * Retrieve a set of matches in the tournament with all attachments.
+	 *
+	 * @param tournament
+	 *            The tournament to get the matches from. Must contain id or url
+	 *            with an optional subdomain
+	 * @param participant
+	 *            Only retrieve matches that include the specified participant.
+	 *            This parameter is optional. Provide null if you want to skip
+	 *            it.
+	 * @param state
+	 *            all (default), pending, open, complete. This parameter is
+	 *            optional. Provide null if you want to skip it.
+	 * @return The tournament's matches
+	 * @throws DataAccessException
+	 *             Exchange with the rest api or validation failed
+	 */
+	public List<Match> getMatchesWithFullData(final Tournament tournament, final Participant participant,
+			final MatchState state) throws DataAccessException {
+		final List<Match> matches = getMatches(tournament, participant, state);
 		
 		for(final Match match : matches) {
 			addMissingData(match);
