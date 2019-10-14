@@ -510,6 +510,31 @@ public class ChallongeExtension extends Challonge {
 	}
 	
 	/**
+	 * Gets an attachment or returns null if it does not exist.
+	 *
+	 * @param match
+	 *            The match to get the attachment from. Must contain the
+	 *            tournament- and match id
+	 * @param attachmentId
+	 *            The attachment's unique ID
+	 * @param onSuccess
+	 *            Called with result if call was successful
+	 * @param onFailure
+	 *            Called with exception if call was not successful
+	 */
+	public void getAttachmentOrNull(final Match match, final long attachmentId, final Callback<Attachment> onSuccess,
+			final Callback<DataAccessException> onFailure) {
+		getAttachment(match, attachmentId, onSuccess, e -> {
+			if(e.getMessage().contains(
+					" was not successful (404) and returned: {\"errors\":[\"Attachment with that ID was not found for match ID ")) {
+				onSuccess.accept(null);
+			} else {
+				onFailure.accept(e);
+			}
+		});
+	}
+	
+	/**
 	 * Retrieve a single tournament record created with or co-owned by your
 	 * account.
 	 *
