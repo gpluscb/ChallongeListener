@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import at.stefangeyer.challonge.Challonge;
+import at.stefangeyer.challonge.async.Callback;
 import at.stefangeyer.challonge.exception.DataAccessException;
 import at.stefangeyer.challonge.model.Attachment;
 import at.stefangeyer.challonge.model.Credentials;
@@ -213,6 +214,82 @@ public class ChallongeExtension extends Challonge {
 	}
 	
 	/**
+	 * Gets a tournament or returns null if it does not exist.
+	 *
+	 * @param tournament
+	 *            Tournament ID (e.g. 10230) or URL (e.g. 'single_elim' for
+	 *            challonge.com/single_elim). If assigned to a subdomain, URL
+	 *            format must be :subdomain-:tournament_url (e.g.
+	 *            'test-mytourney' for test.challonge.com/mytourney)
+	 * @param onSuccess
+	 *            Called with result if call was successful
+	 * @param onFailure
+	 *            Called with exception if call was not successful
+	 */
+	public final void getTournamentOrNull(final String tournament, final Callback<Tournament> onSuccess,
+			final Callback<DataAccessException> onFailure) {
+		getTournamentOrNull(tournament, false, false, false, onSuccess, onFailure);
+	}
+	
+	/**
+	 * Gets a tournament or returns null if it does not exist.
+	 *
+	 * @param tournament
+	 *            Tournament ID (e.g. 10230) or URL (e.g. 'single_elim' for
+	 *            challonge.com/single_elim). If assigned to a subdomain, URL
+	 *            format must be :subdomain-:tournament_url (e.g.
+	 *            'test-mytourney' for test.challonge.com/mytourney)
+	 * @param includeParticipants
+	 *            Include a list of participants in the response
+	 * @param includeMatches
+	 *            Include a list of matches in the response
+	 * @param onSuccess
+	 *            Called with result if call was successful
+	 * @param onFailure
+	 *            Called with exception if call was not successful
+	 */
+	public final void getTournamentOrNull(final String tournament, final boolean includeParticipants,
+			final boolean includeMatches, final Callback<Tournament> onSuccess,
+			final Callback<DataAccessException> onFailure) {
+		getTournamentOrNull(tournament, includeParticipants, includeMatches, false, onSuccess, onFailure);
+	}
+	
+	/**
+	 * Gets a tournament or returns null if it does not exist.
+	 *
+	 * @param tournament
+	 *            Tournament ID (e.g. 10230) or URL (e.g. 'single_elim' for
+	 *            challonge.com/single_elim). If assigned to a subdomain, URL
+	 *            format must be :subdomain-:tournament_url (e.g.
+	 *            'test-mytourney' for test.challonge.com/mytourney)
+	 * @param includeParticipants
+	 *            Include a list of participants in the response
+	 * @param includeMatches
+	 *            Include a list of matches in the response
+	 * @param includeAttachments
+	 *            Include a list of attachments for each match in the response
+	 * @param onSuccess
+	 *            Called with result if call was successful
+	 * @param onFailure
+	 *            Called with exception if call was not successful
+	 */
+	public final void getTournamentOrNull(final String tournament, final boolean includeParticipants,
+			final boolean includeMatches, final boolean includeAttachments, final Callback<Tournament> onSuccess,
+			final Callback<DataAccessException> onFailure) {
+		// TODO: make the check better and safer for api updates, no ideas yet.
+		// getCause() with instanceof checks and casts so that there might be
+		// some kind of getErrorCode() method?
+		getTournament(tournament, includeParticipants, includeMatches, includeAttachments, onSuccess, e -> {
+			if(e.getMessage().contains(
+					" was not successful (404) and returned: {\"errors\":[\"Requested tournament not found\"]}")) {
+				onSuccess.accept(null);
+			} else {
+				onFailure.accept(e);
+			}
+		});
+	}
+	
+	/**
 	 * Gets a participant or returns null if it does not exist.
 	 *
 	 * @param tournament
@@ -379,6 +456,57 @@ public class ChallongeExtension extends Challonge {
 		}
 		
 		return ret;
+	}
+	
+	/**
+	 * Retrieve a single tournament record created with or co-owned by your
+	 * account.
+	 *
+	 * @param tournament
+	 *            Tournament ID (e.g. 10230) or URL (e.g. 'single_elim' for
+	 *            challonge.com/single_elim). If assigned to a subdomain, URL
+	 *            format must be :subdomain-:tournament_url (e.g.
+	 *            'test-mytourney' for test.challonge.com/mytourney)
+	 * @param includeParticipants
+	 *            Include a list of participants in the response
+	 * @param includeMatches
+	 *            Include a list of matches in the response
+	 * @param includeAttachments
+	 *            Include a list of attachments for each match in the response
+	 *            Exchange with the rest api or validation failed
+	 * @param onSuccess
+	 *            Called with result if call was successful
+	 * @param onFailure
+	 *            Called with exception if call was not successful
+	 * @throws IllegalArgumentException
+	 *             includeAttachments is true but includeMatches is false
+	 */
+	public void getTournament(final String tournament, final boolean includeParticipants, final boolean includeMatches,
+			final boolean includeAttachments, final Callback<Tournament> onSuccess,
+			final Callback<DataAccessException> onFailure) {
+		if(!includeMatches && includeAttachments) {
+			throw new IllegalArgumentException("Attachments can only be included if matches are included as well.");
+		}
+		
+		getTournament(tournament, includeParticipants, includeMatches, ret -> {
+			try {
+				// Matches need to be assigned to participants too
+				if(includeParticipants && includeMatches) {
+					for(final Participant participant : ret.getParticipants()) {
+						assignMissingData(participant, ret.getMatches());
+					}
+				}
+				
+				// Add the attachments to the matches
+				if(includeAttachments) {
+					for(final Match match : ret.getMatches()) {
+						addMissingData(match);
+					}
+				}
+			} catch(final DataAccessException e) {
+				onFailure.accept(e);
+			}
+		}, onFailure);
 	}
 	
 	/**
