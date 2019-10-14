@@ -847,7 +847,51 @@ public class ChallongeExtension extends Challonge {
 	 */
 	public void getMatchesWithFullData(final Tournament tournament, final Callback<List<Match>> onSuccess,
 			final Callback<DataAccessException> onFailure) {
-		getMatches(tournament, matches -> {
+		getMatchesWithFullData(tournament, null, null, onSuccess, onFailure);
+	}
+	
+	/**
+	 * Retrieve a set of the matches in the tournament with all attachments.
+	 *
+	 * @param tournament
+	 *            The tournament to get the matches from. Must contain id or url
+	 *            with an optional subdomain
+	 * @param participant
+	 *            Only retrieve matches that include the specified participant.
+	 *            This parameter is optional. Provide null if you want to skip
+	 *            it.
+	 * @param onSuccess
+	 *            Called with result if call was successful
+	 * @param onFailure
+	 *            Called with exception if call was not successful
+	 */
+	public void getMatchesWithFullData(final Tournament tournament, final Participant participant,
+			final Callback<List<Match>> onSuccess, final Callback<DataAccessException> onFailure) {
+		getMatchesWithFullData(tournament, participant, null, onSuccess, onFailure);
+	}
+	
+	/**
+	 * Retrieve a set of the matches in the tournament with all attachments.
+	 *
+	 * @param tournament
+	 *            The tournament to get the matches from. Must contain id or url
+	 *            with an optional subdomain
+	 * @param participant
+	 *            Only retrieve matches that include the specified participant.
+	 *            This parameter is optional. Provide null if you want to skip
+	 *            it.
+	 * @param state
+	 *            all (default), pending, open, complete. This parameter is
+	 *            optional. Provide null if you want to skip it.
+	 * @param onSuccess
+	 *            Called with result if call was successful
+	 * @param onFailure
+	 *            Called with exception if call was not successful
+	 */
+	public void getMatchesWithFullData(final Tournament tournament, final Participant participant,
+			final MatchState state, final Callback<List<Match>> onSuccess,
+			final Callback<DataAccessException> onFailure) {
+		getMatches(tournament, participant, state, matches -> {
 			try {
 				for(final Match match : matches) {
 					addMissingData(match);
