@@ -213,6 +213,53 @@ public class ChallongeExtension extends Challonge {
 	}
 	
 	/**
+	 * Gets a participant or returns null if it does not exist.
+	 *
+	 * @param tournament
+	 *            The tournament to get the participant from. Must contain
+	 *            tournament id
+	 * @param participantId
+	 *            The participant's unique ID
+	 * @return The requested participant
+	 * @throws DataAccessException
+	 *             Exchange with the rest api or validation failed
+	 */
+	public Participant getParticipantOrNull(final Tournament tournament, final long participantId)
+			throws DataAccessException {
+		return getParticipantOrNull(tournament, participantId, false);
+	}
+	
+	/**
+	 * Gets a participant or returns null if it does not exist.
+	 *
+	 * @param tournament
+	 *            The tournament to get the participant from. Must contain
+	 *            tournament id
+	 * @param participantId
+	 *            The participant's unique ID
+	 * @param includeMatches
+	 *            Includes an array of associated match records
+	 * @return The requested participant
+	 * @throws DataAccessException
+	 *             Exchange with the rest api or validation failed
+	 */
+	public Participant getParticipantOrNull(final Tournament tournament, final long participantId,
+			final boolean includeMatches) throws DataAccessException {
+		// TODO: make the check better and safer for api updates, no ideas yet.
+		// getCause() with instanceof checks and casts so that there might be
+		// some kind of getErrorCode() method?
+		try {
+			return getParticipant(tournament, participantId, includeMatches);
+		} catch(final DataAccessException e) {
+			if(e.getMessage().contains(
+					" was not successful (404) and returned: {\"errors\":[\"Participant not found for tournament ID ")) {
+				return null;
+			}
+			throw e;
+		}
+	}
+	
+	/**
 	 * Gets a match or returns null if it does not exist.
 	 *
 	 * @param tournament
@@ -282,53 +329,6 @@ public class ChallongeExtension extends Challonge {
 		} catch(final DataAccessException e) {
 			if(e.getMessage().contains(
 					" was not successful (404) and returned: {\"errors\":[\"Attachment with that ID was not found for match ID ")) {
-				return null;
-			}
-			throw e;
-		}
-	}
-	
-	/**
-	 * Gets a participant or returns null if it does not exist.
-	 *
-	 * @param tournament
-	 *            The tournament to get the participant from. Must contain
-	 *            tournament id
-	 * @param participantId
-	 *            The participant's unique ID
-	 * @return The requested participant
-	 * @throws DataAccessException
-	 *             Exchange with the rest api or validation failed
-	 */
-	public Participant getParticipantOrNull(final Tournament tournament, final long participantId)
-			throws DataAccessException {
-		return getParticipantOrNull(tournament, participantId, false);
-	}
-	
-	/**
-	 * Gets a participant or returns null if it does not exist.
-	 *
-	 * @param tournament
-	 *            The tournament to get the participant from. Must contain
-	 *            tournament id
-	 * @param participantId
-	 *            The participant's unique ID
-	 * @param includeMatches
-	 *            Includes an array of associated match records
-	 * @return The requested participant
-	 * @throws DataAccessException
-	 *             Exchange with the rest api or validation failed
-	 */
-	public Participant getParticipantOrNull(final Tournament tournament, final long participantId,
-			final boolean includeMatches) throws DataAccessException {
-		// TODO: make the check better and safer for api updates, no ideas yet.
-		// getCause() with instanceof checks and casts so that there might be
-		// some kind of getErrorCode() method?
-		try {
-			return getParticipant(tournament, participantId, includeMatches);
-		} catch(final DataAccessException e) {
-			if(e.getMessage().contains(
-					" was not successful (404) and returned: {\"errors\":[\"Participant not found for tournament ID ")) {
 				return null;
 			}
 			throw e;
