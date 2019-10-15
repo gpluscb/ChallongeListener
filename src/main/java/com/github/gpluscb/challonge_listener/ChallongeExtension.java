@@ -226,7 +226,7 @@ public class ChallongeExtension extends Challonge {
 	 * @param onFailure
 	 *            Called with exception if call was not successful
 	 */
-	public final void getTournamentOrNull(final String tournament, final Callback<Tournament> onSuccess,
+	public void getTournamentOrNull(final String tournament, final Callback<Tournament> onSuccess,
 			final Callback<DataAccessException> onFailure) {
 		getTournamentOrNull(tournament, false, false, false, onSuccess, onFailure);
 	}
@@ -248,7 +248,7 @@ public class ChallongeExtension extends Challonge {
 	 * @param onFailure
 	 *            Called with exception if call was not successful
 	 */
-	public final void getTournamentOrNull(final String tournament, final boolean includeParticipants,
+	public void getTournamentOrNull(final String tournament, final boolean includeParticipants,
 			final boolean includeMatches, final Callback<Tournament> onSuccess,
 			final Callback<DataAccessException> onFailure) {
 		getTournamentOrNull(tournament, includeParticipants, includeMatches, false, onSuccess, onFailure);
@@ -273,7 +273,7 @@ public class ChallongeExtension extends Challonge {
 	 * @param onFailure
 	 *            Called with exception if call was not successful
 	 */
-	public final void getTournamentOrNull(final String tournament, final boolean includeParticipants,
+	public void getTournamentOrNull(final String tournament, final boolean includeParticipants,
 			final boolean includeMatches, final boolean includeAttachments, final Callback<Tournament> onSuccess,
 			final Callback<DataAccessException> onFailure) {
 		// TODO: make the check better and safer for api updates, no ideas yet.
