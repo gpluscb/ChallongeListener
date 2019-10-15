@@ -12,8 +12,9 @@ import at.stefangeyer.challonge.model.Tournament;
 import at.stefangeyer.challonge.model.enumeration.MatchState;
 import at.stefangeyer.challonge.model.enumeration.TournamentType;
 import at.stefangeyer.challonge.model.query.enumeration.TournamentQueryState;
+import at.stefangeyer.challonge.service.ChallongeService;
 
-public interface ChallongeExtensionService {
+public interface ChallongeExtensionService extends ChallongeService {
 	/**
 	 * Checks whether a tournament exists.
 	 *
@@ -27,7 +28,9 @@ public interface ChallongeExtensionService {
 	 *             Exchange with the rest api or validation failed in a way that
 	 *             does not indicate that the tournament does not exist
 	 */
-	boolean doesTournamentExist(final String tournament) throws DataAccessException;
+	default boolean doesTournamentExist(final String tournament) throws DataAccessException {
+		return getTournamentOrNull(tournament) != null;
+	}
 	
 	/**
 	 * Checks whether a match exists.
@@ -42,7 +45,9 @@ public interface ChallongeExtensionService {
 	 *             Exchange with the rest api or validation failed in a way that
 	 *             does not indicate that the match does not exist
 	 */
-	boolean doesMatchExist(final Tournament tournament, final long matchId) throws DataAccessException;
+	default boolean doesMatchExist(final Tournament tournament, final long matchId) throws DataAccessException {
+		return getMatchOrNull(tournament, matchId, false) != null;
+	}
 	
 	/**
 	 * Checks whether a participant exists.
@@ -57,7 +62,27 @@ public interface ChallongeExtensionService {
 	 *             Exchange with the rest api or validation failed in a way that
 	 *             does not indicate that the participant does not exist
 	 */
-	boolean doesParticipantExist(final Tournament tournament, final long participantId) throws DataAccessException;
+	default boolean doesParticipantExist(final Tournament tournament, final long participantId)
+			throws DataAccessException {
+		return getParticipantOrNull(tournament, participantId, false) != null;
+	}
+	
+	/**
+	 * Checks whether a participant exists.
+	 *
+	 * @param match
+	 *            The match to get the attachment from. Must contain the
+	 *            tournament- and match id
+	 * @param attachmentId
+	 *            The id of the attachment to be checked
+	 * @return Whether the participant exists
+	 * @throws DataAccessException
+	 *             Exchange with the rest api or validation failed in a way that
+	 *             does not indicate that the participant does not exist
+	 */
+	default boolean doesAttachmentExist(final Match match, final long attachmentId) throws DataAccessException {
+		return getAttachmentOrNull(match, attachmentId) != null;
+	}
 	
 	/**
 	 * Checks whether the tournament is created or co-owned by your account.
