@@ -25,6 +25,8 @@ import at.stefangeyer.challonge.serializer.Serializer;
  * Note that those methods need to use multiple api requests and are therefore
  * more resource consuming.
  */
+// TODO: This extension feature might be ambitious/stand-alone enough to warrant
+// an own project
 public class ChallongeExtension extends Challonge implements ChallongeExtensionService {
 	/**
 	 * Creates a completely functional instance. It can be used directly.
