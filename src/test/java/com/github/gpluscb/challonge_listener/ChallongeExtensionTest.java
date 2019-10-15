@@ -14,7 +14,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.github.gpluscb.challonge_listener.ChallongeExtension;
 import com.google.gson.GsonBuilder;
 
 import at.stefangeyer.challonge.exception.DataAccessException;
