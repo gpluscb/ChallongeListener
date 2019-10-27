@@ -12,4 +12,16 @@ public class ParticipantCache {
 		
 		this.participant = participant;
 	}
+	
+	public TournamentCache getTournament() {
+		return this.tournament;
+	}
+	
+	public Participant getParticipant() {
+		return this.participant;
+	}
+	
+	void update() {
+		// TODO
+	}
 }

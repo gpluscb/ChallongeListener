@@ -24,4 +24,29 @@ public class MatchCache {
 			this.attachments.add(new AttachmentCache(this, attachment));
 		}
 	}
+	
+	public TournamentCache getTournament() {
+		return this.tournament;
+	}
+	
+	public Match getMatch() {
+		return this.match;
+	}
+	
+	public AttachmentCache getAttachmentById(final long attachmentId) {
+		for(final AttachmentCache attachment : this.attachments) {
+			if(attachment.getAttachment().getId().longValue() == attachmentId) {
+				return attachment;
+			}
+		}
+		return null;
+	}
+	
+	public List<AttachmentCache> getAttachments() {
+		return this.attachments;
+	}
+	
+	void update(Match match) {
+		// TODO
+	}
 }

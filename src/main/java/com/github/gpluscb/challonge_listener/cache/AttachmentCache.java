@@ -12,4 +12,16 @@ public class AttachmentCache {
 		
 		this.attachment = attachment;
 	}
+	
+	public MatchCache getMatch() {
+		return this.match;
+	}
+	
+	public Attachment getAttachment() {
+		return this.attachment;
+	}
+	
+	void update(Attachment attachment) {
+		// TODO
+	}
 }
