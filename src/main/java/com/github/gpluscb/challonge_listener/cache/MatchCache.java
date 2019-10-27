@@ -63,7 +63,28 @@ public class MatchCache {
 	}
 	
 	void update(final Match match) {
-		// TODO
+		this.match = match;
+		
+		List<AttachmentCache> notHandledAttachments = new ArrayList<>(this.attachments);
+		for(final Attachment attachment : this.match.getAttachments()) {
+			final AttachmentCache cache = getAttachmentById(attachment.getId().longValue());
+			if(cache == null) {
+				// New attachment
+				this.attachments.add(new AttachmentCache(this, attachment));
+			} else {
+				cache.update(attachment);
+				
+				// Now handled
+				notHandledAttachments.remove(cache);
+			}
+		}
+		// Not present in given matches attachments
+		for(final AttachmentCache toDelete : notHandledAttachments) {
+			this.attachments.remove(toDelete);
+		}
+		
+		// Clearing all links, they are re-initiated in participants update
+		this.participants.clear();
 	}
 	
 	void addParticipant(final ParticipantCache participant) {

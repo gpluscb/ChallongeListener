@@ -53,6 +53,15 @@ public class ParticipantCache {
 	}
 	
 	void update(final Participant participant) {
-		// TODO
+		this.participant = participant;
+		
+		for(Match match : this.participant.getMatches()) {
+			MatchCache cache = this.tournament.getMatchById(match.getId().longValue());
+			if(cache == null) {
+				throw new IllegalStateException("Match exists in tournament, is not represented in cache");
+			}
+			this.matches.add(cache);
+			cache.addParticipant(this);
+		}
 	}
 }

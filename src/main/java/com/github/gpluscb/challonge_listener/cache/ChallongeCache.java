@@ -31,6 +31,22 @@ public class ChallongeCache {
 	}
 	
 	public void update(final List<Tournament> tournaments) {
-		// TODO
+		List<TournamentCache> notHandled = new ArrayList<>(this.tournaments);
+		for(final Tournament tournament : tournaments) {
+			final TournamentCache cache = getTournamentById(tournament.getId().longValue());
+			if(cache == null) {
+				// New tournament
+				this.tournaments.add(new TournamentCache(this, tournament));
+			} else {
+				cache.update(tournament);
+				
+				// Now handled
+				notHandled.remove(cache);
+			}
+		}
+		// Not present in given tournaments
+		for(TournamentCache toDelete : notHandled) {
+			this.tournaments.remove(toDelete); 
+		}
 	}
 }

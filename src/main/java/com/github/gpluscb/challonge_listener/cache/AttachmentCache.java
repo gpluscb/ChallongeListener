@@ -22,6 +22,6 @@ public class AttachmentCache {
 	}
 	
 	void update(final Attachment attachment) {
-		// TODO
+		this.attachment = attachment;
 	}
 }

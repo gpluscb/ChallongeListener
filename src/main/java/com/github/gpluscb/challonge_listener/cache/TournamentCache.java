@@ -68,6 +68,42 @@ public class TournamentCache {
 	}
 	
 	void update(final Tournament tournament) {
-		// TODO
+		this.tournament = tournament;
+		
+		List<MatchCache> notHandledMatches = new ArrayList<>(this.matches);
+		for(final Match match : this.tournament.getMatches()) {
+			final MatchCache cache = getMatchById(match.getId().longValue());
+			if(cache == null) {
+				// New match
+				this.matches.add(new MatchCache(this, match));
+			} else {
+				cache.update(match);
+				
+				// Now handled
+				notHandledMatches.remove(cache);
+			}
+		}
+		// Not present in given tournaments matches
+		for(final MatchCache toDelete : notHandledMatches) {
+			this.matches.remove(toDelete);
+		}
+		
+		List<ParticipantCache> notHandledParticipants = new ArrayList<>(this.participants);
+		for(final Participant participant : this.tournament.getParticipants()) {
+			final ParticipantCache cache = getParticipantById(participant.getId().longValue());
+			if(cache == null) {
+				// New participant
+				this.participants.add(new ParticipantCache(this, participant));
+			} else {
+				cache.update(participant);
+				
+				// Now handled
+				notHandledParticipants.remove(cache);
+			}
+		}
+		// Not present in given tournaments participants
+		for(final ParticipantCache toDelete : notHandledParticipants) {
+			this.participants.remove(toDelete);
+		}
 	}
 }
