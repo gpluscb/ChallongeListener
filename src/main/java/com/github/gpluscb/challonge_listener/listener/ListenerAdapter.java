@@ -176,11 +176,14 @@ import com.github.gpluscb.challonge_listener.events.tournament.participant.Parti
 import com.github.gpluscb.challonge_listener.events.tournament.participant.ParticipantUsernameChangedEvent;
 
 /**
- * Breaks up the {@link com.github.gpluscb.challonge_listener.listener.EventListener
+ * Breaks up the
+ * {@link com.github.gpluscb.challonge_listener.listener.EventListener
  * EventListener} to feature inheritable methods specific to one type of
- * {@link com.github.gpluscb.challonge_listener.events.GenericEvent GenericEvent}.
+ * {@link com.github.gpluscb.challonge_listener.events.GenericEvent
+ * GenericEvent}.
  *
- * @see com.github.gpluscb.challonge_listener.listener.EventListener EventListener
+ * @see com.github.gpluscb.challonge_listener.listener.EventListener
+ *          EventListener
  */
 public abstract class ListenerAdapter implements EventListener {
 	

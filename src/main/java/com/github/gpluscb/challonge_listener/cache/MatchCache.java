@@ -65,7 +65,7 @@ public class MatchCache {
 	void update(final Match match) {
 		this.match = match;
 		
-		List<AttachmentCache> notHandledAttachments = new ArrayList<>(this.attachments);
+		final List<AttachmentCache> notHandledAttachments = new ArrayList<>(this.attachments);
 		for(final Attachment attachment : this.match.getAttachments()) {
 			final AttachmentCache cache = getAttachmentById(attachment.getId().longValue());
 			if(cache == null) {

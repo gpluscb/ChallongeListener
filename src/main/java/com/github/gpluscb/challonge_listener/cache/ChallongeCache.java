@@ -7,7 +7,7 @@ import java.util.List;
 import at.stefangeyer.challonge.model.Tournament;
 
 public class ChallongeCache {
-	private List<TournamentCache> tournaments;
+	private final List<TournamentCache> tournaments;
 	
 	public ChallongeCache(final List<Tournament> tournaments) {
 		this.tournaments = new ArrayList<>();
@@ -17,7 +17,7 @@ public class ChallongeCache {
 		}
 	}
 	
-	public TournamentCache getTournamentById(long tournamentId) {
+	public TournamentCache getTournamentById(final long tournamentId) {
 		for(final TournamentCache tournament : this.tournaments) {
 			if(tournament.getTournament().getId().longValue() == tournamentId) {
 				return tournament;
@@ -31,7 +31,7 @@ public class ChallongeCache {
 	}
 	
 	public void update(final List<Tournament> tournaments) {
-		List<TournamentCache> notHandled = new ArrayList<>(this.tournaments);
+		final List<TournamentCache> notHandled = new ArrayList<>(this.tournaments);
 		for(final Tournament tournament : tournaments) {
 			final TournamentCache cache = getTournamentById(tournament.getId().longValue());
 			if(cache == null) {
@@ -45,8 +45,8 @@ public class ChallongeCache {
 			}
 		}
 		// Not present in given tournaments
-		for(TournamentCache toDelete : notHandled) {
-			this.tournaments.remove(toDelete); 
+		for(final TournamentCache toDelete : notHandled) {
+			this.tournaments.remove(toDelete);
 		}
 	}
 }

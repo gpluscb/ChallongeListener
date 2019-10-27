@@ -2,7 +2,6 @@ package com.github.gpluscb.challonge_listener;
 
 import java.util.Scanner;
 
-import com.github.gpluscb.challonge_listener.ChallongeExtension;
 import com.github.gpluscb.challonge_listener.events.tournament.GenericTournamentEvent;
 import com.github.gpluscb.challonge_listener.events.tournament.TournamentDescriptionChangedEvent;
 import com.github.gpluscb.challonge_listener.listener.ListenerAdapter;

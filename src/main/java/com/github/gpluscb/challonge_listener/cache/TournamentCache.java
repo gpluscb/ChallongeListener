@@ -70,7 +70,7 @@ public class TournamentCache {
 	void update(final Tournament tournament) {
 		this.tournament = tournament;
 		
-		List<MatchCache> notHandledMatches = new ArrayList<>(this.matches);
+		final List<MatchCache> notHandledMatches = new ArrayList<>(this.matches);
 		for(final Match match : this.tournament.getMatches()) {
 			final MatchCache cache = getMatchById(match.getId().longValue());
 			if(cache == null) {
@@ -88,7 +88,7 @@ public class TournamentCache {
 			this.matches.remove(toDelete);
 		}
 		
-		List<ParticipantCache> notHandledParticipants = new ArrayList<>(this.participants);
+		final List<ParticipantCache> notHandledParticipants = new ArrayList<>(this.participants);
 		for(final Participant participant : this.tournament.getParticipants()) {
 			final ParticipantCache cache = getParticipantById(participant.getId().longValue());
 			if(cache == null) {

@@ -21,8 +21,8 @@ public class ParticipantCache {
 		
 		this.matches = new ArrayList<>();
 		
-		for(Match match : this.participant.getMatches()) {
-			MatchCache cache = this.tournament.getMatchById(match.getId().longValue());
+		for(final Match match : this.participant.getMatches()) {
+			final MatchCache cache = this.tournament.getMatchById(match.getId().longValue());
 			if(cache == null) {
 				throw new IllegalStateException("Match exists in tournament, is not represented in cache");
 			}
@@ -55,8 +55,8 @@ public class ParticipantCache {
 	void update(final Participant participant) {
 		this.participant = participant;
 		
-		for(Match match : this.participant.getMatches()) {
-			MatchCache cache = this.tournament.getMatchById(match.getId().longValue());
+		for(final Match match : this.participant.getMatches()) {
+			final MatchCache cache = this.tournament.getMatchById(match.getId().longValue());
 			if(cache == null) {
 				throw new IllegalStateException("Match exists in tournament, is not represented in cache");
 			}
