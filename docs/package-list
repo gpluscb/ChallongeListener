@@ -1,4 +1,5 @@
 com.github.gpluscb.challonge_listener
+com.github.gpluscb.challonge_listener.cache
 com.github.gpluscb.challonge_listener.events
 com.github.gpluscb.challonge_listener.events.tournament
 com.github.gpluscb.challonge_listener.events.tournament.match

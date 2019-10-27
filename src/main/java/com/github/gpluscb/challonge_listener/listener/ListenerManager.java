@@ -6,14 +6,17 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import com.github.gpluscb.challonge_listener.ChallongeExtension;
+import com.github.gpluscb.challonge_listener.cache.ChallongeCache;
 import com.github.gpluscb.challonge_listener.events.GenericEvent;
 import com.github.gpluscb.challonge_listener.events.tournament.GenericTournamentChangedEvent;
 import com.github.gpluscb.challonge_listener.events.tournament.GenericTournamentEvent;
@@ -81,6 +84,8 @@ public class ListenerManager {
 	
 	private final List<EventListener> managedListeners;
 	
+	private final ChallongeCache cache;
+	
 	/**
 	 * Creates a running instance that tries to update every 5 seconds. Note
 	 * that if something is changed but then changed back in-between updates the
@@ -126,6 +131,7 @@ public class ListenerManager {
 		this.interval = interval;
 		
 		this.managedListeners = new ArrayList<>();
+		this.cache = new ChallongeCache(Collections.emptyList());
 		
 		this.executor = Executors.newSingleThreadScheduledExecutor(runnable -> new Thread(runnable, "ListenerManager"));
 		this.executor.scheduleAtFixedRate(new Runnable() {
@@ -149,6 +155,8 @@ public class ListenerManager {
 			throws DataAccessException {
 		// Fetch current tournaments state
 		final List<TournamentWrapper> currentTournaments = getSubscribedTournaments();
+		ListenerManager.this.cache.update(currentTournaments.stream().filter(wrapper -> wrapper.exists())
+				.map(wrapper -> wrapper.getTournament()).collect(Collectors.toList()));
 		
 		// Does nothing if prevoiusTournaments is null
 		compareTournaments(previousTournaments, currentTournaments);
@@ -745,6 +753,16 @@ public class ListenerManager {
 	@Deprecated
 	public boolean isRunning() {
 		return this.state.equals(ManagerState.RUNNING);
+	}
+	
+	/**
+	 * Gets the cache of all of the managed tournaments. The instance will not
+	 * change, only contents will be updated.
+	 * 
+	 * @return The cache of the managed tournaments
+	 */
+	public ChallongeCache getCache() {
+		return this.cache;
 	}
 	
 	/**
