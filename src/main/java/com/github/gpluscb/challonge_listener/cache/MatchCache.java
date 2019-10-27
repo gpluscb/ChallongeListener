@@ -23,7 +23,7 @@ public class MatchCache {
 		this.attachments = new ArrayList<>();
 		this.participants = new ArrayList<>();
 		
-		for(final Attachment attachment : match.getAttachments()) {
+		for(final Attachment attachment : this.match.getAttachments()) {
 			this.attachments.add(new AttachmentCache(this, attachment));
 		}
 	}

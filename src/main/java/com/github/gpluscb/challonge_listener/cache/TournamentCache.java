@@ -24,11 +24,11 @@ public class TournamentCache {
 		this.matches = new ArrayList<>();
 		this.participants = new ArrayList<>();
 		
-		for(final Match match : tournament.getMatches()) {
+		for(final Match match : this.tournament.getMatches()) {
 			this.matches.add(new MatchCache(this, match));
 		}
 		
-		for(final Participant participant : tournament.getParticipants()) {
+		for(final Participant participant : this.tournament.getParticipants()) {
 			this.participants.add(new ParticipantCache(this, participant));
 		}
 	}

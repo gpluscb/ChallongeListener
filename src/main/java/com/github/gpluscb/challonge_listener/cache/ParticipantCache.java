@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Participant;
 
 public class ParticipantCache {
@@ -20,7 +21,14 @@ public class ParticipantCache {
 		
 		this.matches = new ArrayList<>();
 		
-		// TODO: Link
+		for(Match match : this.participant.getMatches()) {
+			MatchCache cache = this.tournament.getMatchById(match.getId().longValue());
+			if(cache == null) {
+				throw new IllegalStateException("Match exists in tournament, is not represented in cache");
+			}
+			this.matches.add(cache);
+			cache.addParticipant(this);
+		}
 	}
 	
 	public TournamentCache getTournament() {
