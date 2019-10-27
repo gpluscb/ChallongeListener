@@ -1,6 +1,7 @@
 package com.github.gpluscb.challonge_listener.cache;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import at.stefangeyer.challonge.model.Attachment;
@@ -12,6 +13,7 @@ public class MatchCache {
 	private Match match;
 	
 	private final List<AttachmentCache> attachments;
+	private final List<ParticipantCache> participants;
 	
 	MatchCache(final TournamentCache tournament, final Match match) {
 		this.tournament = tournament;
@@ -19,6 +21,7 @@ public class MatchCache {
 		this.match = match;
 		
 		this.attachments = new ArrayList<>();
+		this.participants = new ArrayList<>();
 		
 		for(final Attachment attachment : match.getAttachments()) {
 			this.attachments.add(new AttachmentCache(this, attachment));
@@ -46,7 +49,24 @@ public class MatchCache {
 		return this.attachments;
 	}
 	
-	void update(Match match) {
+	public ParticipantCache getParticipantById(final long participantId) {
+		for(final ParticipantCache participant : this.participants) {
+			if(participant.getParticipant().getId().longValue() == participantId) {
+				return participant;
+			}
+		}
+		return null;
+	}
+	
+	public List<ParticipantCache> getParticipants() {
+		return Collections.unmodifiableList(this.participants);
+	}
+	
+	void update(final Match match) {
 		// TODO
+	}
+	
+	void addParticipant(final ParticipantCache participant) {
+		this.participants.add(participant);
 	}
 }

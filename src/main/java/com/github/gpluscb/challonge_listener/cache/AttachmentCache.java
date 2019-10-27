@@ -21,7 +21,7 @@ public class AttachmentCache {
 		return this.attachment;
 	}
 	
-	void update(Attachment attachment) {
+	void update(final Attachment attachment) {
 		// TODO
 	}
 }

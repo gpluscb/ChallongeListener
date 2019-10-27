@@ -30,7 +30,7 @@ public class ChallongeCache {
 		return Collections.unmodifiableList(this.tournaments);
 	}
 	
-	public void update() {
+	public void update(final List<Tournament> tournaments) {
 		// TODO
 	}
 }
