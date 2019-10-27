@@ -7,6 +7,10 @@ import java.util.List;
 import at.stefangeyer.challonge.model.Attachment;
 import at.stefangeyer.challonge.model.Match;
 
+/**
+ * Manages a single {@link at.stefangeyer.challonge.model.Match Match} as a
+ * cache.
+ */
 public class MatchCache {
 	private final TournamentCache tournament;
 	
@@ -28,14 +32,32 @@ public class MatchCache {
 		}
 	}
 	
+	/**
+	 * Gets the {@link TournamentCache} this cache belongs to.
+	 * 
+	 * @return The {@link TournamentCache} that owns this cache
+	 */
 	public TournamentCache getTournament() {
 		return this.tournament;
 	}
 	
+	/**
+	 * Gets the managed {@link at.stefangeyer.challonge.model.Match Match}.
+	 * 
+	 * @return The managed match
+	 */
 	public Match getMatch() {
 		return this.match;
 	}
 	
+	/**
+	 * Gets an attachment with the given id.
+	 * 
+	 * @param attachmentId
+	 *            The id of the attachment
+	 * @return The attachment with the given id or null if no such attachment
+	 *             exists
+	 */
 	public AttachmentCache getAttachmentById(final long attachmentId) {
 		for(final AttachmentCache attachment : this.attachments) {
 			if(attachment.getAttachment().getId().longValue() == attachmentId) {
@@ -45,10 +67,23 @@ public class MatchCache {
 		return null;
 	}
 	
+	/**
+	 * Gets the managed {@link AttachmentCache AttachmentCaches}.
+	 * 
+	 * @return the managed attachment caches
+	 */
 	public List<AttachmentCache> getAttachments() {
 		return this.attachments;
 	}
 	
+	/**
+	 * Gets an participant of this match with the given id.
+	 * 
+	 * @param participantId
+	 *            The id of the participant
+	 * @return The participant with the given id or null if no such participant
+	 *             exists
+	 */
 	public ParticipantCache getParticipantById(final long participantId) {
 		for(final ParticipantCache participant : this.participants) {
 			if(participant.getParticipant().getId().longValue() == participantId) {
@@ -58,6 +93,11 @@ public class MatchCache {
 		return null;
 	}
 	
+	/**
+	 * Gets the linked {@link ParticipantCache ParticipantCaches}.
+	 * 
+	 * @return the linked participant caches
+	 */
 	public List<ParticipantCache> getParticipants() {
 		return Collections.unmodifiableList(this.participants);
 	}

@@ -7,6 +7,10 @@ import java.util.List;
 import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Participant;
 
+/**
+ * Manages a single {@link at.stefangeyer.challonge.model.Participant
+ * Participant} as a cache.
+ */
 public class ParticipantCache {
 	private final TournamentCache tournament;
 	
@@ -31,14 +35,32 @@ public class ParticipantCache {
 		}
 	}
 	
+	/**
+	 * Gets the {@link TournamentCache} this cache belongs to.
+	 * 
+	 * @return The {@link TournamentCache} that owns this cache
+	 */
 	public TournamentCache getTournament() {
 		return this.tournament;
 	}
 	
+	/**
+	 * Gets the managed {@link at.stefangeyer.challonge.model.Participant
+	 * Participant}.
+	 * 
+	 * @return The managed participant
+	 */
 	public Participant getParticipant() {
 		return this.participant;
 	}
 	
+	/**
+	 * Gets a match of this participant with the given id.
+	 * 
+	 * @param matchId
+	 *            The id of the match
+	 * @return The match with the given id or null if no such match exists
+	 */
 	public MatchCache getMatchById(final long matchId) {
 		for(final MatchCache match : this.matches) {
 			if(match.getMatch().getId().longValue() == matchId) {
@@ -48,6 +70,11 @@ public class ParticipantCache {
 		return null;
 	}
 	
+	/**
+	 * Gets the linked {@link MatchCache MatchCaches}.
+	 * 
+	 * @return the linked match caches
+	 */
 	public List<MatchCache> getMatches() {
 		return Collections.unmodifiableList(this.matches);
 	}

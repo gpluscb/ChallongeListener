@@ -8,6 +8,10 @@ import at.stefangeyer.challonge.model.Match;
 import at.stefangeyer.challonge.model.Participant;
 import at.stefangeyer.challonge.model.Tournament;
 
+/**
+ * Manages a single {@link at.stefangeyer.challonge.model.Tournament Tournament}
+ * as a cache.
+ */
 public class TournamentCache {
 	private final ChallongeCache challonge;
 	
@@ -33,14 +37,32 @@ public class TournamentCache {
 		}
 	}
 	
+	/**
+	 * Gets the {@link ChallongeCache} this cache belongs to.
+	 * 
+	 * @return The {@link ChallongeCache} that owns this cache
+	 */
 	public ChallongeCache getChallonge() {
 		return this.challonge;
 	}
 	
+	/**
+	 * Gets the managed {@link at.stefangeyer.challonge.model.Tournament
+	 * Tournament}.
+	 * 
+	 * @return The managed tournament
+	 */
 	public Tournament getTournament() {
 		return this.tournament;
 	}
 	
+	/**
+	 * Gets a match with the given id.
+	 * 
+	 * @param matchId
+	 *            The id of the match
+	 * @return The match with the given id or null if no such match exists
+	 */
 	public MatchCache getMatchById(final long matchId) {
 		for(final MatchCache match : this.matches) {
 			if(match.getMatch().getId().longValue() == matchId) {
@@ -50,10 +72,23 @@ public class TournamentCache {
 		return null;
 	}
 	
+	/**
+	 * Gets the managed {@link MatchCache MatchCaches}.
+	 * 
+	 * @return the managed match caches
+	 */
 	public List<MatchCache> getMatches() {
 		return Collections.unmodifiableList(this.matches);
 	}
 	
+	/**
+	 * Gets a participant with the given id.
+	 * 
+	 * @param participantId
+	 *            The id of the participant
+	 * @return The participant with the given id or null if no such participant
+	 *             exists
+	 */
 	public ParticipantCache getParticipantById(final long participantId) {
 		for(final ParticipantCache participant : this.participants) {
 			if(participant.getParticipant().getId().longValue() == participantId) {
@@ -63,6 +98,11 @@ public class TournamentCache {
 		return null;
 	}
 	
+	/**
+	 * Gets the managed {@link ParticipantCache ParticipantCaches}.
+	 * 
+	 * @return the managed participant caches
+	 */
 	public List<ParticipantCache> getParticipants() {
 		return Collections.unmodifiableList(this.participants);
 	}
