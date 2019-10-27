@@ -12,7 +12,7 @@ public class ChallongeCache {
 		this.tournaments = new ArrayList<>();
 		
 		for(final Tournament tournament : tournaments) {
-			this.tournaments.add(new TournamentCache(tournament));
+			this.tournaments.add(new TournamentCache(this, tournament));
 		}
 	}
 }
