@@ -76,12 +76,8 @@ public class MatchCache extends Cache<Match> {
 	 */
 	public AttachmentCache getAttachmentById(final long attachmentId) {
 		checkValidity();
-		for(final AttachmentCache attachment : this.attachments) {
-			if(attachment.getAttachment().getId().longValue() == attachmentId) {
-				return attachment;
-			}
-		}
-		return null;
+		final int index = getAttachmentIndexById(attachmentId);
+		return index < 0 ? null : this.attachments.get(index);
 	}
 	
 	/**
@@ -129,6 +125,35 @@ public class MatchCache extends Cache<Match> {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Removes the cache of the given attachment from this cache if it was
+	 * managed by this cache. In that case, that cache will be invalidated.
+	 * 
+	 * @param attachment
+	 *            The attachment cache to remove
+	 * @return Whether the given cache was managed by this cache
+	 * @throws IllegalStateException
+	 *             If the cache is invalid
+	 */
+	public boolean deleteAttachment(final Attachment attachment) {
+		checkValidity();
+		final int index = getAttachmentIndexById(attachment.getId().longValue());
+		if(index < 0) {
+			return false;
+		}
+		this.attachments.get(index);
+		return true;
+	}
+	
+	private int getAttachmentIndexById(final long attachmentId) {
+		for(int i = 0; i < this.attachments.size(); i++) {
+			if(this.attachments.get(i).getAttachment().getId().longValue() == attachmentId) {
+				return i;
+			}
+		}
+		return -1;
 	}
 	
 	/**

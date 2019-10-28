@@ -40,12 +40,8 @@ public class ChallongeCache extends Cache<List<Tournament>> {
 	 */
 	public TournamentCache getTournamentById(final long tournamentId) {
 		checkValidity();
-		for(final TournamentCache tournament : this.tournaments) {
-			if(tournament.getTournament().getId().longValue() == tournamentId) {
-				return tournament;
-			}
-		}
-		return null;
+		final int index = getTournamentIndexById(tournamentId);
+		return index < 0 ? null : this.tournaments.get(index);
 	}
 	
 	/**
@@ -93,6 +89,35 @@ public class ChallongeCache extends Cache<List<Tournament>> {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Removes the cache of the given tournament from this cache if it was
+	 * managed by this cache. In that case, that cache will be invalidated.
+	 * 
+	 * @param tournament
+	 *            The tournament cache to remove
+	 * @return Whether the given cache was managed by this cache
+	 * @throws IllegalStateException
+	 *             If the cache is invalid
+	 */
+	public boolean deleteTournament(final Tournament tournament) {
+		checkValidity();
+		final int index = getTournamentIndexById(tournament.getId().longValue());
+		if(index < 0) {
+			return false;
+		}
+		this.tournaments.get(index);
+		return true;
+	}
+	
+	private int getTournamentIndexById(final long tournamentId) {
+		for(int i = 0; i < this.tournaments.size(); i++) {
+			if(this.tournaments.get(i).getTournament().getId().longValue() == tournamentId) {
+				return i;
+			}
+		}
+		return -1;
 	}
 	
 	/**

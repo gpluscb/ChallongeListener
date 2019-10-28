@@ -81,12 +81,8 @@ public class TournamentCache extends Cache<Tournament> {
 	 */
 	public MatchCache getMatchById(final long matchId) {
 		checkValidity();
-		for(final MatchCache match : this.matches) {
-			if(match.getMatch().getId().longValue() == matchId) {
-				return match;
-			}
-		}
-		return null;
+		final int index = getMatchIndexById(matchId);
+		return index < 0 ? null : this.matches.get(index);
 	}
 	
 	/**
@@ -137,6 +133,35 @@ public class TournamentCache extends Cache<Tournament> {
 	}
 	
 	/**
+	 * Removes the cache of the given match from this cache if it was managed by
+	 * this cache. In that case, that cache will be invalidated.
+	 * 
+	 * @param match
+	 *            The match cache to remove
+	 * @return Whether the given cache was managed by this cache
+	 * @throws IllegalStateException
+	 *             If the cache is invalid
+	 */
+	public boolean deleteMatch(final Match match) {
+		checkValidity();
+		final int index = getMatchIndexById(match.getId().longValue());
+		if(index < 0) {
+			return false;
+		}
+		this.matches.get(index);
+		return true;
+	}
+	
+	private int getMatchIndexById(final long matchId) {
+		for(int i = 0; i < this.matches.size(); i++) {
+			if(this.matches.get(i).getMatch().getId().longValue() == matchId) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	/**
 	 * Gets a participant with the given id.
 	 * 
 	 * @param participantId
@@ -148,12 +173,8 @@ public class TournamentCache extends Cache<Tournament> {
 	 */
 	public ParticipantCache getParticipantById(final long participantId) {
 		checkValidity();
-		for(final ParticipantCache participant : this.participants) {
-			if(participant.getParticipant().getId().longValue() == participantId) {
-				return participant;
-			}
-		}
-		return null;
+		final int index = getParticipantIndexById(participantId);
+		return index < 0 ? null : this.participants.get(index);
 	}
 	
 	/**
@@ -201,6 +222,35 @@ public class TournamentCache extends Cache<Tournament> {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Removes the cache of the given participant from this cache if it was
+	 * managed by this cache. In that case, that cache will be invalidated.
+	 * 
+	 * @param participant
+	 *            The participant cache to remove
+	 * @return Whether the given cache was managed by this cache
+	 * @throws IllegalStateException
+	 *             If the cache is invalid
+	 */
+	public boolean deleteParticipant(final Participant participant) {
+		checkValidity();
+		final int index = getParticipantIndexById(participant.getId().longValue());
+		if(index < 0) {
+			return false;
+		}
+		this.participants.get(index);
+		return true;
+	}
+	
+	private int getParticipantIndexById(final long participantId) {
+		for(int i = 0; i < this.participants.size(); i++) {
+			if(this.participants.get(i).getParticipant().getId().longValue() == participantId) {
+				return i;
+			}
+		}
+		return -1;
 	}
 	
 	/**
