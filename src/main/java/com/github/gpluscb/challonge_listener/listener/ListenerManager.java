@@ -625,6 +625,9 @@ public class ListenerManager {
 				}
 			}
 		}
+		
+		// TODO: Optimization: check for *(Deleted|Created)Events, apply that to
+		// cache instead of iterating over everything there
 	}
 	
 	private void setState(final ManagerState state) {
