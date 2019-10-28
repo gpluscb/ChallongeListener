@@ -7,7 +7,7 @@ import at.stefangeyer.challonge.model.Attachment;
  * as a cache.
  */
 public class AttachmentCache {
-	private final MatchCache match;
+	private MatchCache match;
 	
 	private Attachment attachment;
 	
@@ -36,7 +36,21 @@ public class AttachmentCache {
 		return this.attachment;
 	}
 	
+	/**
+	 * Checks whether this cache is valid or if it has been deleted.
+	 * 
+	 * @return Whether this cache is valid
+	 */
+	public boolean isValid() {
+		return this.match != null;
+	}
+	
 	void update(final Attachment attachment) {
 		this.attachment = attachment;
+	}
+	
+	void delete() {
+		this.match = null;
+		this.attachment = null;
 	}
 }

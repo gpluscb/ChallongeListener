@@ -13,7 +13,7 @@ import at.stefangeyer.challonge.model.Tournament;
  * as a cache.
  */
 public class TournamentCache {
-	private final ChallongeCache challonge;
+	private ChallongeCache challonge;
 	
 	private Tournament tournament;
 	
@@ -107,6 +107,15 @@ public class TournamentCache {
 		return Collections.unmodifiableList(this.participants);
 	}
 	
+	/**
+	 * Checks whether this cache is valid or if it has been deleted.
+	 * 
+	 * @return Whether this cache is valid
+	 */
+	public boolean isValid() {
+		return this.challonge != null;
+	}
+	
 	void update(final Tournament tournament) {
 		this.tournament = tournament;
 		
@@ -144,6 +153,20 @@ public class TournamentCache {
 		// Not present in given tournaments participants
 		for(final ParticipantCache toDelete : notHandledParticipants) {
 			this.participants.remove(toDelete);
+			toDelete.delete();
 		}
+	}
+	
+	void delete() {
+		this.challonge = null;
+		this.tournament = null;
+		for(final ParticipantCache participant : this.participants) {
+			participant.delete();
+		}
+		this.participants.clear();
+		for(final MatchCache match : this.matches) {
+			match.delete();
+		}
+		this.matches.clear();
 	}
 }

@@ -12,7 +12,7 @@ import at.stefangeyer.challonge.model.Match;
  * cache.
  */
 public class MatchCache {
-	private final TournamentCache tournament;
+	private TournamentCache tournament;
 	
 	private Match match;
 	
@@ -102,6 +102,19 @@ public class MatchCache {
 		return Collections.unmodifiableList(this.participants);
 	}
 	
+	/**
+	 * Checks whether this cache is valid or if it has been deleted.
+	 * 
+	 * @return Whether this cache is valid
+	 */
+	public boolean isValid() {
+		return this.tournament != null;
+	}
+	
+	void addParticipant(final ParticipantCache participant) {
+		this.participants.add(participant);
+	}
+	
 	void update(final Match match) {
 		this.match = match;
 		
@@ -121,13 +134,20 @@ public class MatchCache {
 		// Not present in given matches attachments
 		for(final AttachmentCache toDelete : notHandledAttachments) {
 			this.attachments.remove(toDelete);
+			toDelete.delete();
 		}
 		
 		// Clearing all links, they are re-initiated in participants update
 		this.participants.clear();
 	}
 	
-	void addParticipant(final ParticipantCache participant) {
-		this.participants.add(participant);
+	void delete() {
+		this.tournament = null;
+		this.match = null;
+		for(final AttachmentCache attachment : this.attachments) {
+			attachment.delete();
+		}
+		this.attachments.clear();
+		this.participants.clear();
 	}
 }

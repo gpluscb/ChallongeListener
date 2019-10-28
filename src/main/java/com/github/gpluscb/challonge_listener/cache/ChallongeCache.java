@@ -77,6 +77,7 @@ public class ChallongeCache {
 		// Not present in given tournaments
 		for(final TournamentCache toDelete : notHandled) {
 			this.tournaments.remove(toDelete);
+			toDelete.delete();
 		}
 	}
 }

@@ -12,7 +12,7 @@ import at.stefangeyer.challonge.model.Participant;
  * Participant} as a cache.
  */
 public class ParticipantCache {
-	private final TournamentCache tournament;
+	private TournamentCache tournament;
 	
 	private Participant participant;
 	
@@ -79,6 +79,15 @@ public class ParticipantCache {
 		return Collections.unmodifiableList(this.matches);
 	}
 	
+	/**
+	 * Checks whether this cache is valid or if it has been deleted.
+	 * 
+	 * @return Whether this cache is valid
+	 */
+	public boolean isValid() {
+		return this.tournament != null;
+	}
+	
 	void update(final Participant participant) {
 		this.participant = participant;
 		
@@ -90,5 +99,11 @@ public class ParticipantCache {
 			this.matches.add(cache);
 			cache.addParticipant(this);
 		}
+	}
+	
+	void delete() {
+		this.tournament = null;
+		this.participant = null;
+		this.matches.clear();
 	}
 }
