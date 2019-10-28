@@ -30,7 +30,7 @@ public class AttachmentCache extends Cache<Attachment> {
 	 * 
 	 * @return The {@link MatchCache} that owns this cache
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public MatchCache getMatch() {
 		checkValidity();
@@ -43,7 +43,7 @@ public class AttachmentCache extends Cache<Attachment> {
 	 * 
 	 * @return The managed attachment
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public Attachment getAttachment() {
 		checkValidity();
@@ -56,7 +56,7 @@ public class AttachmentCache extends Cache<Attachment> {
 	 * @param attachment
 	 *            The new updated list of attachment
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	@Override
 	public void update(final Attachment attachment) {

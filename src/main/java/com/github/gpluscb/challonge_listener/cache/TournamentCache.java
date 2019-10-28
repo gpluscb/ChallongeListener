@@ -50,7 +50,7 @@ public class TournamentCache extends Cache<Tournament> {
 	 * 
 	 * @return The {@link ChallongeCache} that owns this cache
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public ChallongeCache getChallonge() {
 		checkValidity();
@@ -63,7 +63,7 @@ public class TournamentCache extends Cache<Tournament> {
 	 * 
 	 * @return The managed tournament
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public Tournament getTournament() {
 		checkValidity();
@@ -77,7 +77,7 @@ public class TournamentCache extends Cache<Tournament> {
 	 *            The id of the match
 	 * @return The match with the given id or null if no such match exists
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public MatchCache getMatchById(final long matchId) {
 		checkValidity();
@@ -94,7 +94,7 @@ public class TournamentCache extends Cache<Tournament> {
 	 * 
 	 * @return the managed match caches
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public List<MatchCache> getMatches() {
 		checkValidity();
@@ -107,7 +107,7 @@ public class TournamentCache extends Cache<Tournament> {
 	 * @param match
 	 *            The match cache to manage
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public void addMatch(final MatchCache match) {
 		checkValidity();
@@ -122,7 +122,7 @@ public class TournamentCache extends Cache<Tournament> {
 	 *            The match cache to remove
 	 * @return Whether the given cache was managed by this cache
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public boolean removeMatch(final MatchCache match) {
 		checkValidity();
@@ -137,7 +137,7 @@ public class TournamentCache extends Cache<Tournament> {
 	 * @return The participant with the given id or null if no such participant
 	 *             exists
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public ParticipantCache getParticipantById(final long participantId) {
 		checkValidity();
@@ -154,7 +154,7 @@ public class TournamentCache extends Cache<Tournament> {
 	 * 
 	 * @return the managed participant caches
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public List<ParticipantCache> getParticipants() {
 		checkValidity();
@@ -167,7 +167,7 @@ public class TournamentCache extends Cache<Tournament> {
 	 * @param participant
 	 *            The participant cache to manage
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public void addParticipant(final ParticipantCache participant) {
 		checkValidity();
@@ -182,7 +182,7 @@ public class TournamentCache extends Cache<Tournament> {
 	 *            The participant cache to remove
 	 * @return Whether the given cache was managed by this cache
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public boolean removeParticipant(final ParticipantCache participant) {
 		checkValidity();
@@ -195,7 +195,7 @@ public class TournamentCache extends Cache<Tournament> {
 	 * @param tournament
 	 *            The new updated tournament
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	@Override
 	public void update(final Tournament tournament) {

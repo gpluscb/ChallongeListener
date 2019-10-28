@@ -24,7 +24,7 @@ public abstract class Cache<T> {
 	}
 	
 	/**
-	 * Throws if the cache is invalid.
+	 * Throws If the cache is invalid.
 	 * 
 	 * @throws IllegalStateException
 	 *             If the cache is invalid

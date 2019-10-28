@@ -36,7 +36,7 @@ public class ChallongeCache extends Cache<List<Tournament>> {
 	 * @return The tournament with the given id or null if no such tournament
 	 *             exists
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public TournamentCache getTournamentById(final long tournamentId) {
 		checkValidity();
@@ -53,7 +53,7 @@ public class ChallongeCache extends Cache<List<Tournament>> {
 	 * 
 	 * @return the managed tournament caches
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public List<TournamentCache> getTournaments() {
 		checkValidity();
@@ -66,7 +66,7 @@ public class ChallongeCache extends Cache<List<Tournament>> {
 	 * @param tournament
 	 *            The tournament cache to manage
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public void addTournament(final TournamentCache tournament) {
 		checkValidity();
@@ -81,7 +81,7 @@ public class ChallongeCache extends Cache<List<Tournament>> {
 	 *            The tournament cache to remove
 	 * @return Whether the given cache was managed by this cache
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public boolean removeTournament(final TournamentCache tournament) {
 		checkValidity();
@@ -94,7 +94,7 @@ public class ChallongeCache extends Cache<List<Tournament>> {
 	 * @param tournaments
 	 *            The new updated list of tournaments
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	@Override
 	public void update(final List<Tournament> tournaments) {

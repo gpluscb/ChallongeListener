@@ -48,7 +48,7 @@ public class ParticipantCache extends Cache<Participant> {
 	 * 
 	 * @return The {@link TournamentCache} that owns this cache
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public TournamentCache getTournament() {
 		checkValidity();
@@ -61,7 +61,7 @@ public class ParticipantCache extends Cache<Participant> {
 	 * 
 	 * @return The managed participant
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public Participant getParticipant() {
 		checkValidity();
@@ -75,7 +75,7 @@ public class ParticipantCache extends Cache<Participant> {
 	 *            The id of the match
 	 * @return The match with the given id or null if no such match exists
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public MatchCache getMatchById(final long matchId) {
 		checkValidity();
@@ -92,7 +92,7 @@ public class ParticipantCache extends Cache<Participant> {
 	 * 
 	 * @return the linked match caches
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public List<MatchCache> getMatches() {
 		checkValidity();
@@ -105,7 +105,7 @@ public class ParticipantCache extends Cache<Participant> {
 	 * @param match
 	 *            The attachment cache to link
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public void linkMatch(final MatchCache match) {
 		checkValidity();
@@ -120,7 +120,7 @@ public class ParticipantCache extends Cache<Participant> {
 	 *            The match cache to remove
 	 * @return Whether the given cache was linked to this cache
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public boolean unlinkMatch(final MatchCache match) {
 		checkValidity();
@@ -133,7 +133,7 @@ public class ParticipantCache extends Cache<Participant> {
 	 * @param participant
 	 *            The new updated participant
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	@Override
 	public void update(final Participant participant) {

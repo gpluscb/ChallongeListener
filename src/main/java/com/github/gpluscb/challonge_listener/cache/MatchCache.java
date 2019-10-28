@@ -45,7 +45,7 @@ public class MatchCache extends Cache<Match> {
 	 * 
 	 * @return The {@link TournamentCache} that owns this cache
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public TournamentCache getTournament() {
 		checkValidity();
@@ -57,7 +57,7 @@ public class MatchCache extends Cache<Match> {
 	 * 
 	 * @return The managed match
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public Match getMatch() {
 		checkValidity();
@@ -72,7 +72,7 @@ public class MatchCache extends Cache<Match> {
 	 * @return The attachment with the given id or null if no such attachment
 	 *             exists
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public AttachmentCache getAttachmentById(final long attachmentId) {
 		checkValidity();
@@ -89,7 +89,7 @@ public class MatchCache extends Cache<Match> {
 	 * 
 	 * @return the managed attachment caches
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public List<AttachmentCache> getAttachments() {
 		checkValidity();
@@ -102,7 +102,7 @@ public class MatchCache extends Cache<Match> {
 	 * @param attachment
 	 *            The attachment cache to manage
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public void addAttachment(final AttachmentCache attachment) {
 		checkValidity();
@@ -117,7 +117,7 @@ public class MatchCache extends Cache<Match> {
 	 *            The attachment cache to remove
 	 * @return Whether the given cache was managed by this cache
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public boolean removeAttachment(final AttachmentCache attachment) {
 		checkValidity();
@@ -132,7 +132,7 @@ public class MatchCache extends Cache<Match> {
 	 * @return The participant with the given id or null if no such participant
 	 *             exists
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public ParticipantCache getParticipantById(final long participantId) {
 		checkValidity();
@@ -149,7 +149,7 @@ public class MatchCache extends Cache<Match> {
 	 * 
 	 * @return the linked participant caches
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public List<ParticipantCache> getParticipants() {
 		checkValidity();
@@ -162,7 +162,7 @@ public class MatchCache extends Cache<Match> {
 	 * @param participant
 	 *            The attachment cache to link
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public void linkParticipant(final ParticipantCache participant) {
 		checkValidity();
@@ -177,7 +177,7 @@ public class MatchCache extends Cache<Match> {
 	 *            The participant cache to remove
 	 * @return Whether the given cache was linked to this cache
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	public boolean unlinkParticipant(final ParticipantCache participant) {
 		checkValidity();
@@ -190,7 +190,7 @@ public class MatchCache extends Cache<Match> {
 	 * @param match
 	 *            The new updated match
 	 * @throws IllegalStateException
-	 *             if the cache is invalid
+	 *             If the cache is invalid
 	 */
 	@Override
 	public void update(final Match match) {
