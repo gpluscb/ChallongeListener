@@ -35,8 +35,11 @@ public class ChallongeCache extends Cache<List<Tournament>> {
 	 *            The id of the tournament
 	 * @return The tournament with the given id or null if no such tournament
 	 *             exists
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
 	 */
 	public TournamentCache getTournamentById(final long tournamentId) {
+		checkValidity();
 		for(final TournamentCache tournament : this.tournaments) {
 			if(tournament.getTournament().getId().longValue() == tournamentId) {
 				return tournament;
@@ -49,19 +52,53 @@ public class ChallongeCache extends Cache<List<Tournament>> {
 	 * Gets the managed {@link TournamentCache TournamentCaches}.
 	 * 
 	 * @return the managed tournament caches
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
 	 */
 	public List<TournamentCache> getTournaments() {
+		checkValidity();
 		return Collections.unmodifiableList(this.tournaments);
+	}
+	
+	/**
+	 * Adds the given tournament cache to this cache.
+	 * 
+	 * @param tournament
+	 *            The tournament cache to manage
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
+	 */
+	public void addTournament(final TournamentCache tournament) {
+		checkValidity();
+		this.tournaments.add(tournament);
+	}
+	
+	/**
+	 * Removes the given tournament cache from this cache. This will not
+	 * invalidate the given cache.
+	 * 
+	 * @param tournament
+	 *            The tournament cache to remove
+	 * @return Whether the given cache was managed by this cache
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
+	 */
+	public boolean removeTournament(final TournamentCache tournament) {
+		checkValidity();
+		return this.tournaments.remove(tournament);
 	}
 	
 	/**
 	 * Updates this cache with the given tournaments.
 	 * 
 	 * @param tournaments
-	 *            The new updated of tournaments
+	 *            The new updated list of tournaments
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
 	 */
 	@Override
 	public void update(final List<Tournament> tournaments) {
+		checkValidity();
 		final List<TournamentCache> notHandled = new ArrayList<>(this.tournaments);
 		for(final Tournament tournament : tournaments) {
 			final TournamentCache cache = getTournamentById(tournament.getId().longValue());

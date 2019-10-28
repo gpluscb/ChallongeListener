@@ -11,7 +11,15 @@ public class AttachmentCache extends Cache<Attachment> {
 	
 	private Attachment attachment;
 	
-	AttachmentCache(final MatchCache match, final Attachment attachment) {
+	/**
+	 * Creates a new cache of the given attachment.
+	 * 
+	 * @param match
+	 *            The match cache this cache is managed by
+	 * @param attachment
+	 *            The attachment the cache manages
+	 */
+	public AttachmentCache(final MatchCache match, final Attachment attachment) {
 		this.match = match;
 		
 		this.attachment = attachment;
@@ -21,6 +29,8 @@ public class AttachmentCache extends Cache<Attachment> {
 	 * Gets the {@link MatchCache} this cache belongs to.
 	 * 
 	 * @return The {@link MatchCache} that owns this cache
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
 	 */
 	public MatchCache getMatch() {
 		checkValidity();
@@ -40,8 +50,16 @@ public class AttachmentCache extends Cache<Attachment> {
 		return this.attachment;
 	}
 	
+	/**
+	 * Updates this cache with the given attachment.
+	 * 
+	 * @param attachment
+	 *            The new updated list of attachment
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
+	 */
 	@Override
-	protected void update(final Attachment attachment) {
+	public void update(final Attachment attachment) {
 		checkValidity();
 		this.attachment = attachment;
 	}

@@ -18,7 +18,15 @@ public class ParticipantCache extends Cache<Participant> {
 	
 	private final List<MatchCache> matches;
 	
-	ParticipantCache(final TournamentCache tournament, final Participant participant) {
+	/**
+	 * Creates a new cache of the given participant.
+	 * 
+	 * @param tournament
+	 *            The tournament cache this cache is managed by
+	 * @param participant
+	 *            The participant the cache manages
+	 */
+	public ParticipantCache(final TournamentCache tournament, final Participant participant) {
 		this.tournament = tournament;
 		
 		this.participant = participant;
@@ -31,7 +39,7 @@ public class ParticipantCache extends Cache<Participant> {
 				throw new IllegalStateException("Match exists in tournament, is not represented in cache");
 			}
 			this.matches.add(cache);
-			cache.addParticipant(this);
+			cache.linkParticipant(this);
 		}
 	}
 	
@@ -91,8 +99,45 @@ public class ParticipantCache extends Cache<Participant> {
 		return Collections.unmodifiableList(this.matches);
 	}
 	
+	/**
+	 * Links the given match cache to this cache.
+	 * 
+	 * @param match
+	 *            The attachment cache to link
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
+	 */
+	public void linkMatch(final MatchCache match) {
+		checkValidity();
+		this.matches.add(match);
+	}
+	
+	/**
+	 * Unlinks the given match cache from this cache. This will not invalidate
+	 * the given cache.
+	 * 
+	 * @param match
+	 *            The match cache to remove
+	 * @return Whether the given cache was linked to this cache
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
+	 */
+	public boolean unlinkMatch(final MatchCache match) {
+		checkValidity();
+		return this.matches.remove(match);
+	}
+	
+	/**
+	 * Updates this cache with the given participant.
+	 * 
+	 * @param participant
+	 *            The new updated participant
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
+	 */
 	@Override
-	protected void update(final Participant participant) {
+	public void update(final Participant participant) {
+		checkValidity();
 		this.participant = participant;
 		
 		for(final Match match : this.participant.getMatches()) {
@@ -101,7 +146,7 @@ public class ParticipantCache extends Cache<Participant> {
 				throw new IllegalStateException("Match exists in tournament, is not represented in cache");
 			}
 			this.matches.add(cache);
-			cache.addParticipant(this);
+			cache.linkParticipant(this);
 		}
 	}
 }

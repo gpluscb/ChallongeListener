@@ -19,7 +19,15 @@ public class MatchCache extends Cache<Match> {
 	private final List<AttachmentCache> attachments;
 	private final List<ParticipantCache> participants;
 	
-	MatchCache(final TournamentCache tournament, final Match match) {
+	/**
+	 * Creates a new cache of the given match.
+	 * 
+	 * @param tournament
+	 *            The tournament cache this cache is managed by
+	 * @param match
+	 *            The match the cache manages
+	 */
+	public MatchCache(final TournamentCache tournament, final Match match) {
 		this.tournament = tournament;
 		
 		this.match = match;
@@ -89,6 +97,34 @@ public class MatchCache extends Cache<Match> {
 	}
 	
 	/**
+	 * Adds the given attachment cache to this cache.
+	 * 
+	 * @param attachment
+	 *            The attachment cache to manage
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
+	 */
+	public void addAttachment(final AttachmentCache attachment) {
+		checkValidity();
+		this.attachments.add(attachment);
+	}
+	
+	/**
+	 * Removes the given attachment cache from this cache. This will not
+	 * invalidate the given cache.
+	 * 
+	 * @param attachment
+	 *            The attachment cache to remove
+	 * @return Whether the given cache was managed by this cache
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
+	 */
+	public boolean removeAttachment(final AttachmentCache attachment) {
+		checkValidity();
+		return this.attachments.remove(attachment);
+	}
+	
+	/**
 	 * Gets an participant of this match with the given id.
 	 * 
 	 * @param participantId
@@ -120,13 +156,44 @@ public class MatchCache extends Cache<Match> {
 		return Collections.unmodifiableList(this.participants);
 	}
 	
-	void addParticipant(final ParticipantCache participant) {
+	/**
+	 * Links the given participant cache to this cache.
+	 * 
+	 * @param participant
+	 *            The attachment cache to link
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
+	 */
+	public void linkParticipant(final ParticipantCache participant) {
 		checkValidity();
 		this.participants.add(participant);
 	}
 	
+	/**
+	 * Unlinks the given participant cache from this cache. This will not
+	 * invalidate the given cache.
+	 * 
+	 * @param participant
+	 *            The participant cache to remove
+	 * @return Whether the given cache was linked to this cache
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
+	 */
+	public boolean unlinkParticipant(final ParticipantCache participant) {
+		checkValidity();
+		return this.participants.remove(participant);
+	}
+	
+	/**
+	 * Updates this cache with the given match.
+	 * 
+	 * @param match
+	 *            The new updated match
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
+	 */
 	@Override
-	protected void update(final Match match) {
+	public void update(final Match match) {
 		checkValidity();
 		this.match = match;
 		
