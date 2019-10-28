@@ -11,7 +11,7 @@ import at.stefangeyer.challonge.model.Tournament;
  * {@link com.github.gpluscb.challonge_listener.listener.ListenerManager
  * ListenerManager} manages in a cache. Use this to reduce api calls.
  */
-public class ChallongeCache {
+public class ChallongeCache extends Cache<List<Tournament>> {
 	private final List<TournamentCache> tournaments;
 	
 	/**
@@ -60,6 +60,7 @@ public class ChallongeCache {
 	 * @param tournaments
 	 *            The new updated of tournaments
 	 */
+	@Override
 	public void update(final List<Tournament> tournaments) {
 		final List<TournamentCache> notHandled = new ArrayList<>(this.tournaments);
 		for(final Tournament tournament : tournaments) {
@@ -77,7 +78,7 @@ public class ChallongeCache {
 		// Not present in given tournaments
 		for(final TournamentCache toDelete : notHandled) {
 			this.tournaments.remove(toDelete);
-			toDelete.delete();
+			toDelete.invalidate();
 		}
 	}
 }

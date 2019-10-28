@@ -6,8 +6,8 @@ import at.stefangeyer.challonge.model.Attachment;
  * Manages a single {@link at.stefangeyer.challonge.model.Attachment Attachment}
  * as a cache.
  */
-public class AttachmentCache {
-	private MatchCache match;
+public class AttachmentCache extends Cache<Attachment> {
+	private final MatchCache match;
 	
 	private Attachment attachment;
 	
@@ -23,6 +23,7 @@ public class AttachmentCache {
 	 * @return The {@link MatchCache} that owns this cache
 	 */
 	public MatchCache getMatch() {
+		checkValidity();
 		return this.match;
 	}
 	
@@ -31,26 +32,17 @@ public class AttachmentCache {
 	 * Attachment}.
 	 * 
 	 * @return The managed attachment
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
 	 */
 	public Attachment getAttachment() {
+		checkValidity();
 		return this.attachment;
 	}
 	
-	/**
-	 * Checks whether this cache is valid or if it has been deleted.
-	 * 
-	 * @return Whether this cache is valid
-	 */
-	public boolean isValid() {
-		return this.match != null;
-	}
-	
-	void update(final Attachment attachment) {
+	@Override
+	protected void update(final Attachment attachment) {
+		checkValidity();
 		this.attachment = attachment;
-	}
-	
-	void delete() {
-		this.match = null;
-		this.attachment = null;
 	}
 }

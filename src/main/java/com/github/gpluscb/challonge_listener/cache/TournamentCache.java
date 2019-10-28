@@ -12,8 +12,8 @@ import at.stefangeyer.challonge.model.Tournament;
  * Manages a single {@link at.stefangeyer.challonge.model.Tournament Tournament}
  * as a cache.
  */
-public class TournamentCache {
-	private ChallongeCache challonge;
+public class TournamentCache extends Cache<Tournament> {
+	private final ChallongeCache challonge;
 	
 	private Tournament tournament;
 	
@@ -41,8 +41,11 @@ public class TournamentCache {
 	 * Gets the {@link ChallongeCache} this cache belongs to.
 	 * 
 	 * @return The {@link ChallongeCache} that owns this cache
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
 	 */
 	public ChallongeCache getChallonge() {
+		checkValidity();
 		return this.challonge;
 	}
 	
@@ -51,8 +54,11 @@ public class TournamentCache {
 	 * Tournament}.
 	 * 
 	 * @return The managed tournament
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
 	 */
 	public Tournament getTournament() {
+		checkValidity();
 		return this.tournament;
 	}
 	
@@ -62,8 +68,11 @@ public class TournamentCache {
 	 * @param matchId
 	 *            The id of the match
 	 * @return The match with the given id or null if no such match exists
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
 	 */
 	public MatchCache getMatchById(final long matchId) {
+		checkValidity();
 		for(final MatchCache match : this.matches) {
 			if(match.getMatch().getId().longValue() == matchId) {
 				return match;
@@ -76,8 +85,11 @@ public class TournamentCache {
 	 * Gets the managed {@link MatchCache MatchCaches}.
 	 * 
 	 * @return the managed match caches
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
 	 */
 	public List<MatchCache> getMatches() {
+		checkValidity();
 		return Collections.unmodifiableList(this.matches);
 	}
 	
@@ -88,8 +100,11 @@ public class TournamentCache {
 	 *            The id of the participant
 	 * @return The participant with the given id or null if no such participant
 	 *             exists
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
 	 */
 	public ParticipantCache getParticipantById(final long participantId) {
+		checkValidity();
 		for(final ParticipantCache participant : this.participants) {
 			if(participant.getParticipant().getId().longValue() == participantId) {
 				return participant;
@@ -102,21 +117,17 @@ public class TournamentCache {
 	 * Gets the managed {@link ParticipantCache ParticipantCaches}.
 	 * 
 	 * @return the managed participant caches
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
 	 */
 	public List<ParticipantCache> getParticipants() {
+		checkValidity();
 		return Collections.unmodifiableList(this.participants);
 	}
 	
-	/**
-	 * Checks whether this cache is valid or if it has been deleted.
-	 * 
-	 * @return Whether this cache is valid
-	 */
-	public boolean isValid() {
-		return this.challonge != null;
-	}
-	
-	void update(final Tournament tournament) {
+	@Override
+	protected void update(final Tournament tournament) {
+		checkValidity();
 		this.tournament = tournament;
 		
 		final List<MatchCache> notHandledMatches = new ArrayList<>(this.matches);
@@ -135,6 +146,7 @@ public class TournamentCache {
 		// Not present in given tournaments matches
 		for(final MatchCache toDelete : notHandledMatches) {
 			this.matches.remove(toDelete);
+			toDelete.invalidate();
 		}
 		
 		final List<ParticipantCache> notHandledParticipants = new ArrayList<>(this.participants);
@@ -153,20 +165,7 @@ public class TournamentCache {
 		// Not present in given tournaments participants
 		for(final ParticipantCache toDelete : notHandledParticipants) {
 			this.participants.remove(toDelete);
-			toDelete.delete();
+			toDelete.invalidate();
 		}
-	}
-	
-	void delete() {
-		this.challonge = null;
-		this.tournament = null;
-		for(final ParticipantCache participant : this.participants) {
-			participant.delete();
-		}
-		this.participants.clear();
-		for(final MatchCache match : this.matches) {
-			match.delete();
-		}
-		this.matches.clear();
 	}
 }

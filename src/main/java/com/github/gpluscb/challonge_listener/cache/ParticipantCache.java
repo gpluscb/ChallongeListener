@@ -11,8 +11,8 @@ import at.stefangeyer.challonge.model.Participant;
  * Manages a single {@link at.stefangeyer.challonge.model.Participant
  * Participant} as a cache.
  */
-public class ParticipantCache {
-	private TournamentCache tournament;
+public class ParticipantCache extends Cache<Participant> {
+	private final TournamentCache tournament;
 	
 	private Participant participant;
 	
@@ -39,8 +39,11 @@ public class ParticipantCache {
 	 * Gets the {@link TournamentCache} this cache belongs to.
 	 * 
 	 * @return The {@link TournamentCache} that owns this cache
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
 	 */
 	public TournamentCache getTournament() {
+		checkValidity();
 		return this.tournament;
 	}
 	
@@ -49,8 +52,11 @@ public class ParticipantCache {
 	 * Participant}.
 	 * 
 	 * @return The managed participant
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
 	 */
 	public Participant getParticipant() {
+		checkValidity();
 		return this.participant;
 	}
 	
@@ -60,8 +66,11 @@ public class ParticipantCache {
 	 * @param matchId
 	 *            The id of the match
 	 * @return The match with the given id or null if no such match exists
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
 	 */
 	public MatchCache getMatchById(final long matchId) {
+		checkValidity();
 		for(final MatchCache match : this.matches) {
 			if(match.getMatch().getId().longValue() == matchId) {
 				return match;
@@ -74,21 +83,16 @@ public class ParticipantCache {
 	 * Gets the linked {@link MatchCache MatchCaches}.
 	 * 
 	 * @return the linked match caches
+	 * @throws IllegalStateException
+	 *             if the cache is invalid
 	 */
 	public List<MatchCache> getMatches() {
+		checkValidity();
 		return Collections.unmodifiableList(this.matches);
 	}
 	
-	/**
-	 * Checks whether this cache is valid or if it has been deleted.
-	 * 
-	 * @return Whether this cache is valid
-	 */
-	public boolean isValid() {
-		return this.tournament != null;
-	}
-	
-	void update(final Participant participant) {
+	@Override
+	protected void update(final Participant participant) {
 		this.participant = participant;
 		
 		for(final Match match : this.participant.getMatches()) {
@@ -99,11 +103,5 @@ public class ParticipantCache {
 			this.matches.add(cache);
 			cache.addParticipant(this);
 		}
-	}
-	
-	void delete() {
-		this.tournament = null;
-		this.participant = null;
-		this.matches.clear();
 	}
 }
