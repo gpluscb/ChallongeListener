@@ -102,21 +102,24 @@ public class TournamentCache extends Cache<Tournament> {
 	}
 	
 	/**
-	 * Adds the given match cache to this cache.
+	 * Adds the given match to this cache.
 	 * 
 	 * @param match
-	 *            The match cache to manage
+	 *            The match to manage
+	 * @return The created cache
 	 * @throws IllegalStateException
 	 *             If the cache is invalid
 	 */
-	public void addMatch(final MatchCache match) {
+	public MatchCache newMatch(final Match match) {
 		checkValidity();
-		this.matches.add(match);
+		final MatchCache cache = new MatchCache(this, match);
+		this.matches.add(cache);
+		return cache;
 	}
 	
 	/**
-	 * Removes the given match cache from this cache. This will not invalidate
-	 * the given cache.
+	 * Removes the given match cache from this cache if it was managed by this
+	 * cache. In that case, the given cache will be invalidated.
 	 * 
 	 * @param match
 	 *            The match cache to remove
@@ -124,9 +127,13 @@ public class TournamentCache extends Cache<Tournament> {
 	 * @throws IllegalStateException
 	 *             If the cache is invalid
 	 */
-	public boolean removeMatch(final MatchCache match) {
+	public boolean deleteMatch(final MatchCache match) {
 		checkValidity();
-		return this.matches.remove(match);
+		if(this.matches.remove(match)) {
+			match.invalidate();
+			return true;
+		}
+		return false;
 	}
 	
 	/**
@@ -162,21 +169,24 @@ public class TournamentCache extends Cache<Tournament> {
 	}
 	
 	/**
-	 * Adds the given participant cache to this cache.
+	 * Adds the given participant to this cache.
 	 * 
 	 * @param participant
-	 *            The participant cache to manage
+	 *            The participant to manage
+	 * @return The created cache
 	 * @throws IllegalStateException
 	 *             If the cache is invalid
 	 */
-	public void addParticipant(final ParticipantCache participant) {
+	public ParticipantCache newParticipant(final Participant participant) {
 		checkValidity();
-		this.participants.add(participant);
+		final ParticipantCache cache = new ParticipantCache(this, participant);
+		this.participants.add(cache);
+		return cache;
 	}
 	
 	/**
-	 * Removes the given participant cache from this cache. This will not
-	 * invalidate the given cache.
+	 * Removes the given participant cache from this cache if it was managed by
+	 * this cache. In that case, the given cache will be invalidated.
 	 * 
 	 * @param participant
 	 *            The participant cache to remove
@@ -184,9 +194,13 @@ public class TournamentCache extends Cache<Tournament> {
 	 * @throws IllegalStateException
 	 *             If the cache is invalid
 	 */
-	public boolean removeParticipant(final ParticipantCache participant) {
+	public boolean deleteParticipant(final ParticipantCache participant) {
 		checkValidity();
-		return this.participants.remove(participant);
+		if(this.participants.remove(participant)) {
+			participant.invalidate();
+			return true;
+		}
+		return false;
 	}
 	
 	/**

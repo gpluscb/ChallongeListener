@@ -97,21 +97,24 @@ public class MatchCache extends Cache<Match> {
 	}
 	
 	/**
-	 * Adds the given attachment cache to this cache.
+	 * Adds the given attachment to this cache.
 	 * 
 	 * @param attachment
-	 *            The attachment cache to manage
+	 *            The attachment to manage
+	 * @return The created cache
 	 * @throws IllegalStateException
 	 *             If the cache is invalid
 	 */
-	public void addAttachment(final AttachmentCache attachment) {
+	public AttachmentCache newAttachment(final Attachment attachment) {
 		checkValidity();
-		this.attachments.add(attachment);
+		final AttachmentCache cache = new AttachmentCache(this, attachment);
+		this.attachments.add(cache);
+		return cache;
 	}
 	
 	/**
-	 * Removes the given attachment cache from this cache. This will not
-	 * invalidate the given cache.
+	 * Removes the given attachment cache from this cache if it was managed by
+	 * this cache. In that case, the given cache will be invalidated.
 	 * 
 	 * @param attachment
 	 *            The attachment cache to remove
@@ -119,9 +122,13 @@ public class MatchCache extends Cache<Match> {
 	 * @throws IllegalStateException
 	 *             If the cache is invalid
 	 */
-	public boolean removeAttachment(final AttachmentCache attachment) {
+	public boolean deleteAttachment(final AttachmentCache attachment) {
 		checkValidity();
-		return this.attachments.remove(attachment);
+		if(this.attachments.remove(attachment)) {
+			attachment.invalidate();
+			return true;
+		}
+		return false;
 	}
 	
 	/**

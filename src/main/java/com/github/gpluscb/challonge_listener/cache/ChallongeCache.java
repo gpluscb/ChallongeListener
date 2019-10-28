@@ -61,21 +61,24 @@ public class ChallongeCache extends Cache<List<Tournament>> {
 	}
 	
 	/**
-	 * Adds the given tournament cache to this cache.
+	 * Adds the given tournament to this cache.
 	 * 
 	 * @param tournament
-	 *            The tournament cache to manage
+	 *            The tournament to manage
+	 * @return The created cache
 	 * @throws IllegalStateException
 	 *             If the cache is invalid
 	 */
-	public void addTournament(final TournamentCache tournament) {
+	public TournamentCache newTournament(final Tournament tournament) {
 		checkValidity();
-		this.tournaments.add(tournament);
+		final TournamentCache cache = new TournamentCache(this, tournament);
+		this.tournaments.add(cache);
+		return cache;
 	}
 	
 	/**
-	 * Removes the given tournament cache from this cache. This will not
-	 * invalidate the given cache.
+	 * Removes the given tournament cache from this cache if it was managed by
+	 * this cache. In that case, the given cache will be invalidated.
 	 * 
 	 * @param tournament
 	 *            The tournament cache to remove
@@ -83,9 +86,13 @@ public class ChallongeCache extends Cache<List<Tournament>> {
 	 * @throws IllegalStateException
 	 *             If the cache is invalid
 	 */
-	public boolean removeTournament(final TournamentCache tournament) {
+	public boolean deleteTournament(final TournamentCache tournament) {
 		checkValidity();
-		return this.tournaments.remove(tournament);
+		if(this.tournaments.remove(tournament)) {
+			tournament.invalidate();
+			return true;
+		}
+		return false;
 	}
 	
 	/**
