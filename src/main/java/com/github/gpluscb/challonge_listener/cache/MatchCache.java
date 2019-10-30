@@ -234,7 +234,7 @@ public class MatchCache extends Cache<Match> {
 			final AttachmentCache cache = getAttachmentById(attachment.getId().longValue());
 			if(cache == null) {
 				// New attachment
-				this.attachments.add(new AttachmentCache(this, attachment));
+				newAttachment(attachment);
 			} else {
 				cache.update(attachment);
 				
@@ -244,8 +244,7 @@ public class MatchCache extends Cache<Match> {
 		}
 		// Not present in given matches attachments
 		for(final AttachmentCache toDelete : notHandledAttachments) {
-			this.attachments.remove(toDelete);
-			toDelete.invalidate();
+			deleteAttachment(toDelete);
 		}
 		
 		// Clearing all links, they are re-initiated in participants update

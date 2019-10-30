@@ -100,7 +100,8 @@ public class ParticipantCache extends Cache<Participant> {
 	}
 	
 	/**
-	 * Links the given match cache to this cache.
+	 * Links the given match cache to this cache. No link in the other direction
+	 * will be initiated.
 	 * 
 	 * @param match
 	 *            The attachment cache to link
@@ -114,7 +115,7 @@ public class ParticipantCache extends Cache<Participant> {
 	
 	/**
 	 * Unlinks the given match cache from this cache. This will not invalidate
-	 * the given cache.
+	 * the given cache. The link in the other direction will persist.
 	 * 
 	 * @param match
 	 *            The match cache to remove
@@ -143,7 +144,7 @@ public class ParticipantCache extends Cache<Participant> {
 		for(final Match match : this.participant.getMatches()) {
 			final MatchCache cache = this.tournament.getMatchById(match.getId().longValue());
 			if(cache == null) {
-				throw new IllegalStateException("Match exists in tournament, is not represented in cache");
+				throw new IllegalStateException("Match exists in tournament but is not represented in cache");
 			}
 			this.matches.add(cache);
 			cache.linkParticipant(this);

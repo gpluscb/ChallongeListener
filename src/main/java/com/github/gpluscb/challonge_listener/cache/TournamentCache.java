@@ -271,7 +271,7 @@ public class TournamentCache extends Cache<Tournament> {
 			final MatchCache cache = getMatchById(match.getId().longValue());
 			if(cache == null) {
 				// New match
-				this.matches.add(new MatchCache(this, match));
+				newMatch(match);
 			} else {
 				cache.update(match);
 				
@@ -281,8 +281,7 @@ public class TournamentCache extends Cache<Tournament> {
 		}
 		// Not present in given tournaments matches
 		for(final MatchCache toDelete : notHandledMatches) {
-			this.matches.remove(toDelete);
-			toDelete.invalidate();
+			deleteMatch(toDelete);
 		}
 		
 		final List<ParticipantCache> notHandledParticipants = new ArrayList<>(this.participants);
@@ -290,7 +289,7 @@ public class TournamentCache extends Cache<Tournament> {
 			final ParticipantCache cache = getParticipantById(participant.getId().longValue());
 			if(cache == null) {
 				// New participant
-				this.participants.add(new ParticipantCache(this, participant));
+				newParticipant(participant);
 			} else {
 				cache.update(participant);
 				
@@ -300,8 +299,7 @@ public class TournamentCache extends Cache<Tournament> {
 		}
 		// Not present in given tournaments participants
 		for(final ParticipantCache toDelete : notHandledParticipants) {
-			this.participants.remove(toDelete);
-			toDelete.invalidate();
+			deleteParticipant(toDelete);
 		}
 	}
 }

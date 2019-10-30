@@ -136,7 +136,7 @@ public class ChallongeCache extends Cache<List<Tournament>> {
 			final TournamentCache cache = getTournamentById(tournament.getId().longValue());
 			if(cache == null) {
 				// New tournament
-				this.tournaments.add(new TournamentCache(this, tournament));
+				newTournament(tournament);
 			} else {
 				cache.update(tournament);
 				
@@ -146,8 +146,7 @@ public class ChallongeCache extends Cache<List<Tournament>> {
 		}
 		// Not present in given tournaments
 		for(final TournamentCache toDelete : notHandled) {
-			this.tournaments.remove(toDelete);
-			toDelete.invalidate();
+			deleteTournament(toDelete);
 		}
 	}
 }
