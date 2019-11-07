@@ -30,7 +30,9 @@ public abstract class Cache<T> {
 	 *             If the cache is invalid
 	 */
 	protected void checkValidity() throws IllegalStateException {
-		throw new IllegalStateException("Cache is invalid");
+		if(!this.isValid) {
+			throw new IllegalStateException("Cache is invalid");
+		}
 	}
 	
 	/**
