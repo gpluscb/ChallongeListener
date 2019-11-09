@@ -9,7 +9,7 @@ There is no official stance on api spam or something similar by Challonge as of 
 ### Download:
 This repo is published as a snapshot on Sonatype OSS. You can download it [here](https://oss.sonatype.org/content/repositories/snapshots/com/github/gpluscb/ChallongeListener/).\
 If you are using Maven, add the following to your repositories in your pom.xml:
-```
+```xml
 <repository>
 	<id>oss.sonatype.org-snapshot</id>
 	<url>http://oss.sonatype.org/content/repositories/snapshots</url>
@@ -22,7 +22,7 @@ If you are using Maven, add the following to your repositories in your pom.xml:
 </repository>
 ```
 And this to your dependencies:
-```
+```xml
 <dependency>
 	<groupId>com.github.gpluscb</groupId>
 	<artifactId>ChallongeListener</artifactId>
@@ -30,13 +30,13 @@ And this to your dependencies:
 </dependency>
 ```
 If you are using Gradle, add the following to your repositories in your build.gradle:
-```
+```gradle
 maven {
 	url 'https://oss.sonatype.org/content/repositories/snapshots/'
 }
 ```
 And this to your dependencies:
-```
+```gradle
 implementation group: 'com.github.gpluscb', name: 'ChallongeListener', version: '1.0.0-SNAPSHOT'
 ```
 
@@ -45,7 +45,7 @@ Check out the [ChallongeListener example](src/examples/java/com/gpluscb/challong
 
 #### ListenerManager
 To listen to anything, you need a [ListenerManager](src/main/java/com/gpluscb/challonge_listener/listener/ListenerManager.java) instance. This instance will fire all the events to your listeners.
-```
+```java
 final ListenerManager manager = new ListenerManager(challonge, 5000);
 ```
 As you can see, you will need to pass a ChallongeExtension instance and (optionally) a long value to the constructor.\
