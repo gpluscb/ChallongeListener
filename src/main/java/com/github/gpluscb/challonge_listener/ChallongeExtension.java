@@ -50,16 +50,6 @@ public class ChallongeExtension extends Challonge implements ChallongeExtensionS
 		getTournaments();
 	}
 	
-	/**
-	 * Checks whether the tournament is created or co-owned by your account.
-	 *
-	 * @param tournament
-	 *            The tournament to be checked. Must contain id or url with an
-	 *            optional subdomain
-	 * @return Whether the tournament is owned or co-owned by the user
-	 * @throws DataAccessException
-	 *             Exchange with the rest api or validation failed
-	 */
 	@Override
 	public boolean doesOwn(final Tournament tournament) throws DataAccessException {
 		for(final Tournament ownedTournament : getTournaments()) {
@@ -74,25 +64,22 @@ public class ChallongeExtension extends Challonge implements ChallongeExtensionS
 		return false;
 	}
 	
-	/**
-	 * Gets a tournament or returns null if it does not exist.
-	 *
-	 * @param tournament
-	 *            Tournament ID (e.g. 10230) or URL (e.g. 'single_elim' for
-	 *            challonge.com/single_elim). If assigned to a subdomain, URL
-	 *            format must be :subdomain-:tournament_url (e.g.
-	 *            'test-mytourney' for test.challonge.com/mytourney)
-	 * @param includeParticipants
-	 *            Include a list of participants in the response
-	 * @param includeMatches
-	 *            Include a list of matches in the response
-	 * @param includeAttachments
-	 *            Include a list of attachments for each match in the response
-	 * @return The requested tournament or null
-	 * @throws DataAccessException
-	 *             Exchange with the rest api or validation failed in a way that
-	 *             does not indicate that the tournament does not exist
-	 */
+	@Override
+	public void doesOwn(final Tournament tournament, final Callback<Boolean> onSuccess,
+			final Callback<DataAccessException> onFailure) {
+		getTournaments(tournaments -> {
+			for(final Tournament ownedTournament : tournaments) {
+				if(ownedTournament.getId().equals(tournament.getId())
+						|| ownedTournament.getUrl().equals(tournament.getUrl())
+								&& (ownedTournament.getSubdomain() == null ? tournament.getSubdomain() == null
+										: ownedTournament.getSubdomain().equals(tournament.getSubdomain()))) {
+					onSuccess.accept(Boolean.TRUE);
+				}
+			}
+			onSuccess.accept(Boolean.FALSE);
+		}, onFailure);
+	}
+	
 	@Override
 	public Tournament getTournamentOrNull(final String tournament, final boolean includeParticipants,
 			final boolean includeMatches, final boolean includeAttachments) throws DataAccessException {
@@ -110,25 +97,6 @@ public class ChallongeExtension extends Challonge implements ChallongeExtensionS
 		}
 	}
 	
-	/**
-	 * Gets a tournament or returns null if it does not exist.
-	 *
-	 * @param tournament
-	 *            Tournament ID (e.g. 10230) or URL (e.g. 'single_elim' for
-	 *            challonge.com/single_elim). If assigned to a subdomain, URL
-	 *            format must be :subdomain-:tournament_url (e.g.
-	 *            'test-mytourney' for test.challonge.com/mytourney)
-	 * @param includeParticipants
-	 *            Include a list of participants in the response
-	 * @param includeMatches
-	 *            Include a list of matches in the response
-	 * @param includeAttachments
-	 *            Include a list of attachments for each match in the response
-	 * @param onSuccess
-	 *            Called with result if call was successful
-	 * @param onFailure
-	 *            Called with exception if call was not successful
-	 */
 	@Override
 	public void getTournamentOrNull(final String tournament, final boolean includeParticipants,
 			final boolean includeMatches, final boolean includeAttachments, final Callback<Tournament> onSuccess,
@@ -146,20 +114,6 @@ public class ChallongeExtension extends Challonge implements ChallongeExtensionS
 		});
 	}
 	
-	/**
-	 * Gets a participant or returns null if it does not exist.
-	 *
-	 * @param tournament
-	 *            The tournament to get the participant from. Must contain
-	 *            tournament id
-	 * @param participantId
-	 *            The participant's unique ID
-	 * @param includeMatches
-	 *            Includes an array of associated match records
-	 * @return The requested participant
-	 * @throws DataAccessException
-	 *             Exchange with the rest api or validation failed
-	 */
 	@Override
 	public Participant getParticipantOrNull(final Tournament tournament, final long participantId,
 			final boolean includeMatches) throws DataAccessException {
@@ -177,21 +131,6 @@ public class ChallongeExtension extends Challonge implements ChallongeExtensionS
 		}
 	}
 	
-	/**
-	 * Gets a participant or returns null if it does not exist.
-	 *
-	 * @param tournament
-	 *            The tournament to get the participant from. Must contain
-	 *            tournament id
-	 * @param participantId
-	 *            The participant's unique ID
-	 * @param includeMatches
-	 *            Includes an array of associated match records
-	 * @param onSuccess
-	 *            Called with result if call was successful
-	 * @param onFailure
-	 *            Called with exception if call was not successful
-	 */
 	@Override
 	public void getParticipantOrNull(final Tournament tournament, final long participantId,
 			final boolean includeMatches, final Callback<Participant> onSuccess,
@@ -209,21 +148,6 @@ public class ChallongeExtension extends Challonge implements ChallongeExtensionS
 		});
 	}
 	
-	/**
-	 * Gets a match or returns null if it does not exist.
-	 *
-	 * @param tournament
-	 *            The tournament to get the match from. Must contain tournament
-	 *            id
-	 * @param matchId
-	 *            The match's unique ID
-	 * @param includeAttachments
-	 *            Include an array of associated attachment records
-	 * @return The requested match or null
-	 * @throws DataAccessException
-	 *             Exchange with the rest api or validation failed in a way that
-	 *             does not indicate that the tournament does not exist
-	 */
 	@Override
 	public Match getMatchOrNull(final Tournament tournament, final long matchId, final boolean includeAttachments)
 			throws DataAccessException {
@@ -241,21 +165,6 @@ public class ChallongeExtension extends Challonge implements ChallongeExtensionS
 		}
 	}
 	
-	/**
-	 * Gets a match or returns null if it does not exist.
-	 *
-	 * @param tournament
-	 *            The tournament to get the match from. Must contain tournament
-	 *            id
-	 * @param matchId
-	 *            The match's unique ID
-	 * @param includeAttachments
-	 *            Include an array of associated attachment records
-	 * @param onSuccess
-	 *            Called with result if call was successful
-	 * @param onFailure
-	 *            Called with exception if call was not successful
-	 */
 	@Override
 	public void getMatchOrNull(final Tournament tournament, final long matchId, final boolean includeAttachments,
 			final Callback<Match> onSuccess, final Callback<DataAccessException> onFailure) {
@@ -272,19 +181,6 @@ public class ChallongeExtension extends Challonge implements ChallongeExtensionS
 		});
 	}
 	
-	/**
-	 * Gets an attachment or returns null if it does not exist.
-	 *
-	 * @param match
-	 *            The match to get the attachment from. Must contain the
-	 *            tournament- and match id
-	 * @param attachmentId
-	 *            The attachment's unique ID
-	 * @return The requested attachment or null
-	 * @throws DataAccessException
-	 *             Exchange with the rest api or validation failed in a way that
-	 *             does not indicate that the tournament does not exist
-	 */
 	@Override
 	public Attachment getAttachmentOrNull(final Match match, final long attachmentId) throws DataAccessException {
 		// TODO: make the check better and safer for api updates, no ideas yet.
@@ -301,19 +197,6 @@ public class ChallongeExtension extends Challonge implements ChallongeExtensionS
 		}
 	}
 	
-	/**
-	 * Gets an attachment or returns null if it does not exist.
-	 *
-	 * @param match
-	 *            The match to get the attachment from. Must contain the
-	 *            tournament- and match id
-	 * @param attachmentId
-	 *            The attachment's unique ID
-	 * @param onSuccess
-	 *            Called with result if call was successful
-	 * @param onFailure
-	 *            Called with exception if call was not successful
-	 */
 	@Override
 	public void getAttachmentOrNull(final Match match, final long attachmentId, final Callback<Attachment> onSuccess,
 			final Callback<DataAccessException> onFailure) {
@@ -327,27 +210,6 @@ public class ChallongeExtension extends Challonge implements ChallongeExtensionS
 		});
 	}
 	
-	/**
-	 * Retrieve a single tournament record created with or co-owned by your
-	 * account.
-	 *
-	 * @param tournament
-	 *            Tournament ID (e.g. 10230) or URL (e.g. 'single_elim' for
-	 *            challonge.com/single_elim). If assigned to a subdomain, URL
-	 *            format must be :subdomain-:tournament_url (e.g.
-	 *            'test-mytourney' for test.challonge.com/mytourney)
-	 * @param includeParticipants
-	 *            Include a list of participants in the response
-	 * @param includeMatches
-	 *            Include a list of matches in the response
-	 * @param includeAttachments
-	 *            Include a list of attachments for each match in the response
-	 * @return The matching tournament
-	 * @throws DataAccessException
-	 *             Exchange with the rest api or validation failed
-	 * @throws IllegalArgumentException
-	 *             includeAttachments is true but includeMatches is false
-	 */
 	@Override
 	public Tournament getTournament(final String tournament, final boolean includeParticipants,
 			final boolean includeMatches, final boolean includeAttachments) throws DataAccessException {
@@ -374,29 +236,6 @@ public class ChallongeExtension extends Challonge implements ChallongeExtensionS
 		return ret;
 	}
 	
-	/**
-	 * Retrieve a single tournament record created with or co-owned by your
-	 * account.
-	 *
-	 * @param tournament
-	 *            Tournament ID (e.g. 10230) or URL (e.g. 'single_elim' for
-	 *            challonge.com/single_elim). If assigned to a subdomain, URL
-	 *            format must be :subdomain-:tournament_url (e.g.
-	 *            'test-mytourney' for test.challonge.com/mytourney)
-	 * @param includeParticipants
-	 *            Include a list of participants in the response
-	 * @param includeMatches
-	 *            Include a list of matches in the response
-	 * @param includeAttachments
-	 *            Include a list of attachments for each match in the response
-	 *            Exchange with the rest api or validation failed
-	 * @param onSuccess
-	 *            Called with result if call was successful
-	 * @param onFailure
-	 *            Called with exception if call was not successful
-	 * @throws IllegalArgumentException
-	 *             includeAttachments is true but includeMatches is false
-	 */
 	@Override
 	public void getTournament(final String tournament, final boolean includeParticipants, final boolean includeMatches,
 			final boolean includeAttachments, final Callback<Tournament> onSuccess,
@@ -426,25 +265,6 @@ public class ChallongeExtension extends Challonge implements ChallongeExtensionS
 		}, onFailure);
 	}
 	
-	/**
-	 * Retrieve a set of tournaments created with or co-owned by your account
-	 * with all participants, matches and attachments.
-	 *
-	 * @param state
-	 *            Only get tournaments with this state
-	 * @param type
-	 *            Only get tournaments with this type
-	 * @param createdAfter
-	 *            Get tournaments created after this date
-	 * @param createdBefore
-	 *            Get tournaments created before this date
-	 * @param subdomain
-	 *            Only get tournaments with this subdomain
-	 * @return The tournaments
-	 * @throws DataAccessException
-	 *             Exchange with the rest api or validation failed. Can occur if
-	 *             a tournament is significantly changed during the operation
-	 */
 	@Override
 	public List<Tournament> getTournamentsWithFullData(final TournamentQueryState state, final TournamentType type,
 			final OffsetDateTime createdAfter, final OffsetDateTime createdBefore, final String subdomain)
@@ -458,25 +278,6 @@ public class ChallongeExtension extends Challonge implements ChallongeExtensionS
 		return tournaments;
 	}
 	
-	/**
-	 * Retrieve a set of tournaments created with or co-owned by your account
-	 * with all participants, matches and attachments.
-	 * 
-	 * @param state
-	 *            Only get tournaments with this state
-	 * @param type
-	 *            Only get tournaments with this type
-	 * @param createdAfter
-	 *            Get tournaments created after this date
-	 * @param createdBefore
-	 *            Get tournaments created before this date
-	 * @param subdomain
-	 *            Only get tournaments with this subdomain
-	 * @param onSuccess
-	 *            Called with result if call was successful
-	 * @param onFailure
-	 *            Called with exception if call was not successful
-	 */
 	@Override
 	public void getTournamentsWithFullData(final TournamentQueryState state, final TournamentType type,
 			final OffsetDateTime createdAfter, final OffsetDateTime createdBefore, final String subdomain,
@@ -494,17 +295,6 @@ public class ChallongeExtension extends Challonge implements ChallongeExtensionS
 		}, onFailure);
 	}
 	
-	/**
-	 * Retrieve all the participants in the tournament with all matches.
-	 *
-	 * @param tournament
-	 *            The tournament to get the matches from. Must contain id or url
-	 *            with an optional subdomain
-	 * @return The tournament's participants
-	 * @throws DataAccessException
-	 *             Exchange with the rest api or validation failed. Can occur if
-	 *             the tournament is significantly during the operation
-	 */
 	@Override
 	public List<Participant> getParticipantsWithFullData(final Tournament tournament) throws DataAccessException {
 		final List<Participant> participants = getParticipants(tournament);
@@ -516,17 +306,6 @@ public class ChallongeExtension extends Challonge implements ChallongeExtensionS
 		return participants;
 	}
 	
-	/**
-	 * Retrieve all the participants in the tournament with all matches.
-	 *
-	 * @param tournament
-	 *            The tournament to get the matches from. Must contain id or url
-	 *            with an optional subdomain
-	 * @param onSuccess
-	 *            Called with result if call was successful
-	 * @param onFailure
-	 *            Called with exception if call was not successful
-	 */
 	@Override
 	public void getParticipantsWithFullData(final Tournament tournament, final Callback<List<Participant>> onSuccess,
 			final Callback<DataAccessException> onFailure) {
@@ -543,23 +322,6 @@ public class ChallongeExtension extends Challonge implements ChallongeExtensionS
 		}, onFailure);
 	}
 	
-	/**
-	 * Retrieve a set of matches in the tournament with all attachments.
-	 *
-	 * @param tournament
-	 *            The tournament to get the matches from. Must contain id or url
-	 *            with an optional subdomain
-	 * @param participant
-	 *            Only retrieve matches that include the specified participant.
-	 *            This parameter is optional. Provide null if you want to skip
-	 *            it.
-	 * @param state
-	 *            all (default), pending, open, complete. This parameter is
-	 *            optional. Provide null if you want to skip it.
-	 * @return The tournament's matches
-	 * @throws DataAccessException
-	 *             Exchange with the rest api or validation failed
-	 */
 	@Override
 	public List<Match> getMatchesWithFullData(final Tournament tournament, final Participant participant,
 			final MatchState state) throws DataAccessException {
@@ -572,24 +334,6 @@ public class ChallongeExtension extends Challonge implements ChallongeExtensionS
 		return matches;
 	}
 	
-	/**
-	 * Retrieve a set of the matches in the tournament with all attachments.
-	 *
-	 * @param tournament
-	 *            The tournament to get the matches from. Must contain id or url
-	 *            with an optional subdomain
-	 * @param participant
-	 *            Only retrieve matches that include the specified participant.
-	 *            This parameter is optional. Provide null if you want to skip
-	 *            it.
-	 * @param state
-	 *            all (default), pending, open, complete. This parameter is
-	 *            optional. Provide null if you want to skip it.
-	 * @param onSuccess
-	 *            Called with result if call was successful
-	 * @param onFailure
-	 *            Called with exception if call was not successful
-	 */
 	@Override
 	public void getMatchesWithFullData(final Tournament tournament, final Participant participant,
 			final MatchState state, final Callback<List<Match>> onSuccess,

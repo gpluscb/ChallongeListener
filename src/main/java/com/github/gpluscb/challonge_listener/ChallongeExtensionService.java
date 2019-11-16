@@ -97,6 +97,20 @@ public interface ChallongeExtensionService extends ChallongeService {
 	boolean doesOwn(final Tournament tournament) throws DataAccessException;
 	
 	/**
+	 * Checks whether the tournament is created or co-owned by your account.
+	 *
+	 * @param tournament
+	 *            The tournament to be checked. Must contain id or url with an
+	 *            optional subdomain
+	 * @param onSuccess
+	 *            Called with result if call was successful
+	 * @param onFailure
+	 *            Called with exception if call was not successful
+	 */
+	void doesOwn(final Tournament tournament, final Callback<Boolean> onSuccess,
+			final Callback<DataAccessException> onFailure);
+	
+	/**
 	 * Gets a tournament or returns null if it does not exist.
 	 *
 	 * @param tournament
