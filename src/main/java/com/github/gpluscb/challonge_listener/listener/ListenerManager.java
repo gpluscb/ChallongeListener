@@ -155,7 +155,7 @@ public class ListenerManager {
 			throws DataAccessException {
 		// Fetch current tournaments state
 		final List<TournamentWrapper> currentTournaments = getSubscribedTournaments();
-		ListenerManager.this.cache.update(currentTournaments.stream().filter(TournamentWrapper::exists)
+		this.cache.update(currentTournaments.stream().filter(TournamentWrapper::exists)
 				.map(TournamentWrapper::getTournament).collect(Collectors.toList()));
 		
 		// Does nothing if prevoiusTournaments is null
@@ -223,7 +223,6 @@ public class ListenerManager {
 	
 	private void compareTournaments(final List<TournamentWrapper> previousTournaments,
 			final List<TournamentWrapper> currentTournaments) {
-		
 		if(currentTournaments != null && previousTournaments != null) {
 			for(final TournamentWrapper currentTournament : currentTournaments) {
 				for(final TournamentWrapper previousTournament : previousTournaments) {
