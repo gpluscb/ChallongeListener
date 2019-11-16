@@ -33,6 +33,25 @@ public interface ChallongeExtensionService extends ChallongeService {
 	}
 	
 	/**
+	 * Checks whether a tournament exists.
+	 *
+	 * @param tournament
+	 *            Tournament ID (e.g. 10230) or URL (e.g. 'single_elim' for
+	 *            challonge.com/single_elim). If assigned to a subdomain, URL
+	 *            format must be :subdomain-:tournament_url (e.g.
+	 *            'test-mytourney' for test.challonge.com/mytourney)
+	 * @param onSuccess
+	 *            Called with result if call was successful
+	 * @param onFailure
+	 *            Called with exception if call was not successful
+	 */
+	default void doesTournamentExist(final String tournament, final Callback<Boolean> onSuccess,
+			final Callback<DataAccessException> onFailure) {
+		getTournamentOrNull(tournament, tournamentOrNull -> onSuccess.accept(Boolean.valueOf(tournamentOrNull != null)),
+				onFailure);
+	}
+	
+	/**
 	 * Checks whether a match exists.
 	 *
 	 * @param tournament
@@ -47,6 +66,25 @@ public interface ChallongeExtensionService extends ChallongeService {
 	 */
 	default boolean doesMatchExist(final Tournament tournament, final long matchId) throws DataAccessException {
 		return getMatchOrNull(tournament, matchId, false) != null;
+	}
+	
+	/**
+	 * Checks whether a match exists.
+	 *
+	 * @param tournament
+	 *            The matches tournament. Must contain id or url with an
+	 *            optional subdomain
+	 * @param matchId
+	 *            The id of the match to be checked
+	 * @param onSuccess
+	 *            Called with result if call was successful
+	 * @param onFailure
+	 *            Called with exception if call was not successful
+	 */
+	default void doesMatchExist(final Tournament tournament, final long matchId, final Callback<Boolean> onSuccess,
+			final Callback<DataAccessException> onFailure) {
+		getMatchOrNull(tournament, matchId, false, match -> onSuccess.accept(Boolean.valueOf(match != null)),
+				onFailure);
 	}
 	
 	/**
@@ -70,18 +108,56 @@ public interface ChallongeExtensionService extends ChallongeService {
 	/**
 	 * Checks whether a participant exists.
 	 *
+	 * @param tournament
+	 *            The participantes tournament. Must contain id or url with an
+	 *            optional subdomain
+	 * @param participantId
+	 *            The id of the participant to be checked
+	 * @param onSuccess
+	 *            Called with result if call was successful
+	 * @param onFailure
+	 *            Called with exception if call was not successful
+	 */
+	default void doesParticipantExist(final Tournament tournament, final long participantId,
+			final Callback<Boolean> onSuccess, final Callback<DataAccessException> onFailure) {
+		getParticipantOrNull(tournament, participantId, false,
+				participant -> onSuccess.accept(Boolean.valueOf(participant != null)), onFailure);
+	}
+	
+	/**
+	 * Checks whether an attachment exists.
+	 *
 	 * @param match
 	 *            The match to get the attachment from. Must contain the
 	 *            tournament- and match id
 	 * @param attachmentId
 	 *            The id of the attachment to be checked
-	 * @return Whether the participant exists
+	 * @return Whether the attachment exists
 	 * @throws DataAccessException
 	 *             Exchange with the rest api or validation failed in a way that
 	 *             does not indicate that the participant does not exist
 	 */
 	default boolean doesAttachmentExist(final Match match, final long attachmentId) throws DataAccessException {
 		return getAttachmentOrNull(match, attachmentId) != null;
+	}
+	
+	/**
+	 * Checks whether an attachment exists.
+	 *
+	 * @param match
+	 *            The match to get the attachment from. Must contain the
+	 *            tournament- and match id
+	 * @param attachmentId
+	 *            The id of the attachment to be checked
+	 * @param onSuccess
+	 *            Called with result if call was successful
+	 * @param onFailure
+	 *            Called with exception if call was not successful
+	 */
+	default void doesAttachmentExist(final Match match, final long attachmentId, final Callback<Boolean> onSuccess,
+			final Callback<DataAccessException> onFailure) {
+		getAttachmentOrNull(match, attachmentId, attachment -> onSuccess.accept(Boolean.valueOf(attachment != null)),
+				onFailure);
 	}
 	
 	/**
