@@ -107,7 +107,7 @@ public class ChallongeCache extends Cache<List<Tournament>> {
 		if(index < 0) {
 			return false;
 		}
-		this.tournaments.get(index);
+		this.tournaments.remove(index);
 		return true;
 	}
 	

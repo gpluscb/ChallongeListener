@@ -148,7 +148,7 @@ public class TournamentCache extends Cache<Tournament> {
 		if(index < 0) {
 			return false;
 		}
-		this.matches.get(index);
+		this.matches.remove(index);
 		return true;
 	}
 	
@@ -240,7 +240,7 @@ public class TournamentCache extends Cache<Tournament> {
 		if(index < 0) {
 			return false;
 		}
-		this.participants.get(index);
+		this.participants.remove(index);
 		return true;
 	}
 	

@@ -143,7 +143,7 @@ public class MatchCache extends Cache<Match> {
 		if(index < 0) {
 			return false;
 		}
-		this.attachments.get(index);
+		this.attachments.remove(index);
 		return true;
 	}
 	

@@ -6,6 +6,7 @@ package com.github.gpluscb.challonge_listener.cache;
  * @param <T>
  *            The class of the cache.
  */
+// TODO: Use maps instead of lists
 public abstract class Cache<T> {
 	private boolean isValid;
 	
