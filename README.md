@@ -1,8 +1,12 @@
 # ChallongeListener
+
 A project using the [stefangeyer/challonge-java](https://github.com/stefangeyer/challonge-java) project to fire events to listeners when a tournament changes.
 
 **Quick disclaimer**:\
-There is no official stance on api spam or something similar by Challonge as of now. So you are entirely at your own risk when using this project as it automates api calls. I am not at fault if you get limited, timed-out, banned, or punished in any other way. Just a quick heads up: the more unique tournaments you subscribe to and the more attachments these tournaments have, the more api calls are made each update cycle.
+You are entirely at your own risk when using this project as it polls the api quite often. I am not at fault if you get limited, timed-out, banned, or punished in any other way. Regarding this topic, support told me the following:
+> We unfortunately don't have callbacks yet \[...\], so polling the API is fine as long as you don't hammer away too rapidly. We have pretty liberal rate limits, but if you have an estimate of what numbers you anticipate, please let me know.
+
+Just a quick heads up: the more unique tournaments you subscribe to and the more attachments these tournaments have, the more api calls are made each update cycle.
 
 ## Using this project:
 
