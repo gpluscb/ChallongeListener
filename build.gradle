@@ -49,7 +49,7 @@ uploadArchives {
 				name 'ChallongeListener'
 				packaging 'jar'
 				description 'A project using the stefangeyer/challonge-java project to fire events to listeners when a Challonge tournament changes.'
-				url 'http://githb.com/gpluscb/ChallongeListener'
+				url 'http://github.com/gpluscb/ChallongeListener'
 				
 				scm {
 					connection 'scm:git:git://github.com/gpluscb/ChallongeListener.git'
