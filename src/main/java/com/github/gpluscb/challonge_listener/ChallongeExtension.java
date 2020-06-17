@@ -74,6 +74,7 @@ public class ChallongeExtension extends Challonge implements ChallongeExtensionS
 								&& (ownedTournament.getSubdomain() == null ? tournament.getSubdomain() == null
 										: ownedTournament.getSubdomain().equals(tournament.getSubdomain()))) {
 					onSuccess.accept(Boolean.TRUE);
+					return;
 				}
 			}
 			onSuccess.accept(Boolean.FALSE);
@@ -259,6 +260,8 @@ public class ChallongeExtension extends Challonge implements ChallongeExtensionS
 						addMissingData(match);
 					}
 				}
+
+				onSuccess.accept(ret);
 			} catch(final DataAccessException e) {
 				onFailure.accept(e);
 			}
