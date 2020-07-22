@@ -13,6 +13,7 @@ import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import com.github.gpluscb.challonge_listener.ChallongeExtension;
@@ -86,6 +87,8 @@ public class ListenerManager {
 	
 	private final ChallongeCache cache;
 	
+	private Consumer<? super DataAccessException> exceptionHandler = Throwable::printStackTrace;
+	
 	/**
 	 * Creates a running instance that tries to update every 5 seconds. Note
 	 * that if something is changed but then changed back in-between updates the
@@ -142,8 +145,7 @@ public class ListenerManager {
 				try {
 					this.previousTournaments = update(this.previousTournaments);
 				} catch(final DataAccessException e) {
-					System.out.println("ListenerManager: DataAccessException caught, trying to continue anyway: "
-							+ e.getMessage());
+					exceptionHandler.accept(e);
 				}
 			}
 		}, 0, Math.max(interval, 1), TimeUnit.MILLISECONDS);
@@ -208,12 +210,11 @@ public class ListenerManager {
 					
 					break;
 				} catch(final DataAccessException e) {
+					exceptionHandler.accept(e);
+					
 					if(i >= NUM_TRIES) {
 						throw e;
 					}
-					System.out.println(
-							"ListenerManager: DataAccessException caught while getting Tournaments, trying again: "
-									+ e.getMessage());
 				}
 			}
 		}
@@ -744,7 +745,16 @@ public class ListenerManager {
 	public ManagerState getState() {
 		return this.state;
 	}
-	
+
+	/**
+	 * Sets the consumer invoked whenever an DataAccessException is caught
+	 * 
+	 * @param exceptionHandler The exception handler
+	 */
+	public void setExceptionHandler(Consumer<? super DataAccessException> exceptionHandler) {
+		this.exceptionHandler = exceptionHandler;
+	}
+
 	/**
 	 * Whether the update cycle is running.
 	 *
